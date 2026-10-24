@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=jw-photos-en" />
   </head>
   <body>
     <div class="app-shell">
@@ -81,17 +81,17 @@
           </div>
           <label class="search-box" for="searchInput">
             <span class="search-icon" aria-hidden="true"></span>
-            <input id="searchInput" type="search" placeholder="이름이나 증류소로 검색" autocomplete="off" />
+            <input id="searchInput" type="search" placeholder="한글·영문 이름이나 증류소로 검색" autocomplete="off" />
             <kbd>⌘ K</kbd>
           </label>
-          <div class="explore-meta"><span id="resultCount">63</span> bottles to discover <span class="meta-rule"></span><span>CURATED SELECTION</span></div>
+          <div class="explore-meta"><span id="resultCount">64</span> bottles to discover <span class="meta-rule"></span><span>CURATED SELECTION</span></div>
           <div class="explore-actions"><button class="add-whisky-button" id="addWhiskyButton"><span aria-hidden="true">＋</span> 위스키 직접 추가</button></div>
           <div class="explore-filters" id="exploreFilterRow" aria-label="탐색 종류별 필터"></div>
           <div class="whisky-grid explore-grid" id="exploreGrid"></div>
           <div class="empty-state hidden" id="exploreEmpty">
             <span class="empty-icon" aria-hidden="true">⌕</span>
             <h3>검색 결과가 없어요</h3>
-            <p>다른 이름이나 증류소로 검색해 보세요.</p>
+            <p>다른 한글·영문 이름이나 증류소로 검색해 보세요.</p>
           </div>
         </section>
       </main>
@@ -116,6 +116,8 @@
       </section>
     </div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="app.js"></script>
+    <script src="app.js?v=jw-photos-en"></script>
   </body>
+</html>
+
 </html>

@@ -1,16 +1,16 @@
 const seedWhiskies = [
-  { id: "macallan-12-sherry", name: "맥캘란 12년 셰리 오크", distillery: "The Macallan", type: "싱글몰트", region: "스페이사이드 · 스코틀랜드", abv: 40, averagePrice: "₩120,000 – 160,000", priceValue: 140000, tone: "tone-ruby", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Macallan_whisky%2C_12-15-18_years.jpg/500px-Macallan_whisky%2C_12-15-18_years.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Macallan_whisky,_12-15-18_years.jpg", imageCredit: "Ssu · CC BY-SA 4.0", notes: { aroma: "말린 과일 · 바닐라", taste: "생강 · 시나몬 · 건포도", finish: "따뜻한 오크 · 달콤함" } },
-  { id: "glenfiddich-12", name: "글렌피딕 12년 스페셜 리저브", distillery: "Glenfiddich", type: "싱글몰트", region: "스페이사이드 · 스코틀랜드", abv: 40, averagePrice: "₩75,000 – 95,000", priceValue: 85000, tone: "tone-green", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/GlenfiddichSpecialReserve12Years.jpg/250px-GlenfiddichSpecialReserve12Years.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:GlenfiddichSpecialReserve12Years.jpg", imageCredit: "Pbrundel · CC BY-SA 3.0", notes: { aroma: "꿀 · 바닐라 · 셰리", taste: "과일 케이크 · 토피", finish: "부드러운 향신료" } },
-  { id: "laphroaig-10", name: "라프로익 10년", distillery: "Laphroaig", type: "싱글몰트", region: "아일라 · 스코틀랜드", abv: 40, averagePrice: "₩75,000 – 95,000", priceValue: 85000, tone: "tone-blue", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Laphroaig_10.jpg/250px-Laphroaig_10.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Laphroaig_10.jpg", imageCredit: "Thomon · CC BY-SA 4.0", notes: { aroma: "피트 연기 · 해초", taste: "바다 소금 · 바닐라", finish: "긴 스모키 · 약초" } },
-  { id: "balvenie-12", name: "발베니 12년 더블우드", distillery: "The Balvenie", type: "싱글몰트", region: "스페이사이드 · 스코틀랜드", abv: 40, averagePrice: "₩95,000 – 125,000", priceValue: 110000, tone: "tone-clear", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Balvenie_Whisky_Doublewood_12_years_old.jpg/330px-Balvenie_Whisky_Doublewood_12_years_old.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Balvenie_Whisky_Doublewood_12_years_old.jpg", imageCredit: "Pbrundel · CC BY-SA 3.0", notes: { aroma: "달콤한 과일 · 셰리", taste: "견과류 · 계피 · 꿀", finish: "부드럽고 오래가는 여운" } },
-  { id: "hibiki-harmony", name: "히비키 재패니즈 하모니", distillery: "Suntory", type: "블렌디드", region: "일본", abv: 43, averagePrice: "₩150,000 – 190,000", priceValue: 170000, tone: "tone-ruby", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Hibiki_the_premium_blended_whisky_from_Japanese_distiller_Suntory.jpg/500px-Hibiki_the_premium_blended_whisky_from_Japanese_distiller_Suntory.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Hibiki_the_premium_blended_whisky_from_Japanese_distiller_Suntory.jpg", imageCredit: "Wiki Taro · CC0", notes: { aroma: "장미 · 리치 · 로즈마리", taste: "오렌지 껍질 · 화이트초콜릿", finish: "미즈나라 오크 · 은은한 향신료" } },
-  { id: "jim-beam-black", name: "짐빔 블랙 7년", distillery: "Jim Beam", type: "버번", region: "켄터키 · 미국", abv: 45, averagePrice: "₩45,000 – 60,000", priceValue: 52000, tone: "tone-clear", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Bottle_of_Jim_Beam_Black_in_Oulu_Jan2009.jpg/500px-Bottle_of_Jim_Beam_Black_in_Oulu_Jan2009.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Bottle_of_Jim_Beam_Black_in_Oulu_Jan2009.jpg", imageCredit: "Methem · Public domain", notes: { aroma: "캐러멜 · 바닐라 · 오크", taste: "구운 견과류 · 토피", finish: "긴 오크 · 따뜻한 향신료" } },
-  { id: "wild-turkey-101", name: "와일드 터키 101", distillery: "Wild Turkey", type: "버번", region: "켄터키 · 미국", abv: 50.5, averagePrice: "₩50,000 – 70,000", priceValue: 60000, tone: "tone-ruby", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Wild_Turkey_101.JPG/500px-Wild_Turkey_101.JPG", imagePage: "https://commons.wikimedia.org/wiki/File:Wild_Turkey_101.JPG", imageCredit: "Craiglduncan · CC BY-SA 3.0", notes: { aroma: "바닐라 · 오렌지 · 담배", taste: "캐러멜 · 시나몬 · 토피", finish: "대담한 오크 · 후추" } },
-  { id: "makers-mark", name: "메이커스 마크", distillery: "Maker's Mark", type: "버번", region: "켄터키 · 미국", abv: 45, averagePrice: "₩45,000 – 65,000", priceValue: 55000, tone: "tone-green", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Bottle_of_Maker%27s_Mark_Whisky.JPG/500px-Bottle_of_Maker%27s_Mark_Whisky.JPG", imagePage: "https://commons.wikimedia.org/wiki/File:Bottle_of_Maker%27s_Mark_Whisky.JPG", imageCredit: "Brian Adler · Public domain", notes: { aroma: "달콤한 밀 · 바닐라", taste: "캐러멜 · 과일 · 스파이스", finish: "부드러운 오크" } },
-  { id: "woodford-reserve", name: "우드포드 리저브", distillery: "Woodford Reserve", type: "버번", region: "켄터키 · 미국", abv: 43.2, averagePrice: "₩55,000 – 75,000", priceValue: 65000, tone: "tone-blue", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Woodford_Reserve_2016.png/250px-Woodford_Reserve_2016.png", imagePage: "https://commons.wikimedia.org/wiki/File:Woodford_Reserve_2016.png", imageCredit: "Guerlin · CC BY-SA 4.0", notes: { aroma: "말린 과일 · 민트 · 오렌지", taste: "코코아 · 시나몬 · 토피", finish: "부드러운 초콜릿" } },
-  { id: "johnnie-walker-black", name: "조니워커 블랙 라벨 12년", distillery: "Johnnie Walker", type: "블렌디드", region: "스코틀랜드", abv: 40, averagePrice: "₩45,000 – 60,000", priceValue: 52000, tone: "tone-blue", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Johnnie_Walker_Black_Label.jpg/500px-Johnnie_Walker_Black_Label.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Johnnie_Walker_Black_Label.jpg", imageCredit: "Iceman7840 · CC BY-SA 3.0", notes: { aroma: "바닐라 · 감귤 · 스모크", taste: "과일 · 캐러멜 · 향신료", finish: "은은한 피트 · 오크" } },
-  { id: "chivas-18", name: "시바스 리갈 18년", distillery: "Chivas Regal", type: "블렌디드", region: "스코틀랜드", abv: 40, averagePrice: "₩100,000 – 140,000", priceValue: 120000, tone: "tone-ruby", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Chivas_Regal_The_Icon_Blended_Scotch_Whisky_%28700mL%29.jpg/500px-Chivas_Regal_The_Icon_Blended_Scotch_Whisky_%28700mL%29.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Chivas_Regal_The_Icon_Blended_Scotch_Whisky_(700mL).jpg", imageCredit: "Oleg Yunakov · CC BY-SA 4.0", notes: { aroma: "말린 과일 · 버터스카치", taste: "다크초콜릿 · 시트러스", finish: "긴 여운 · 은은한 스모크" } },
-  { id: "bulleit-rye", name: "불릿 라이", distillery: "Bulleit", type: "라이", region: "켄터키 · 미국", abv: 45, averagePrice: "₩50,000 – 70,000", priceValue: 60000, tone: "tone-clear", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0d/Bulleit_Bourbon_Frontier_Whiskey.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Bulleit_Bourbon_Frontier_Whiskey.jpg", imageCredit: "Ethan Prater · CC BY 2.0", notes: { aroma: "메이플 · 오크 · 스파이스", taste: "캐러멜 · 후추 · 체리", finish: "드라이한 호밀 · 오크" } },
+  { id: "macallan-12-sherry", name: "맥캘란 12년 셰리 오크", nameEn: "The Macallan 12 Year Old Sherry Oak", distillery: "The Macallan", type: "싱글몰트", region: "스페이사이드 · 스코틀랜드", abv: 40, averagePrice: "₩120,000 – 160,000", priceValue: 140000, tone: "tone-ruby", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Macallan_whisky%2C_12-15-18_years.jpg/500px-Macallan_whisky%2C_12-15-18_years.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Macallan_whisky,_12-15-18_years.jpg", imageCredit: "Ssu · CC BY-SA 4.0", notes: { aroma: "말린 과일 · 바닐라", taste: "생강 · 시나몬 · 건포도", finish: "따뜻한 오크 · 달콤함" } },
+  { id: "glenfiddich-12", name: "글렌피딕 12년 스페셜 리저브", nameEn: "Glenfiddich 12 Year Old Special Reserve", distillery: "Glenfiddich", type: "싱글몰트", region: "스페이사이드 · 스코틀랜드", abv: 40, averagePrice: "₩75,000 – 95,000", priceValue: 85000, tone: "tone-green", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/GlenfiddichSpecialReserve12Years.jpg/250px-GlenfiddichSpecialReserve12Years.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:GlenfiddichSpecialReserve12Years.jpg", imageCredit: "Pbrundel · CC BY-SA 3.0", notes: { aroma: "꿀 · 바닐라 · 셰리", taste: "과일 케이크 · 토피", finish: "부드러운 향신료" } },
+  { id: "laphroaig-10", name: "라프로익 10년", nameEn: "Laphroaig 10 Year Old", distillery: "Laphroaig", type: "싱글몰트", region: "아일라 · 스코틀랜드", abv: 40, averagePrice: "₩75,000 – 95,000", priceValue: 85000, tone: "tone-blue", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Laphroaig_10.jpg/250px-Laphroaig_10.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Laphroaig_10.jpg", imageCredit: "Thomon · CC BY-SA 4.0", notes: { aroma: "피트 연기 · 해초", taste: "바다 소금 · 바닐라", finish: "긴 스모키 · 약초" } },
+  { id: "balvenie-12", name: "발베니 12년 더블우드", nameEn: "The Balvenie 12 Year Old DoubleWood", distillery: "The Balvenie", type: "싱글몰트", region: "스페이사이드 · 스코틀랜드", abv: 40, averagePrice: "₩95,000 – 125,000", priceValue: 110000, tone: "tone-clear", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Balvenie_Whisky_Doublewood_12_years_old.jpg/330px-Balvenie_Whisky_Doublewood_12_years_old.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Balvenie_Whisky_Doublewood_12_years_old.jpg", imageCredit: "Pbrundel · CC BY-SA 3.0", notes: { aroma: "달콤한 과일 · 셰리", taste: "견과류 · 계피 · 꿀", finish: "부드럽고 오래가는 여운" } },
+  { id: "hibiki-harmony", name: "히비키 재패니즈 하모니", nameEn: "Hibiki Japanese Harmony", distillery: "Suntory", type: "블렌디드", region: "일본", abv: 43, averagePrice: "₩150,000 – 190,000", priceValue: 170000, tone: "tone-ruby", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Hibiki_the_premium_blended_whisky_from_Japanese_distiller_Suntory.jpg/500px-Hibiki_the_premium_blended_whisky_from_Japanese_distiller_Suntory.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Hibiki_the_premium_blended_whisky_from_Japanese_distiller_Suntory.jpg", imageCredit: "Wiki Taro · CC0", notes: { aroma: "장미 · 리치 · 로즈마리", taste: "오렌지 껍질 · 화이트초콜릿", finish: "미즈나라 오크 · 은은한 향신료" } },
+  { id: "jim-beam-black", name: "짐빔 블랙 7년", nameEn: "Jim Beam Black 7 Year Old", distillery: "Jim Beam", type: "버번", region: "켄터키 · 미국", abv: 45, averagePrice: "₩45,000 – 60,000", priceValue: 52000, tone: "tone-clear", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Bottle_of_Jim_Beam_Black_in_Oulu_Jan2009.jpg/500px-Bottle_of_Jim_Beam_Black_in_Oulu_Jan2009.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Bottle_of_Jim_Beam_Black_in_Oulu_Jan2009.jpg", imageCredit: "Methem · Public domain", notes: { aroma: "캐러멜 · 바닐라 · 오크", taste: "구운 견과류 · 토피", finish: "긴 오크 · 따뜻한 향신료" } },
+  { id: "wild-turkey-101", name: "와일드 터키 101", nameEn: "Wild Turkey 101", distillery: "Wild Turkey", type: "버번", region: "켄터키 · 미국", abv: 50.5, averagePrice: "₩50,000 – 70,000", priceValue: 60000, tone: "tone-ruby", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Wild_Turkey_101.JPG/500px-Wild_Turkey_101.JPG", imagePage: "https://commons.wikimedia.org/wiki/File:Wild_Turkey_101.JPG", imageCredit: "Craiglduncan · CC BY-SA 3.0", notes: { aroma: "바닐라 · 오렌지 · 담배", taste: "캐러멜 · 시나몬 · 토피", finish: "대담한 오크 · 후추" } },
+  { id: "makers-mark", name: "메이커스 마크", nameEn: "Maker's Mark", distillery: "Maker's Mark", type: "버번", region: "켄터키 · 미국", abv: 45, averagePrice: "₩45,000 – 65,000", priceValue: 55000, tone: "tone-green", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Bottle_of_Maker%27s_Mark_Whisky.JPG/500px-Bottle_of_Maker%27s_Mark_Whisky.JPG", imagePage: "https://commons.wikimedia.org/wiki/File:Bottle_of_Maker%27s_Mark_Whisky.JPG", imageCredit: "Brian Adler · Public domain", notes: { aroma: "달콤한 밀 · 바닐라", taste: "캐러멜 · 과일 · 스파이스", finish: "부드러운 오크" } },
+  { id: "woodford-reserve", name: "우드포드 리저브", nameEn: "Woodford Reserve", distillery: "Woodford Reserve", type: "버번", region: "켄터키 · 미국", abv: 43.2, averagePrice: "₩55,000 – 75,000", priceValue: 65000, tone: "tone-blue", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Woodford_Reserve_2016.png/250px-Woodford_Reserve_2016.png", imagePage: "https://commons.wikimedia.org/wiki/File:Woodford_Reserve_2016.png", imageCredit: "Guerlin · CC BY-SA 4.0", notes: { aroma: "말린 과일 · 민트 · 오렌지", taste: "코코아 · 시나몬 · 토피", finish: "부드러운 초콜릿" } },
+  { id: "johnnie-walker-black", name: "조니워커 블랙 라벨 12년", nameEn: "Johnnie Walker Black Label 12 Year Old", distillery: "Johnnie Walker", type: "블렌디드", region: "스코틀랜드", abv: 40, averagePrice: "₩45,000 – 60,000", priceValue: 52000, tone: "tone-blue", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Johnnie_Walker_Black_Label.jpg/500px-Johnnie_Walker_Black_Label.jpg", fallbackImageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/21/Johnnie_Walker_Black_Label.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Johnnie_Walker_Black_Label.jpg", imageCredit: "Iceman7840 · CC BY-SA 3.0", notes: { aroma: "바닐라 · 감귤 · 스모크", taste: "과일 · 캐러멜 · 향신료", finish: "은은한 피트 · 오크" } },
+  { id: "chivas-18", name: "시바스 리갈 18년", nameEn: "Chivas Regal 18 Year Old", distillery: "Chivas Regal", type: "블렌디드", region: "스코틀랜드", abv: 40, averagePrice: "₩100,000 – 140,000", priceValue: 120000, tone: "tone-ruby", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Chivas_Regal_The_Icon_Blended_Scotch_Whisky_%28700mL%29.jpg/500px-Chivas_Regal_The_Icon_Blended_Scotch_Whisky_%28700mL%29.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Chivas_Regal_The_Icon_Blended_Scotch_Whisky_(700mL).jpg", imageCredit: "Oleg Yunakov · CC BY-SA 4.0", notes: { aroma: "말린 과일 · 버터스카치", taste: "다크초콜릿 · 시트러스", finish: "긴 여운 · 은은한 스모크" } },
+  { id: "bulleit-rye", name: "불릿 라이", nameEn: "Bulleit Rye", distillery: "Bulleit", type: "라이", region: "켄터키 · 미국", abv: 45, averagePrice: "₩50,000 – 70,000", priceValue: 60000, tone: "tone-clear", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0d/Bulleit_Bourbon_Frontier_Whiskey.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Bulleit_Bourbon_Frontier_Whiskey.jpg", imageCredit: "Ethan Prater · CC BY 2.0", notes: { aroma: "메이플 · 오크 · 스파이스", taste: "캐러멜 · 후추 · 체리", finish: "드라이한 호밀 · 오크" } },
 ];
 
 const additionalWhiskies = [
@@ -68,6 +68,77 @@ const additionalWhiskies = [
   ["royal-brackla-12", "로열 브라클라 12년", "Royal Brackla", "싱글몰트", "하이랜드 · 스코틀랜드", 46, "₩90,000 – 130,000", "파인애플 · 시트러스 · 꽃향기", "바닐라 · 배 · 시나몬", "따뜻한 오크 · 달콤한 향신료", "tone-clear"],
 ];
 
+const englishNamesById = {
+  "macallan-12-sherry": "The Macallan 12 Year Old Sherry Oak",
+  "glenfiddich-12": "Glenfiddich 12 Year Old Special Reserve",
+  "laphroaig-10": "Laphroaig 10 Year Old",
+  "balvenie-12": "The Balvenie 12 Year Old DoubleWood",
+  "hibiki-harmony": "Hibiki Japanese Harmony",
+  "jim-beam-black": "Jim Beam Black 7 Year Old",
+  "wild-turkey-101": "Wild Turkey 101",
+  "makers-mark": "Maker's Mark",
+  "woodford-reserve": "Woodford Reserve",
+  "johnnie-walker-black": "Johnnie Walker Black Label 12 Year Old",
+  "chivas-18": "Chivas Regal 18 Year Old",
+  "bulleit-rye": "Bulleit Rye",
+  "glenlivet-12": "The Glenlivet 12 Year Old",
+  "glenlivet-15": "The Glenlivet 15 Year Old French Oak Reserve",
+  "glenmorangie-original-10": "Glenmorangie The Original 10 Year Old",
+  "glenmorangie-quinta-ruban": "Glenmorangie Quinta Ruban 14 Year Old",
+  "ardbeg-10": "Ardbeg 10 Year Old",
+  "ardbeg-uigeadail": "Ardbeg Uigeadail",
+  "lagavulin-16": "Lagavulin 16 Year Old",
+  "talisker-10": "Talisker 10 Year Old",
+  "highland-park-12": "Highland Park 12 Year Old Viking Honour",
+  "aberlour-12": "Aberlour 12 Year Old Double Cask",
+  "glenallachie-12": "The GlenAllachie 12 Year Old",
+  "macallan-double-cask-12": "The Macallan 12 Year Old Double Cask",
+  "macallan-sherry-oak-18": "The Macallan 18 Year Old Sherry Oak",
+  "glenfiddich-18": "Glenfiddich 18 Year Old Small Batch Reserve",
+  "balvenie-caribbean-cask-14": "The Balvenie 14 Year Old Caribbean Cask",
+  "oban-14": "Oban 14 Year Old",
+  "caol-ila-12": "Caol Ila 12 Year Old",
+  "springbank-10": "Springbank 10 Year Old",
+  "yamazaki-12": "Yamazaki 12 Year Old",
+  "hakushu-12": "Hakushu 12 Year Old",
+  "yoichi-single-malt": "Nikka Yoichi Single Malt",
+  "kavalan-classic": "Kavalan Classic Single Malt",
+  "monkey-shoulder": "Monkey Shoulder Original",
+  "johnnie-walker-red": "Johnnie Walker Red Label",
+  "johnnie-walker-double-black": "Johnnie Walker Double Black",
+  "johnnie-walker-green-15": "Johnnie Walker Green Label 15 Year Old",
+  "johnnie-walker-blue": "Johnnie Walker Blue Label",
+  "ballantines-finest": "Ballantine's Finest",
+  "ballantines-17": "Ballantine's 17 Year Old",
+  "chivas-12": "Chivas Regal 12 Year Old",
+  "chivas-mizunara": "Chivas Regal Mizunara",
+  "royal-salute-21": "Royal Salute 21 Year Old Signature Blend",
+  "dewars-12": "Dewar's 12 Year Old",
+  "jameson-irish": "Jameson Irish Whiskey",
+  "bushmills-black-bush": "Bushmills Black Bush",
+  "suntory-toki": "Suntory Toki",
+  "nikka-from-the-barrel": "Nikka From The Barrel",
+  "hibiki-17": "Hibiki 17 Year Old",
+  "buffalo-trace": "Buffalo Trace Kentucky Straight Bourbon",
+  "eagle-rare-10": "Eagle Rare 10 Year Old",
+  "four-roses-single-barrel": "Four Roses Single Barrel",
+  "four-roses-yellow": "Four Roses Bourbon",
+  "woodford-double-oaked": "Woodford Reserve Double Oaked",
+  "makers-mark-46": "Maker's Mark 46",
+  "knob-creek-9": "Knob Creek 9 Year Old",
+  "elijah-craig-small-batch": "Elijah Craig Small Batch",
+  "blantons-original": "Blanton's Original Single Barrel",
+  "russells-reserve-10": "Russell's Reserve 10 Year Old",
+  "wild-turkey-rare-breed": "Wild Turkey Rare Breed",
+  "rittenhouse-rye": "Rittenhouse Bottled-in-Bond Straight Rye",
+  "sazerac-rye": "Sazerac Rye",
+  "royal-brackla-12": "Royal Brackla 12 Year Old",
+};
+
+seedWhiskies.forEach((whisky) => {
+  whisky.nameEn = whisky.nameEn || englishNamesById[whisky.id] || whisky.name;
+});
+
 const additionalPhotoSources = {
   "The Glenlivet": ["The_Glenlivet_12_year_old_whisky.jpg", "JIP · CC BY-SA 3.0"],
   Glenmorangie: ["Glenmorangie_The_Original_whisky.jpg", "JIP · CC BY-SA 3.0"],
@@ -101,12 +172,53 @@ const additionalPhotoSources = {
   "Blanton's": ["Blanton%27s_Bourbon.jpg", "Fortkeeper · CC BY-SA 4.0"],
   Sazerac: ["Sazerac_Rye_Whisky.jpg", "Dwstultz · CC BY-SA 3.0"],
 };
+
+const additionalPhotoSourcesById = {
+  "johnnie-walker-red": {
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Johnnie_Walker_Red_Label.jpg/500px-Johnnie_Walker_Red_Label.jpg",
+    fallbackImageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Johnnie_Walker_Red_Label.jpg",
+    imagePage: "https://commons.wikimedia.org/wiki/File:Johnnie_Walker_Red_Label.jpg",
+    imageCredit: "kallerna · CC BY-SA 3.0",
+  },
+  "johnnie-walker-double-black": {
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/JW_Double_Black.jpg/500px-JW_Double_Black.jpg",
+    fallbackImageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a2/JW_Double_Black.jpg",
+    imagePage: "https://commons.wikimedia.org/wiki/File:JW_Double_Black.jpg",
+    imageCredit: "Iceman7840 · CC BY-SA 3.0",
+  },
+  "johnnie-walker-green-15": {
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/JW_Greens.jpg/500px-JW_Greens.jpg",
+    fallbackImageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d7/JW_Greens.jpg",
+    imagePage: "https://commons.wikimedia.org/wiki/File:JW_Greens.jpg",
+    imageCredit: "Iceman7840 · CC BY-SA 3.0",
+  },
+  "johnnie-walker-blue": {
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/JW_Blue_Label.jpg/500px-JW_Blue_Label.jpg",
+    fallbackImageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a3/JW_Blue_Label.jpg",
+    imagePage: "https://commons.wikimedia.org/wiki/File:JW_Blue_Label.jpg",
+    imageCredit: "Iceman7840 · CC BY-SA 3.0",
+  },
+};
+
 const genericWhiskyPhoto = {
   imageUrl: "https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=500&q=85",
   imagePage: "https://unsplash.com/",
   imageCredit: "위스키 사진 · Unsplash",
 };
+
 const photoForWhisky = (id, distillery) => {
+  const specificPhoto = additionalPhotoSourcesById[id];
+  if (specificPhoto) {
+    if (typeof specificPhoto === "object" && !Array.isArray(specificPhoto)) {
+      return specificPhoto;
+    }
+    const [fileName, imageCredit] = specificPhoto;
+    return {
+      imageUrl: `https://commons.wikimedia.org/wiki/Special:FilePath/${fileName}?width=500`,
+      imagePage: `https://commons.wikimedia.org/wiki/File:${fileName.replace(/%27/g, "'").replace(/%28/g, "(").replace(/%29/g, ")").replace(/%2C/g, ",")}`,
+      imageCredit,
+    };
+  }
   const photoSource = additionalPhotoSources[distillery];
   if (photoSource) {
     const [fileName, imageCredit] = photoSource;
@@ -122,7 +234,15 @@ const photoForWhisky = (id, distillery) => {
 };
 
 seedWhiskies.push(...additionalWhiskies.map(([id, name, distillery, type, region, abv, averagePrice, aroma, taste, finish, tone]) => ({
-  id, name, distillery, type, region, abv, averagePrice, tone,
+  id,
+  name,
+  nameEn: englishNamesById[id] || name,
+  distillery,
+  type,
+  region,
+  abv,
+  averagePrice,
+  tone,
   ...photoForWhisky(id, distillery),
   notes: { aroma, taste, finish },
 })));
@@ -144,8 +264,28 @@ function loadWhiskies() {
     if (Array.isArray(stored)) {
       const storedById = new Map(stored.map((whisky) => [whisky.id, whisky]));
       const seedIds = new Set(seedWhiskies.map((whisky) => whisky.id));
-      const savedSeeds = seedWhiskies.map((seed) => ({ ...seed, ...storedById.get(seed.id) }));
-      const customWhiskies = stored.filter((whisky) => !seedIds.has(whisky.id));
+      const savedSeeds = seedWhiskies.map((seed) => {
+        const saved = storedById.get(seed.id);
+        const preserveUploadedPhoto = saved?.imageCredit === "내가 등록한 사진";
+        return {
+          ...seed,
+          ...saved,
+          name: seed.name,
+          nameEn: (saved?.nameEn && saved.nameEn !== seed.name) ? saved.nameEn : seed.nameEn,
+          ...(preserveUploadedPhoto ? {} : {
+            imageUrl: seed.imageUrl,
+            fallbackImageUrl: seed.fallbackImageUrl || "",
+            imagePage: seed.imagePage,
+            imageCredit: seed.imageCredit,
+          }),
+        };
+      });
+      const customWhiskies = stored
+        .filter((whisky) => !seedIds.has(whisky.id))
+        .map((whisky) => ({
+          ...whisky,
+          nameEn: whisky.nameEn || whisky.name || "",
+        }));
       return [...savedSeeds, ...customWhiskies];
     }
   } catch (error) {
@@ -153,8 +293,6 @@ function loadWhiskies() {
   }
   return seedWhiskies.map((whisky) => ({ ...whisky, isSaved: false, addedAt: null, userReview: { rating: 0, purchasePrice: "", openDate: "", personalNote: "" } }));
 }
-
-let whiskies = loadWhiskies();
 
 function persist() {
   try {
@@ -164,13 +302,38 @@ function persist() {
   }
 }
 
+let whiskies = loadWhiskies();
+persist();
+
 function escapeHtml(value = "") {
   return String(value).replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]);
 }
 
+function normalizeSearchText(value = "") {
+  return String(value)
+    .toLocaleLowerCase("ko")
+    .replace(/['’`\-_./]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function matchesWhiskyQuery(whisky, rawQuery = "") {
+  const trimmed = rawQuery.trim();
+  if (!trimmed) return true;
+  const rawHaystack = `${whisky.name || ""} ${whisky.nameEn || ""} ${whisky.distillery || ""} ${whisky.type || ""} ${whisky.region || ""} ${(whisky.id || "").replace(/-/g, " ")}`.toLocaleLowerCase("ko");
+  const normalizedHaystack = normalizeSearchText(rawHaystack);
+  const compactHaystack = normalizedHaystack.replace(/\s+/g, "");
+  const loweredQuery = trimmed.toLocaleLowerCase("ko");
+  if (rawHaystack.includes(loweredQuery)) return true;
+  const tokens = normalizeSearchText(trimmed).split(" ").filter(Boolean);
+  if (!tokens.length) return true;
+  return tokens.every((token) => normalizedHaystack.includes(token) || compactHaystack.includes(token));
+}
+
 function bottleArt(whisky, extraClass = "", allowPhotoChange = false) {
   const label = whisky.name.replace(/\s+/g, " ").slice(0, 18);
-  const photo = whisky.imageUrl ? `<img class="bottle-photo" src="${escapeHtml(whisky.imageUrl)}" alt="${escapeHtml(whisky.name)} 위스키 병" loading="lazy" decoding="async" onload="this.parentElement.classList.add('photo-loaded')" onerror="this.parentElement.classList.remove('photo-loaded'); this.remove()">` : "";
+  const fallbackAttr = whisky.fallbackImageUrl ? ` data-fallback-src="${escapeHtml(whisky.fallbackImageUrl)}"` : "";
+  const photo = whisky.imageUrl ? `<img class="bottle-photo" src="${escapeHtml(whisky.imageUrl)}"${fallbackAttr} alt="${escapeHtml(whisky.name)} (${escapeHtml(whisky.nameEn || whisky.name)}) 위스키 병" loading="lazy" decoding="async" onload="this.parentElement.classList.add('photo-loaded')" onerror="if(this.dataset.fallbackSrc && this.src !== this.dataset.fallbackSrc){this.src = this.dataset.fallbackSrc; return;} this.parentElement.classList.remove('photo-loaded'); this.remove()">` : "";
   const credit = whisky.imageCredit ? whisky.imagePage
     ? `<a class="photo-credit" href="${escapeHtml(whisky.imagePage)}" target="_blank" rel="noreferrer" aria-label="사진 출처: ${escapeHtml(whisky.imageCredit)}">${escapeHtml(whisky.imageCredit)}</a>`
     : `<span class="photo-credit">${escapeHtml(whisky.imageCredit)}</span>` : "";
@@ -181,12 +344,13 @@ function bottleArt(whisky, extraClass = "", allowPhotoChange = false) {
 function cardMarkup(whisky, isExplore = false) {
   const rating = Number(whisky.userReview?.rating || 0);
   const saved = Boolean(whisky.isSaved);
-  return `<article class="whisky-card" data-open="${escapeHtml(whisky.id)}" tabindex="0" aria-label="${escapeHtml(whisky.name)} 상세 정보">
+  return `<article class="whisky-card" data-open="${escapeHtml(whisky.id)}" tabindex="0" aria-label="${escapeHtml(whisky.name)} ${escapeHtml(whisky.nameEn || "")} 상세 정보">
     <div class="card-visual">${bottleArt(whisky)}
       ${isExplore ? `<button class="card-save ${saved ? "saved" : ""}" data-save="${escapeHtml(whisky.id)}" aria-label="${saved ? "보관함에서 제거" : "보관함에 추가"}" title="${saved ? "보관함에서 제거" : "보관함에 추가"}">${saved ? "♥" : "+"}</button>` : ""}
     </div>
     <div class="card-info"><p class="card-distillery">${escapeHtml(whisky.distillery)} <span>· ${escapeHtml(whisky.type)}</span></p>
       <h3 class="card-name">${escapeHtml(whisky.name)}</h3>
+      <p class="card-name-en">${escapeHtml(whisky.nameEn || "")}</p>
       <div class="card-meta"><span>${whisky.abv}% ABV</span><span class="card-rating">${rating ? `★ ${rating.toFixed(1)}` : "☆ 평가 전"}</span></div>
       ${isExplore ? `<div class="card-price"><span>참고가</span>${escapeHtml(whisky.averagePrice)}</div>` : ""}
     </div>
@@ -203,7 +367,7 @@ function renderCollection() {
   const sortBy = document.getElementById("sortSelect").value;
   const filtered = saved.filter((whisky) => selectedType === "전체" || whisky.type === selectedType);
   if (sortBy === "rating") filtered.sort((a, b) => Number(b.userReview?.rating || 0) - Number(a.userReview?.rating || 0));
-  if (sortBy === "name") filtered.sort((a, b) => a.name.localeCompare(b.name, "ko"));
+  if (sortBy === "name") filtered.sort((a, b) => a.name.localeCompare(b.name, "ko") || (a.nameEn || "").localeCompare(b.nameEn || "", "en"));
   if (sortBy === "recent") filtered.sort((a, b) => (b.addedAt || 0) - (a.addedAt || 0));
   document.getElementById("savedCount").textContent = String(saved.length).padStart(2, "0");
   document.getElementById("featureCount").textContent = String(saved.length).padStart(2, "0");
@@ -217,11 +381,10 @@ function renderCollection() {
 }
 
 function renderExplore() {
-  const query = document.getElementById("searchInput").value.trim().toLocaleLowerCase("ko");
+  const query = document.getElementById("searchInput").value;
   const result = whiskies.filter((whisky) => {
     const matchesType = selectedExploreType === "전체" || whisky.type === selectedExploreType;
-    const matchesQuery = !query || `${whisky.name} ${whisky.distillery} ${whisky.type}`.toLocaleLowerCase("ko").includes(query);
-    return matchesType && matchesQuery;
+    return matchesType && matchesWhiskyQuery(whisky, query);
   });
   document.getElementById("resultCount").textContent = result.length;
   document.getElementById("exploreGrid").innerHTML = result.map((whisky) => cardMarkup(whisky, true)).join("");
@@ -269,6 +432,7 @@ function toggleSaved(id) {
 
 function getReviewDraft() {
   return {
+    nameEn: document.getElementById("detailEnglishName")?.value,
     purchasePrice: document.getElementById("purchasePrice")?.value || "",
     openDate: document.getElementById("openDate")?.value || "",
     personalNote: document.getElementById("personalNote")?.value || "",
@@ -280,15 +444,16 @@ function renderDetail(id, draft = {}) {
   if (!whisky) return;
   activeWhiskyId = id;
   const review = { rating: 0, purchasePrice: "", openDate: "", personalNote: "", ...whisky.userReview, ...draft };
+  const currentNameEn = draft.nameEn !== undefined ? draft.nameEn : (whisky.nameEn || "");
   const stars = Array.from({ length: 5 }, (_, index) => `<button type="button" class="star-button ${index < Number(review.rating || 0) ? "active" : ""}" data-rating="${index + 1}" aria-label="${index + 1}점">★</button>`).join("");
   const naverSearchUrl = new URL("https://search.naver.com/search.naver");
   naverSearchUrl.searchParams.set("query", whisky.name);
   document.getElementById("detailContent").innerHTML = `
-    <div class="detail-hero">${bottleArt(whisky, "", true)}<div><p class="detail-distillery">${escapeHtml(whisky.distillery.toUpperCase())}</p><h2 id="detailName">${escapeHtml(whisky.name)}</h2><div class="detail-meta"><span>${escapeHtml(whisky.type)}</span><span>${whisky.abv}% ABV</span><span>${escapeHtml(whisky.region)}</span></div><p class="detail-price"><span>참고 가격</span>${escapeHtml(whisky.averagePrice)}</p><a class="naver-search-button" data-naver-search href="${escapeHtml(naverSearchUrl.href)}" target="_blank" rel="noopener noreferrer"><span class="naver-mark" aria-hidden="true">N</span><span>네이버에서 검색</span><span class="naver-arrow" aria-hidden="true">↗</span></a></div></div>
+    <div class="detail-hero">${bottleArt(whisky, "", true)}<div><p class="detail-distillery">${escapeHtml(whisky.distillery.toUpperCase())}</p><h2 id="detailName">${escapeHtml(whisky.name)}</h2><p class="detail-name-en">${escapeHtml(currentNameEn)}</p><div class="detail-meta"><span>${escapeHtml(whisky.type)}</span><span>${whisky.abv}% ABV</span><span>${escapeHtml(whisky.region)}</span></div><p class="detail-price"><span>참고 가격</span>${escapeHtml(whisky.averagePrice)}</p><a class="naver-search-button" data-naver-search href="${escapeHtml(naverSearchUrl.href)}" target="_blank" rel="noopener noreferrer"><span class="naver-mark" aria-hidden="true">N</span><span>네이버에서 검색</span><span class="naver-arrow" aria-hidden="true">↗</span></a></div></div>
     <section class="notes-section"><div class="detail-section-title"><h3>테이스팅 노트</h3><span>TASTING PROFILE</span></div><div class="note-groups"><div class="note-group"><span>AROMA</span><p>${escapeHtml(whisky.notes.aroma)}</p></div><div class="note-group"><span>TASTE</span><p>${escapeHtml(whisky.notes.taste)}</p></div><div class="note-group"><span>FINISH</span><p>${escapeHtml(whisky.notes.finish)}</p></div></div></section>
     <section class="review-section"><div class="detail-section-title"><h3>나의 기록</h3><span>PERSONAL JOURNAL</span></div>
       <div class="rating-row"><span class="field-label">나의 평점</span><div class="stars" role="group" aria-label="별점">${stars}<span class="rating-value">${Number(review.rating || 0) ? Number(review.rating).toFixed(1) : "—"}</span></div></div>
-      <div class="review-fields"><div class="form-field"><label for="purchasePrice">구매 가격 (원)</label><input id="purchasePrice" type="number" inputmode="numeric" min="0" placeholder="예: 120000" value="${escapeHtml(review.purchasePrice || "")}" /></div><div class="form-field"><label for="openDate">개봉일</label><input id="openDate" type="date" value="${escapeHtml(review.openDate || "")}" /></div><div class="form-field note-field"><label for="personalNote">시음 메모</label><textarea id="personalNote" placeholder="오늘의 향과 맛, 함께한 순간을 기록해 보세요.">${escapeHtml(review.personalNote || "")}</textarea></div></div>
+      <div class="review-fields"><div class="form-field note-field"><label for="detailEnglishName">영문 이름</label><input id="detailEnglishName" type="text" maxlength="100" placeholder="예: Johnnie Walker Black Label 12 Year Old" value="${escapeHtml(currentNameEn)}" /></div><div class="form-field"><label for="purchasePrice">구매 가격 (원)</label><input id="purchasePrice" type="number" inputmode="numeric" min="0" placeholder="예: 120000" value="${escapeHtml(review.purchasePrice || "")}" /></div><div class="form-field"><label for="openDate">개봉일</label><input id="openDate" type="date" value="${escapeHtml(review.openDate || "")}" /></div><div class="form-field note-field"><label for="personalNote">시음 메모</label><textarea id="personalNote" placeholder="오늘의 향과 맛, 함께한 순간을 기록해 보세요.">${escapeHtml(review.personalNote || "")}</textarea></div></div>
       <div class="detail-actions">${whisky.isSaved ? `<button class="remove-button" data-remove="${escapeHtml(id)}">보관함 삭제</button>` : ""}<button class="primary-button" id="saveReview">${whisky.isSaved ? "기록 저장하기" : "내 리스트에 담기"} <span aria-hidden="true">↗</span></button></div>
     </section>`;
   document.getElementById("detailBackdrop").classList.remove("hidden");
@@ -312,6 +477,7 @@ function renderNewWhiskyForm() {
       </section>
       <div class="review-fields">
         <div class="form-field"><label for="newName">위스키 이름 *</label><input id="newName" name="name" required maxlength="80" placeholder="예: 아드벡 우거다일" /></div>
+        <div class="form-field"><label for="newEnglishName">영문 이름</label><input id="newEnglishName" name="nameEn" maxlength="100" placeholder="예: Ardbeg Uigeadail" /></div>
         <div class="form-field"><label for="newDistillery">증류소 / 브랜드 *</label><input id="newDistillery" name="distillery" required maxlength="60" placeholder="예: Ardbeg" /></div>
         <div class="form-field"><label for="newType">종류 *</label><select id="newType" name="type" required>${types.filter((type) => type !== "전체").map((type) => `<option value="${type}">${type}</option>`).join("")}</select></div>
         <div class="form-field"><label for="newAbv">도수 (% ABV) *</label><input id="newAbv" name="abv" type="number" min="0" max="100" step="0.1" required placeholder="예: 46.6" /></div>
@@ -328,7 +494,7 @@ function renderNewWhiskyForm() {
 }
 
 function renderLookupResults(localMatches, internetMatches = []) {
-  const localResults = localMatches.map((whisky) => `<button class="lookup-result" type="button" data-catalogue-id="${escapeHtml(whisky.id)}"><strong>${escapeHtml(whisky.name)}</strong><span>${escapeHtml(whisky.distillery)} · ${escapeHtml(whisky.type)}${whisky.isSaved ? " · 이미 보관함에 있어요" : " · 샘플 정보를 사용해 보관함에 추가"}</span></button>`).join("");
+  const localResults = localMatches.map((whisky) => `<button class="lookup-result" type="button" data-catalogue-id="${escapeHtml(whisky.id)}"><strong>${escapeHtml(whisky.name)}</strong><span>${escapeHtml(whisky.nameEn || "")} · ${escapeHtml(whisky.distillery)} · ${escapeHtml(whisky.type)}${whisky.isSaved ? " · 이미 보관함에 있어요" : " · 샘플 정보를 사용해 보관함에 추가"}</span></button>`).join("");
   const onlineResults = internetMatches.map((result, index) => `<button class="lookup-result" type="button" data-online-result="${index}"><strong>${escapeHtml(result.title)}</strong><span>${escapeHtml(result.snippet.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim())}</span></button>`).join("");
   document.getElementById("onlineLookupResults").innerHTML = `${localResults}${onlineResults}` || `<p class="lookup-message">검색 결과가 없습니다. 영어 제품명이나 증류소 이름으로 다시 검색해 보세요.</p>`;
 }
@@ -344,8 +510,7 @@ async function searchWhiskyOnline() {
   searchButton.disabled = true;
   searchButton.textContent = "검색 중";
   resultsElement.innerHTML = `<p class="lookup-message">기본 목록과 Wikipedia를 검색하고 있어요.</p>`;
-  const normalizedQuery = query.toLocaleLowerCase("ko");
-  const localMatches = seedWhiskies.filter((whisky) => `${whisky.name} ${whisky.distillery}`.toLocaleLowerCase("ko").includes(normalizedQuery)).slice(0, 4);
+  const localMatches = whiskies.filter((whisky) => matchesWhiskyQuery(whisky, query)).slice(0, 4);
   try {
     const internetResults = await Promise.all(["en", "ko"].map(async (language) => {
       const params = new URLSearchParams({
@@ -443,6 +608,7 @@ async function selectOnlineWhisky(index) {
     const distillery = candidate.title.replace(/\s+distillery.*$/i, "").trim();
     const extract = page.extract || "";
     document.getElementById("newName").value = searchQuery;
+    document.getElementById("newEnglishName").value = /[A-Za-z]/.test(searchQuery) ? searchQuery : candidate.title;
     document.getElementById("newDistillery").value = distillery;
     const region = findRegion(extract);
     if (region) document.getElementById("newRegion").value = region;
@@ -532,11 +698,13 @@ function saveNewWhisky(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
   const name = formData.get("name").trim();
+  const nameEn = formData.get("nameEn").trim() || name;
   const distillery = formData.get("distillery").trim();
   const id = `custom-${crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`}`;
   const whisky = {
     id,
     name,
+    nameEn,
     distillery,
     type: formData.get("type"),
     abv: Number(formData.get("abv")),
@@ -635,6 +803,10 @@ document.getElementById("detailContent").addEventListener("click", (event) => {
   if (event.target.id !== "saveReview") return;
   const whisky = whiskies.find((item) => item.id === activeWhiskyId);
   if (!whisky) return;
+  const editedNameEn = document.getElementById("detailEnglishName")?.value.trim();
+  if (editedNameEn) {
+    whisky.nameEn = editedNameEn;
+  }
   whisky.userReview = {
     ...whisky.userReview,
     purchasePrice: document.getElementById("purchasePrice").value,
@@ -679,6 +851,7 @@ document.getElementById("detailContent").addEventListener("change", async (event
     const whisky = whiskies.find((item) => item.id === activeWhiskyId);
     if (!whisky) return;
     whisky.imageUrl = photo;
+    whisky.fallbackImageUrl = "";
     whisky.imagePage = "";
     whisky.imageCredit = "내가 등록한 사진";
     persist();
@@ -688,5 +861,7 @@ document.getElementById("detailContent").addEventListener("change", async (event
     showToast(error.message || "사진을 불러오지 못했어요.");
   }
 });
+
+render();
 
 render();
