@@ -247,10 +247,242 @@ seedWhiskies.push(...additionalWhiskies.map(([id, name, distillery, type, region
   notes: { aroma, taste, finish },
 })));
 
+const storyCategories = [
+  { id: "all", label: "전체" },
+  { id: "types", label: "위스키 종류" },
+  { id: "storage", label: "보관법" },
+  { id: "drinking", label: "즐기는 방법" },
+  { id: "trivia", label: "관련 상식" },
+];
+
+const whiskyStorySections = [
+  {
+    id: "types",
+    eyebrow: "01 · WHISKY STYLES",
+    title: "위스키 종류",
+    description: "원료와 증류·블렌딩 방식에 따라 달라지는 위스키의 대표 스타일",
+    items: [
+      {
+        badge: "STYLE 01",
+        en: "Single Malt Whisky",
+        title: "싱글몰트 위스키",
+        summary: "단 한 곳의 증류소(Single)에서 100% 발아 보리(Malt)만을 원료로 단식 증류기를 통해 만들어낸 위스키입니다. 산지와 증류소 고유의 개성이 가장 뚜렷하게 드러납니다.",
+        points: [
+          "<strong>스페이사이드</strong>: 과일·꿀·셰리 오크의 화려하고 우아한 풍미 (맥캘란, 글렌피딕, 발베니)",
+          "<strong>아일라</strong>: 피트(이탄) 연기와 바닷바람의 강렬한 스모키 풍미 (라프로익, 아드벡, 라가불린)",
+          "<strong>하이랜드 & 캠벨타운</strong>: 화사한 꽃향기부터 묵직한 몰트·소금기까지 다채로운 스펙트럼",
+        ],
+        tags: "대표 보틀 · 맥캘란 12년, 글렌피딕 12년, 아드벡 10년",
+        exploreType: "싱글몰트",
+      },
+      {
+        badge: "STYLE 02",
+        en: "Blended Whisky",
+        title: "블렌디드 위스키",
+        summary: "개성이 강한 여러 싱글몰트 위스키에 부드러운 그레인(곡물) 위스키를 마스터 블렌더의 비율로 조화시킨 스타일입니다. 균형감이 뛰어나고 언제 마셔도 편안합니다.",
+        points: [
+          "<strong>일관된 밸런스</strong>: 수십 가지 원액을 블렌딩해 복합적이면서도 모나지 않은 맛 구현",
+          "<strong>폭넓은 활용도</strong>: 니트와 온더락은 물론 하이볼 기주로도 훌륭한 궁합",
+          "<strong>블렌디드 몰트</strong>: 그레인 없이 몰트 원액끼리만 섞은 스타일 (몽키숄더, 조니워커 그린)",
+        ],
+        tags: "대표 보틀 · 조니워커 시리즈, 히비키 하모니, 발렌타인 17년",
+        exploreType: "블렌디드",
+      },
+      {
+        badge: "STYLE 03",
+        en: "Bourbon Whiskey",
+        title: "버번 위스키",
+        summary: "옥수수를 최소 51% 이상 사용하고, 안쪽을 불로 강하게 그을린(Charring) 새 아메리칸 화이트 오크통에서 숙성하는 미국 대표 위스키입니다.",
+        points: [
+          "<strong>진한 단맛과 타격감</strong>: 바닐라, 캐러멜, 메이플 시럽, 구운 오크와 코코넛 아로마",
+          "<strong>켄터키의 기후</strong>: 여름과 겨울의 큰 기온차로 짧은 숙성 기간에도 짙은 호박색과 풍미 형성",
+          "<strong>밀(Wheat) 버번</strong>: 호밀 대신 밀을 배합해 한층 부드럽고 달콤한 스타일 (메이커스 마크)",
+        ],
+        tags: "대표 보틀 · 와일드 터키 101, 우드포드 리저브, 버팔로 트레이스",
+        exploreType: "버번",
+      },
+      {
+        badge: "STYLE 04",
+        en: "Rye Whiskey",
+        title: "라이 위스키",
+        summary: "호밀(Rye) 함량 51% 이상으로 빚어내는 미국 위스키로, 버번보다 단맛은 절제되고 후추·민트·시나몬 같은 알싸한 스파이스가 돋보입니다.",
+        points: [
+          "<strong>스파이시 & 드라이</strong>: 입안을 깔끔하게 잡아주는 드라이한 피니시와 허브·향신료 노트",
+          "<strong>클래식 칵테일의 기주</strong>: 올드 패션드, 맨해튼, 사제락 등 바텐더들이 사랑하는 베이스",
+          "<strong>바틀드 인 본드(BiB)</strong>: 단일 증류 시즌·4년 이상 숙성·50% 도수 규정을 지킨 정통 표기",
+        ],
+        tags: "대표 보틀 · 불릿 라이, 리튼하우스 라이, 사제락 라이",
+        exploreType: "라이",
+      },
+    ],
+  },
+  {
+    id: "storage",
+    eyebrow: "02 · PROPER STORAGE",
+    title: "위스키 보관법",
+    description: "소중한 보틀의 향과 맛을 마지막 한 잔까지 지키는 4가지 원칙",
+    items: [
+      {
+        badge: "RULE 01",
+        en: "Always Keep Upright",
+        title: "반드시 세워서 보관하세요",
+        summary: "코르크가 마르지 않게 눕혀 보관하는 와인과 달리, 도수가 40% 이상인 위스키는 병을 눕히면 고도수 알코올이 코르크를 부식시킵니다.",
+        points: [
+          "<strong>코르크 손상 방지</strong>: 알코올과 계속 닿으면 코르크가 삭아서 개봉 시 부러지거나 위스키에 냄새가 배어듭니다.",
+          "<strong>가끔 적셔주기</strong>: 장기간 보관할 때는 몇 달에 한 번씩만 병을 살짝 기울였다 세워 코르크 수분만 유지해 주세요.",
+        ],
+        tags: "핵심 팁 · 와인은 눕혀서, 위스키는 세워서",
+      },
+      {
+        badge: "RULE 02",
+        en: "Avoid Sunlight & Heat",
+        title: "직사광선 차단과 일정한 온도",
+        summary: "자외선과 급격한 온도 변화는 위스키의 가장 큰 적입니다. 빛에 노출되면 색이 바래고 섬세한 에스테르(과일·꽃향기) 성분이 파괴됩니다.",
+        points: [
+          "<strong>적정 온도 15~20°C</strong>: 서늘하고 온도 변화가 적은 실내 찬장이나 그늘진 선반이 이상적입니다.",
+          "<strong>냉장·냉동 보관 지양</strong>: 지나치게 차가우면 향이 닫히고 지방산 성분이 하얗게 응고(백탁 현상)될 수 있습니다.",
+          "<strong>케이스 활용</strong>: 구매 시 제공된 종이 박스나 틴케이스에 넣어두면 빛을 완벽히 차단할 수 있습니다.",
+        ],
+        tags: "핵심 팁 · 직사광선 없는 어두운 실내 선반",
+      },
+      {
+        badge: "RULE 03",
+        en: "Airing & Oxidation",
+        title: "개봉 후 에어링(Airing)과 산화 관리",
+        summary: "병을 처음 열면 알코올 부즈(자극)가 강할 수 있지만, 병 안에 들어간 산소와 만나면서 점차 알코올이 둥글어지고 숨은 향이 피어납니다.",
+        points: [
+          "<strong>황금 구간</strong>: 개봉 후 1~3개월, 잔량이 2/3~1/2 정도 남았을 때 가장 화사한 맛을 보여주는 경우가 많습니다.",
+          "<strong>잔량 1/3 이하 주의</strong>: 병 속 공기층이 넓어지면 산화가 빨라져 향이 날아가므로 6개월~1년 안에 마시는 것이 좋습니다.",
+        ],
+        tags: "핵심 팁 · 뚜껑을 연 뒤 천천히 변화하는 맛을 기록해 보세요",
+      },
+      {
+        badge: "RULE 04",
+        en: "Parafilm & Decanting",
+        title: "장기 보관과 소분 팁",
+        summary: "아껴 마시는 고가 보틀이거나 개봉한 위스키가 여러 병이라면 간단한 도구로 증발과 산화를 늦출 수 있습니다.",
+        points: [
+          "<strong>소분 공병 활용</strong>: 위스키가 1/3 미만으로 남았을 때 작은 유리 공병에 옮겨 담으면 공기 접촉 면적을 크게 줄일 수 있습니다.",
+          "<strong>파라필름 마감</strong>: 장기간 마시지 않을 보틀은 캡 주변에 실험용 파라필름을 감아두면 알코올 증발을 막는 데 도움이 됩니다.",
+        ],
+        tags: "핵심 팁 · 남은 양이 적을 땐 작은 병에 옮겨 담기",
+      },
+    ],
+  },
+  {
+    id: "drinking",
+    eyebrow: "03 · HOW TO ENJOY",
+    title: "위스키 즐기는 방법",
+    description: "기분과 자리에 맞춰 위스키의 매력을 100% 끌어내는 음용법과 테이스팅 가이드",
+    items: [
+      {
+        badge: "SERVE 01",
+        en: "Neat & Chaser",
+        title: "니트 (Neat · 스트레이트)",
+        summary: "얼음이나 물을 섞지 않고 상온의 위스키 원액 그대로를 음미하는 방법입니다. 증류소가 의도한 본연의 향과 질감을 가장 정확하게 느낄 수 있습니다.",
+        points: [
+          "<strong>글렌케언 글라스</strong>: 아래는 넓고 입구는 좁아지는 튤립 모양 잔이 아로마를 모아주어 테이스팅에 최적입니다.",
+          "<strong>체이서(Chaser) 곁들이기</strong>: 상온의 생수 한 잔을 옆에 두고 한 모금 마신 뒤 입안을 헹구면 다음 모금의 향을 더욱 선명하게 느낄 수 있습니다.",
+        ],
+        tags: "추천 · 싱글몰트, 고숙성 블렌디드",
+      },
+      {
+        badge: "SERVE 02",
+        en: "Water Drop & Twice Up",
+        title: "워터 드롭 & 트와이스 업",
+        summary: "위스키에 상온의 물 몇 방울을 떨어뜨리면 알코올과 결합해 있던 향미 분자가 풀려나오며 꽃과 과일 아로마가 극적으로 열립니다.",
+        points: [
+          "<strong>워터 드롭(Water Drop)</strong>: 스포이트나 빨대로 물 2~3방울을 더해 알코올 자극은 줄이고 숨은 향을 깨웁니다.",
+          "<strong>트와이스 업(Twice Up)</strong>: 위스키와 상온수를 1:1로 섞어 도수를 20%대로 낮추는 방식으로, 마스터 블렌더들이 관능 평가할 때 즐겨 씁니다.",
+        ],
+        tags: "추천 · CS(고도수) 위스키, 향이 풍부한 싱글몰트",
+      },
+      {
+        badge: "SERVE 03",
+        en: "On the Rocks & Highball",
+        title: "온더락 & 하이볼",
+        summary: "얼음과 탄산수를 활용해 온도감과 청량감을 더하는 방식입니다. 위스키가 낯선 입문자나 식사와 함께 곁들이는 반주로 제격입니다.",
+        points: [
+          "<strong>온더락(On the Rocks)</strong>: 잔에 크고 단단한 얼음을 넣고 위스키를 부어, 얼음이 천천히 녹으며 변화하는 맛의 그라데이션을 즐깁니다.",
+          "<strong>하이볼(Highball)</strong>: 얼음을 가득 채운 잔에 위스키 1 : 탄산수 3~4 비율로 붓고 마들러로 한 번만 가볍게 들어 올리듯 섞어 탄산을 살립니다.",
+        ],
+        tags: "추천 · 버번, 아이리시, 스모키 블렌디드",
+      },
+      {
+        badge: "TASTING GUIDE",
+        en: "Nose · Palate · Finish",
+        title: "시음 기록을 위한 테이스팅 3단계",
+        summary: "내 보관함에 시음 노트를 남길 때 AROMA(향) · TASTE(맛) · FINISH(여운) 세 단계로 나누어 집중해 보면 나만의 취향을 쉽게 발견할 수 있습니다.",
+        points: [
+          "<strong>1단계 AROMA (향)</strong>: 코를 잔에 바로 대지 말고 천천히 거리를 좁히며 입을 살짝 벌려 맡으면 알코올 자극 없이 과일·꽃·오크 향이 느껴집니다.",
+          "<strong>2단계 TASTE (맛)</strong>: 소량을 입에 머금고 혀 전체로 굴리며 단맛, 산미, 스파이스와 오일리한 바디감을 확인합니다.",
+          "<strong>3단계 FINISH (여운)</strong>: 삼킨 뒤 코로 천천히 숨을 내쉬며 입안에 남는 잔향(피트, 초콜릿, 견과류)과 지속 시간을 음미합니다.",
+        ],
+        tags: "팁 · 정답은 없으니 떠오르는 일상 속 향과 기억을 자유롭게 적어보세요",
+      },
+    ],
+  },
+  {
+    id: "trivia",
+    eyebrow: "04 · WHISKY TRIVIA",
+    title: "알아두면 좋은 위스키 상식",
+    description: "라벨과 용어를 읽는 즐거움을 더해주는 흥미로운 위스키 배경지식",
+    items: [
+      {
+        badge: "TRIVIA 01",
+        en: "The Angel's Share",
+        title: "천사의 몫 (Angel's Share)",
+        summary: "오크통 속에서 위스키가 숙성되는 동안 매년 약 2%씩 알코올과 수분이 통 밖으로 자연 증발하는데, 이를 '천사들이 먼저 마신 몫'이라 부릅니다.",
+        points: [
+          "<strong>20년 숙성의 비밀</strong>: 스코틀랜드에서 20년을 숙성하면 처음 담은 원액의 약 30~40%가 사라져 고숙성 위스키일수록 귀하고 가격이 높아집니다.",
+          "<strong>열대 숙성</strong>: 대만(카발란)이나 인도처럼 더운 기후에서는 연 10~12%씩 증발하는 대신 4~6년 만에도 짙고 농밀한 숙성미를 얻습니다.",
+        ],
+        tags: "키워드 · 숙성 연수, 희소성",
+      },
+      {
+        badge: "TRIVIA 02",
+        en: "Oak Cask & Maturation",
+        title: "맛과 색의 70%를 결정하는 오크통(Cask)",
+        summary: "증류기를 막 빠져나온 위스키 원액(New Make Spirit)은 소주처럼 투명합니다. 갈색 빛깔과 깊은 풍미는 전적으로 오크통 숙성에서 탄생합니다.",
+        points: [
+          "<strong>버번 캐스크 (Ex-Bourbon)</strong>: 미국 버번을 숙성했던 아메리칸 오크통으로 바닐라, 꿀, 코코넛, 밝은 황금빛을 부여합니다.",
+          "<strong>셰리 캐스크 (Ex-Sherry)</strong>: 스페인 주정강화 와인(셰리)을 담았던 오크통으로 건포도, 무화과, 다크초콜릿과 붉은 호박색을 만듭니다.",
+          "<strong>더블우드 / 피니시</strong>: 서로 다른 두 종류 이상의 캐스크에서 차례로 숙성해 복합적인 레이어를 입히는 기법입니다.",
+        ],
+        tags: "키워드 · 셰리 오크, 더블 캐스크, 미즈나라",
+      },
+      {
+        badge: "TRIVIA 03",
+        en: "Peat & Smokiness",
+        title: "피트 (Peat · 이탄)와 스모키향",
+        summary: "스코틀랜드 해안과 섬 지역에서 수천 년간 헤더 풀과 식물이 퇴적되어 만들어진 흙(이탄)을 태워 보리의 싹을 말릴 때 배어드는 독특한 훈연 향입니다.",
+        points: [
+          "<strong>호불호가 갈리는 매력</strong>: 처음엔 정로환·소독약·모닥불 연기처럼 낯설지만, 익숙해지면 대체 불가능한 감칠맛과 긴 여운에 빠지게 됩니다.",
+          "<strong>페놀 수치(PPM)</strong>: 피트 향의 강도를 나타내는 지표로, 글렌피딕·맥캘란은 논피트(또는 극소량), 라프로익·아드벡은 40~55 PPM 이상의 헤비 피트입니다.",
+        ],
+        tags: "키워드 · 아일라, 피트향, PPM",
+      },
+      {
+        badge: "TRIVIA 04",
+        en: "Label Terms: CS · NAS · Whisky vs Whiskey",
+        title: "라벨 속 용어: CS · NAS · 철자 차이",
+        summary: "위스키 병 라벨에 적힌 약어와 표기법만 알아도 어떤 성격의 술인지 한눈에 파악할 수 있습니다.",
+        points: [
+          "<strong>CS (Cask Strength)</strong>: 병입 전 물을 타지 않고 오크통 원액 도수 그대로(보통 50~60%대) 담아낸 강렬하고 진한 위스키",
+          "<strong>NAS (No Age Statement)</strong>: 숙성 연수 표기 없이 마스터 블렌더가 다양한 연수의 원액을 조합해 최적의 맛을 구현한 위스키 (히비키 하모니, 아드벡 우거다일 등)",
+          "<strong>Whisky vs Whiskey</strong>: 스코틀랜드·일본·캐나다·대만은 'Whisky', 아일랜드와 미국은 주로 'e'가 들어간 'Whiskey'로 표기합니다.",
+        ],
+        tags: "키워드 · 라벨 읽는 법, 캐스크 스트렝스",
+      },
+    ],
+  },
+];
+
 const storageKey = "stillnote-whisky-collection-v1";
 const types = ["전체", "싱글몰트", "버번", "블렌디드", "라이"];
 let selectedType = "전체";
 let selectedExploreType = "전체";
+let selectedStoryCategory = "all";
 let currentTab = "collection";
 let activeWhiskyId = null;
 let toastTimer;
@@ -360,6 +592,50 @@ function cardMarkup(whisky, isExplore = false) {
 function renderFilters() {
   document.getElementById("filterRow").innerHTML = types.map((type) => `<button class="filter-chip ${selectedType === type ? "active" : ""}" data-filter="${type}">${type}</button>`).join("");
   document.getElementById("exploreFilterRow").innerHTML = types.map((type) => `<button class="filter-chip ${selectedExploreType === type ? "active" : ""}" data-explore-filter="${type}">${type}</button>`).join("");
+  const storyFilterRow = document.getElementById("storyFilterRow");
+  if (storyFilterRow) {
+    storyFilterRow.innerHTML = storyCategories.map((category) => `<button class="filter-chip ${selectedStoryCategory === category.id ? "active" : ""}" data-story-filter="${category.id}">${category.label}</button>`).join("");
+  }
+}
+
+function renderStories() {
+  const container = document.getElementById("storyContainer");
+  if (!container) return;
+  const visibleSections = selectedStoryCategory === "all"
+    ? whiskyStorySections
+    : whiskyStorySections.filter((section) => section.id === selectedStoryCategory);
+  container.innerHTML = visibleSections.map((section) => `
+    <section class="story-section" aria-label="${escapeHtml(section.title)}">
+      <div class="story-section-header">
+        <div>
+          <p class="eyebrow">${escapeHtml(section.eyebrow)}</p>
+          <h2>${escapeHtml(section.title)}</h2>
+        </div>
+        <p class="story-section-desc">${escapeHtml(section.description)}</p>
+      </div>
+      <div class="story-grid">
+        ${section.items.map((item) => `
+          <article class="story-card">
+            <div>
+              <div class="story-card-top">
+                <span class="story-badge">${escapeHtml(item.badge)}</span>
+                <span class="story-en">${escapeHtml(item.en)}</span>
+              </div>
+              <h3>${escapeHtml(item.title)}</h3>
+              <p class="story-summary">${escapeHtml(item.summary)}</p>
+              <ul class="story-points">
+                ${item.points.map((point) => `<li>${point}</li>`).join("")}
+              </ul>
+            </div>
+            <div class="story-card-footer">
+              <span class="story-tags">${escapeHtml(item.tags)}</span>
+              ${item.exploreType ? `<button type="button" class="story-explore-btn" data-jump-explore="${escapeHtml(item.exploreType)}">${escapeHtml(item.exploreType)} 보틀 보기 ↗</button>` : ""}
+            </div>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `).join("");
 }
 
 function renderCollection() {
@@ -396,6 +672,7 @@ function render() {
   renderFilters();
   renderCollection();
   renderExplore();
+  renderStories();
 }
 
 function showToast(message) {
@@ -416,6 +693,7 @@ function setTab(tab) {
   });
   document.getElementById("collectionView").classList.toggle("active", tab === "collection");
   document.getElementById("exploreView").classList.toggle("active", tab === "explore");
+  document.getElementById("storyView")?.classList.toggle("active", tab === "story");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -754,6 +1032,13 @@ document.addEventListener("click", (event) => {
   if (tabButton) { setTab(tabButton.dataset.tab); return; }
   const goButton = event.target.closest("[data-go]");
   if (goButton) { setTab(goButton.dataset.go); return; }
+  const jumpExplore = event.target.closest("[data-jump-explore]");
+  if (jumpExplore) {
+    selectedExploreType = jumpExplore.dataset.jumpExplore;
+    render();
+    setTab("explore");
+    return;
+  }
   if (event.target.closest("#lookupWhiskyButton")) { searchWhiskyOnline(); return; }
   const catalogueResult = event.target.closest("[data-catalogue-id]");
   if (catalogueResult) { addCatalogueWhisky(catalogueResult.dataset.catalogueId); return; }
@@ -764,6 +1049,8 @@ document.addEventListener("click", (event) => {
   if (filterButton) { selectedType = filterButton.dataset.filter; render(); return; }
   const exploreFilter = event.target.closest("[data-explore-filter]");
   if (exploreFilter) { selectedExploreType = exploreFilter.dataset.exploreFilter; render(); return; }
+  const storyFilter = event.target.closest("[data-story-filter]");
+  if (storyFilter) { selectedStoryCategory = storyFilter.dataset.storyFilter; render(); return; }
   const saveButton = event.target.closest("[data-save]");
   if (saveButton) { event.stopPropagation(); toggleSaved(saveButton.dataset.save); return; }
   const starButton = event.target.closest("[data-rating]");
@@ -861,7 +1148,5 @@ document.getElementById("detailContent").addEventListener("change", async (event
     showToast(error.message || "사진을 불러오지 못했어요.");
   }
 });
-
-render();
 
 render();
