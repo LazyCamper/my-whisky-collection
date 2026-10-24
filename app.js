@@ -17,6 +17,7 @@ const additionalWhiskies = [
   ["glenlivet-12", "더 글렌리벳 12년", "The Glenlivet", "싱글몰트", "스페이사이드 · 스코틀랜드", 40, "₩70,000 – 90,000", "배 · 사과 · 꽃향기", "바닐라 · 시트러스 · 몰트", "부드럽고 달콤한 여운", "tone-green"],
   ["glenlivet-15", "더 글렌리벳 15년 프렌치 오크", "The Glenlivet", "싱글몰트", "스페이사이드 · 스코틀랜드", 40, "₩100,000 – 130,000", "복숭아 · 버터 · 오크", "살구 · 견과류 · 향신료", "부드러운 오크와 과일", "tone-clear"],
   ["glenmorangie-original-10", "글렌모렌지 오리지널 10년", "Glenmorangie", "싱글몰트", "하이랜드 · 스코틀랜드", 40, "₩75,000 – 95,000", "시트러스 · 복숭아 · 바닐라", "크림 · 꿀 · 아몬드", "가볍고 산뜻한 여운", "tone-blue"],
+  ["glenmorangie-original-12", "글렌모렌지 디 오리지널 12년", "Glenmorangie", "싱글몰트", "하이랜드 · 스코틀랜드", 40, "₩78,000 – 98,000", "오렌지 · 복숭아 · 바닐라 · 꿀", "12년 숙성으로 깊어진 크리미 퍼지 · 시트러스 · 아몬드", "실키하고 화사한 과일과 바닐라 여운", "tone-clear"],
   ["glenmorangie-quinta-ruban", "글렌모렌지 퀸타 루반 14년", "Glenmorangie", "싱글몰트", "하이랜드 · 스코틀랜드", 46, "₩120,000 – 155,000", "다크초콜릿 · 민트 · 오렌지", "자두 · 호두 · 코코아", "풍부한 초콜릿과 스파이스", "tone-ruby"],
   ["ardbeg-10", "아드벡 10년", "Ardbeg", "싱글몰트", "아일라 · 스코틀랜드", 46, "₩95,000 – 125,000", "강한 피트 · 레몬 · 바다", "스모크 · 후추 · 라임", "긴 스모키 피니시", "tone-blue"],
   ["ardbeg-uigeadail", "아드벡 우거다일", "Ardbeg", "싱글몰트", "아일라 · 스코틀랜드", 54.2, "₩150,000 – 195,000", "셰리 · 장작 연기 · 건포도", "대추야자 · 에스프레소 · 피트", "달콤하고 강렬한 스모크", "tone-ruby"],
@@ -38,6 +39,14 @@ const additionalWhiskies = [
   ["singleton-dufftown-12", "싱글톤 더프타운 12년", "The Singleton", "싱글몰트", "스페이사이드 · 스코틀랜드", 40, "₩62,000 – 82,000", "구운 사과 · 브라운슈가 · 견과류", "과일 · 크리미한 토피 · 바닐라", "매끄럽고 달콤한 오크 여운", "tone-green"],
   ["auchentoshan-three-wood", "오켄토션 쓰리우드", "Auchentoshan", "싱글몰트", "로우랜드 · 스코틀랜드", 43, "₩82,000 – 110,000", "블랙커런트 · 브라운슈가 · 자두", "헤이즐넛 · 다크초콜릿 · 시나몬 · 셰리", "부드러운 3회 증류와 진한 셰리 피니시", "tone-ruby"],
   ["tamnavulin-double-cask", "탐나불린 더블 캐스크", "Tamnavulin", "싱글몰트", "스페이사이드 · 스코틀랜드", 40, "₩35,000 – 48,000", "사과 · 토피 · 꿀 · 마지팬", "배 · 복숭아 · 파인애플 · 셰리 오크", "부드럽고 산뜻한 달콤함", "tone-clear"],
+  ["tamnavulin-sherry-cask", "탐나불린 셰리 캐스크", "Tamnavulin", "싱글몰트", "스페이사이드 · 스코틀랜드", 40, "₩36,000 – 49,000", "바닐라 · 건포도 · 카라멜 · 오렌지", "3종 올로로소 셰리 캐스크 피니시 · 대추야자 · 시나몬", "부드럽고 달콤한 과일 케이크 여운", "tone-ruby"],
+  ["benromach-10", "벤로막 10년", "Benromach", "싱글몰트", "스페이사이드 · 스코틀랜드", 43, "₩75,000 – 98,000", "구운 맥아 · 청사과 · 은은한 피트 연기", "셰리 과일 · 바닐라 · 생강 · 부드러운 스모크", "클래식 스페이사이드 특유의 훈연과 오크 여운", "tone-ruby"],
+  ["tamdhu-12", "탐두 12년", "Tamdhu", "싱글몰트", "스페이사이드 · 스코틀랜드", 43, "₩95,000 – 125,000", "진한 올로로소 셰리 · 시나몬 · 건포도", "자두 · 건베리 · 바닐라 · 구운 오크", "100% 셰리 캐스크 숙성의 깊고 달콤한 여운", "tone-ruby"],
+  ["bunnahabhain-12", "부나하벤 12년", "Bunnahabhain", "싱글몰트", "아일라 · 스코틀랜드", 46.3, "₩95,000 – 125,000", "말린 과일 · 꽃향기 · 바닷바람 · 견과류", "논피트 아일라 · 달콤한 셰리 · 바닐라 · 소금기", "묵직하고 크리미한 견과와 셰리 피니시", "tone-blue"],
+  ["mortlach-16", "모틀락 16년", "Mortlach", "싱글몰트", "스페이사이드 · 스코틀랜드", 43.4, "₩165,000 – 215,000", "다크 베리 · 가죽 · 셰리 · 구운 향신료", "2.81회 증류 특유의 묵직한 바디 · 건과일 · 꿀 · 정향", "풍부하고 복합적인 감칠맛과 긴 오크 여운", "tone-ruby"],
+  ["jura-12-sherry-cask", "주라 12년 셰리 캐스크 피니시", "Jura", "싱글몰트", "주라섬 · 스코틀랜드", 40, "₩65,000 – 85,000", "다크초콜릿 · 꿀 · 열대과일 · 구운 호두", "구운 바나나 · 브라운슈가 · 감귤 · 올로로소 셰리", "부드러운 달콤함과 섬세한 오크 스파이스", "tone-ruby"],
+  ["glen-grant-arboralis", "글렌그란트 아보랄리스", "Glen Grant", "싱글몰트", "스페이사이드 · 스코틀랜드", 40, "₩32,000 – 45,000", "청사과 · 배 · 레몬 · 흰 꽃향기", "버터스카치 · 바닐라 · 산뜻한 몰트", "화사하고 깔끔한 과수원 과일 여운", "tone-green"],
+  ["smoky-scot", "스모키 스캇", "Aceo (Caol Ila)", "싱글몰트", "아일라 · 스코틀랜드", 40, "₩38,000 – 52,000", "모닥불 연기 · 해풍 · 레몬 껍질 · 요오드", "쿨일라 원액 기반의 선명한 피트 · 후추 · 보리 맥아", "깔끔하고 강렬한 아일라 스모키 여운", "tone-blue"],
   ["glenfarclas-12", "글렌파클라스 12년", "Glenfarclas", "싱글몰트", "스페이사이드 · 스코틀랜드", 43, "₩85,000 – 115,000", "상큼한 셰리 · 사과 · 구운 오크", "건포도 · 시나몬 · 정향 · 몰트", "전통 셰리 캐스크의 길고 스파이시한 여운", "tone-ruby"],
   ["cardhu-12", "카두 12년", "Cardhu", "싱글몰트", "스페이사이드 · 스코틀랜드", 40, "₩65,000 – 85,000", "배 · 헤더 꿀 · 잘 익은 사과", "실키한 몰트 · 바닐라 · 부드러운 오크", "깔끔하고 달콤한 여운", "tone-clear"],
   ["kirkland-single-malt", "커클랜드 시그니처 싱글몰트 스카치", "Kirkland Signature", "싱글몰트", "하이랜드 · 스코틀랜드", 46, "₩75,000 – 110,000", "셰리 · 건포도 · 오렌지 껍질", "견과류 · 다크초콜릿 · 스파이스", "진하고 따뜻한 오크 피니시", "tone-ruby"],
@@ -55,6 +64,10 @@ const additionalWhiskies = [
   ["grants-triple-wood", "그란츠 트리플 우드", "Grant's", "블렌디드", "스코틀랜드", 40, "₩19,000 – 29,000", "잘 익은 배 · 바닐라 · 몰트", "브라운슈가 · 바나나 · 오크", "부드럽고 은은한 달콤함", "tone-clear"],
   ["bells-original", "벨즈 오리지널", "Bell's", "블렌디드", "스코틀랜드", 40, "₩16,000 – 25,000", "사과 · 생강 · 구운 곡물", "견과류 · 허브 · 은은한 스모크", "드라이하고 가벼운 스파이스", "tone-clear"],
   ["black-bottle", "블랙보틀", "Black Bottle", "블렌디드", "스코틀랜드", 40, "₩25,000 – 36,000", "은은한 피트 연기 · 꽃향기 · 나무", "꿀 · 과일 · 스모키 오크", "부드러운 스모크와 향신료", "tone-blue"],
+  ["naked-malt", "네이키드 몰트", "Naked Malt", "블렌디드", "스코틀랜드", 40, "₩45,000 – 62,000", "버터스카치 · 구운 사과 · 건포도 · 셰리", "맥캘란·하이랜드파크·글렌로세스 원액 블렌딩 · 퍼스트필 올로로소 셰리", "진한 말린 과일과 초콜릿 여운", "tone-ruby"],
+  ["john-barr-reserve", "존바 리저브 블랙", "John Barr", "블렌디드", "스코틀랜드", 40, "₩18,000 – 28,000", "구운 사과 · 시나몬 · 바닐라 · 꿀", "하이랜드·스페이사이드 몰트 블렌딩 · 초콜릿 · 살구", "부드러운 스파이스와 은은한 오크 여운", "tone-clear"],
+  ["cutty-sark-prohibition", "커티삭 프로히비션", "Cutty Sark", "블렌디드", "스코틀랜드", 50, "₩36,000 – 48,000", "바닐라 · 토피 · 시트러스 · 흑후추", "50도 논칠필터링의 묵직한 타격감 · 캐러멜 · 정향 · 오크", "진하고 스파이시하며 길게 이어지는 여운", "tone-ruby"],
+  ["black-and-white", "블랙 앤 화이트", "Black & White", "블렌디드", "스코틀랜드", 40, "₩16,000 – 25,000", "신선한 곡물 · 레몬 · 꿀 · 은은한 허브", "부드러운 몰트 · 비스킷 · 바닐라 · 가벼운 스모크", "하이볼과 데일리에 잘 어울리는 깔끔한 목넘김", "tone-clear"],
   ["monkey-shoulder", "몽키숄더 오리지널", "Monkey Shoulder", "블렌디드", "스코틀랜드", 40, "₩55,000 – 75,000", "오렌지 · 바닐라 · 몰트", "꿀 · 향신료 · 과일", "부드럽고 달콤한 몰트", "tone-ruby"],
   ["johnnie-walker-red", "조니워커 레드 라벨", "Johnnie Walker", "블렌디드", "스코틀랜드", 40, "₩30,000 – 45,000", "바닐라 · 사과 · 스모크", "캐러멜 · 후추 · 몰트", "가볍고 스파이시한 여운", "tone-ruby"],
   ["johnnie-walker-double-black", "조니워커 더블 블랙", "Johnnie Walker", "블렌디드", "스코틀랜드", 40, "₩55,000 – 75,000", "짙은 피트 · 포도 · 오크", "훈연 · 후추 · 바닐라", "깊고 묵직한 스모크", "tone-blue"],
@@ -118,6 +131,7 @@ const englishNamesById = {
   "glenlivet-12": "The Glenlivet 12 Year Old",
   "glenlivet-15": "The Glenlivet 15 Year Old French Oak Reserve",
   "glenmorangie-original-10": "Glenmorangie The Original 10 Year Old",
+  "glenmorangie-original-12": "Glenmorangie The Original 12 Year Old",
   "glenmorangie-quinta-ruban": "Glenmorangie Quinta Ruban 14 Year Old",
   "ardbeg-10": "Ardbeg 10 Year Old",
   "ardbeg-uigeadail": "Ardbeg Uigeadail",
@@ -139,6 +153,14 @@ const englishNamesById = {
   "singleton-dufftown-12": "The Singleton of Dufftown 12 Year Old",
   "auchentoshan-three-wood": "Auchentoshan Three Wood",
   "tamnavulin-double-cask": "Tamnavulin Double Cask",
+  "tamnavulin-sherry-cask": "Tamnavulin Sherry Cask Edition",
+  "benromach-10": "Benromach 10 Year Old",
+  "tamdhu-12": "Tamdhu 12 Year Old",
+  "bunnahabhain-12": "Bunnahabhain 12 Year Old",
+  "mortlach-16": "Mortlach 16 Year Old Distiller's Dram",
+  "jura-12-sherry-cask": "Jura 12 Year Old Sherry Cask Finish",
+  "glen-grant-arboralis": "The Glen Grant Arboralis",
+  "smoky-scot": "Smoky Scot Islay Single Malt",
   "glenfarclas-12": "Glenfarclas 12 Year Old",
   "cardhu-12": "Cardhu 12 Year Old",
   "kirkland-single-malt": "Kirkland Signature Single Malt Scotch Whisky",
@@ -156,6 +178,10 @@ const englishNamesById = {
   "grants-triple-wood": "Grant's Triple Wood",
   "bells-original": "Bell's Original Blended Scotch Whisky",
   "black-bottle": "Black Bottle Blended Scotch Whisky",
+  "naked-malt": "Naked Malt Blended Malt Scotch Whisky",
+  "john-barr-reserve": "John Barr Reserve Black Label",
+  "cutty-sark-prohibition": "Cutty Sark Prohibition Edition",
+  "black-and-white": "Black & White Blended Scotch Whisky",
   "monkey-shoulder": "Monkey Shoulder Original",
   "johnnie-walker-red": "Johnnie Walker Red Label",
   "johnnie-walker-double-black": "Johnnie Walker Double Black",
@@ -222,12 +248,21 @@ const additionalPhotoSources = {
   Bowmore: ["Bowmore_Single_Malt_Scotch_Whisky_12_years_old.jpg", "Look Sharp! · CC BY-SA 3.0"],
   "The Singleton": ["Singleton_Single_Malt_Whisky_Aged_12_years.jpg", "Wikimedia Commons · CC BY-SA 4.0"],
   Auchentoshan: ["Auchentoshan_Family.jpg", "Wikimedia Commons · CC BY-SA 3.0"],
+  Tamnavulin: ["Tamnavulin_Double.jpg", "Wikimedia Commons · CC BY-SA 4.0"],
+  Tamdhu: ["Tamdhu_Ambar_Speyside_Single_Malt_Whisky%2C_aged_14_years.jpg", "Wikimedia Commons · CC BY-SA 4.0"],
+  Bunnahabhain: ["Bunnahabhain_Cruach-Mh%C3%B2na.jpg", "Wikimedia Commons · CC BY-SA 3.0"],
+  Mortlach: ["Mortlach_Single_Malt_Whisky.jpg", "Wikimedia Commons · CC BY-SA 3.0"],
+  Jura: ["Jura_Single_Malt.jpg", "Wikimedia Commons · CC BY-SA 3.0"],
+  "Glen Grant": ["01-Glen-Grant.jpg", "Wikimedia Commons · CC BY-SA 3.0"],
+  "Aceo (Caol Ila)": ["Caol_Ila_12_years_old_whisky.jpg", "JIP · CC BY-SA 3.0"],
   Glenfarclas: ["Glenfarclas_15y_bottle.jpg", "Wikimedia Commons · CC BY-SA 3.0"],
   Cardhu: ["Whisky_Cardhu.jpg", "Wikimedia Commons · CC BY-SA 3.0"],
   "Teacher's": ["Teacher%27s_Highland_Cream_20cl_bottle_1.jpg", "Wikimedia Commons · CC BY-SA 4.0"],
   "Kirkland Signature": ["Bourbon_Kirkland.jpg", "Wikimedia Commons · CC BY-SA 4.0"],
   "The Famous Grouse": ["Famous_Grouse.JPG", "Wikimedia Commons · CC BY-SA 3.0"],
   "Grant's": ["Grant%27s_Whisky_01.jpg", "Wikimedia Commons · CC BY-SA 3.0"],
+  "Cutty Sark": ["Bottle_of_Cutty_Sark_Scotch_Whisky_with_box.JPG", "Wikimedia Commons · CC BY-SA 3.0"],
+  "Black & White": ["Black_%26_White_%28whisky%29_bottle_01.jpg", "Wikimedia Commons · CC BY-SA 4.0"],
   "The Macallan": ["Macallan_whisky%2C_12-15-18_years.jpg", "Ssu · CC BY-SA 4.0"],
   Glenfiddich: ["GlenfiddichSpecialReserve12Years.jpg", "Pbrundel · CC BY-SA 3.0"],
   "The Balvenie": ["Balvenie_Whisky_Doublewood_12_years_old.jpg", "Pbrundel · CC BY-SA 3.0"],
@@ -296,6 +331,18 @@ const additionalPhotoSourcesById = {
     fallbackImageUrl: "https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=500&q=85",
     imagePage: "https://www.thewhiskyexchange.com/p/155/dalmore-12-year-old",
     imageCredit: "The Dalmore 12 · Bottle",
+  },
+  "benromach-10": {
+    imageUrl: "https://img.thewhiskyexchange.com/540/brmob.10yo.jpg",
+    fallbackImageUrl: "https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=500&q=85",
+    imagePage: "https://www.thewhiskyexchange.com/",
+    imageCredit: "Benromach 10 · Bottle",
+  },
+  "naked-malt": {
+    imageUrl: "https://img.thewhiskyexchange.com/540/vatted_nak1.jpg",
+    fallbackImageUrl: "https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=500&q=85",
+    imagePage: "https://www.thewhiskyexchange.com/",
+    imageCredit: "Naked Malt · Bottle",
   },
   "suntory-kakubin": ["Suntory_Kakubin.jpg", "Wikimedia Commons · CC BY-SA 3.0"],
 };
@@ -651,7 +698,14 @@ function escapeHtml(value = "") {
 function normalizeSearchText(value = "") {
   return String(value)
     .toLocaleLowerCase("ko")
-    .replace(/['’`\-_./]/g, " ")
+    .replace(/글랜/g, "글렌")
+    .replace(/맥켈란/g, "맥캘란")
+    .replace(/티쳐스/g, "티처스")
+    .replace(/하일랜드/g, "하이랜드")
+    .replace(/쉐리/g, "셰리")
+    .replace(/케스크/g, "캐스크")
+    .replace(/피니쉬/g, "피니시")
+    .replace(/['’`\-_./&]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
