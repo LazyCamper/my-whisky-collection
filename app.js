@@ -219,7 +219,6 @@ const additionalPhotoSources = {
   Oban: ["Oban_Single_malt_Whisky_14_years_old.jpg", "Look Sharp! · CC BY-SA 3.0"],
   "Caol Ila": ["Caol_Ila_12_years_old_whisky.jpg", "JIP · CC BY-SA 3.0"],
   Springbank: ["Springbank_aged15y.jpg", "Springbank Distillery · CC BY-SA 3.0"],
-  "The Dalmore": ["Scotland_Alness_Dalmore_Distillery.jpg", "Wikimedia Commons · CC BY-SA 3.0"],
   Bowmore: ["Bowmore_Single_Malt_Scotch_Whisky_12_years_old.jpg", "Look Sharp! · CC BY-SA 3.0"],
   "The Singleton": ["Singleton_Single_Malt_Whisky_Aged_12_years.jpg", "Wikimedia Commons · CC BY-SA 4.0"],
   Auchentoshan: ["Auchentoshan_Family.jpg", "Wikimedia Commons · CC BY-SA 3.0"],
@@ -229,7 +228,6 @@ const additionalPhotoSources = {
   "Kirkland Signature": ["Bourbon_Kirkland.jpg", "Wikimedia Commons · CC BY-SA 4.0"],
   "The Famous Grouse": ["Famous_Grouse.JPG", "Wikimedia Commons · CC BY-SA 3.0"],
   "Grant's": ["Grant%27s_Whisky_01.jpg", "Wikimedia Commons · CC BY-SA 3.0"],
-  "Bell's": ["Glass_of_Bell%27s.png", "Wikimedia Commons · CC BY-SA 3.0"],
   "The Macallan": ["Macallan_whisky%2C_12-15-18_years.jpg", "Ssu · CC BY-SA 4.0"],
   Glenfiddich: ["GlenfiddichSpecialReserve12Years.jpg", "Pbrundel · CC BY-SA 3.0"],
   "The Balvenie": ["Balvenie_Whisky_Doublewood_12_years_old.jpg", "Pbrundel · CC BY-SA 3.0"],
@@ -286,6 +284,18 @@ const additionalPhotoSourcesById = {
     fallbackImageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a3/JW_Blue_Label.jpg",
     imagePage: "https://commons.wikimedia.org/wiki/File:JW_Blue_Label.jpg",
     imageCredit: "Iceman7840 · CC BY-SA 3.0",
+  },
+  "bells-original": {
+    imageUrl: "https://img.thewhiskyexchange.com/540/blend_bel1.jpg",
+    fallbackImageUrl: "assets/bells-original.svg",
+    imagePage: "https://www.thewhiskyexchange.com/p/3545/bells-original",
+    imageCredit: "Bell's Original · Bottle",
+  },
+  "dalmore-12": {
+    imageUrl: "https://img.thewhiskyexchange.com/540/dlmob.12yov9.jpg",
+    fallbackImageUrl: "https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=500&q=85",
+    imagePage: "https://www.thewhiskyexchange.com/p/155/dalmore-12-year-old",
+    imageCredit: "The Dalmore 12 · Bottle",
   },
   "suntory-kakubin": ["Suntory_Kakubin.jpg", "Wikimedia Commons · CC BY-SA 3.0"],
 };
@@ -662,7 +672,7 @@ function matchesWhiskyQuery(whisky, rawQuery = "") {
 function bottleArt(whisky, extraClass = "", allowPhotoChange = false) {
   const label = whisky.name.replace(/\s+/g, " ").slice(0, 18);
   const fallbackAttr = whisky.fallbackImageUrl ? ` data-fallback-src="${escapeHtml(whisky.fallbackImageUrl)}"` : "";
-  const photo = whisky.imageUrl ? `<img class="bottle-photo" src="${escapeHtml(whisky.imageUrl)}"${fallbackAttr} alt="${escapeHtml(whisky.name)} (${escapeHtml(whisky.nameEn || whisky.name)}) 위스키 병" loading="lazy" decoding="async" onload="this.parentElement.classList.add('photo-loaded')" onerror="if(this.dataset.fallbackSrc && this.src !== this.dataset.fallbackSrc){this.src = this.dataset.fallbackSrc; return;} this.parentElement.classList.remove('photo-loaded'); this.remove()">` : "";
+  const photo = whisky.imageUrl ? `<img class="bottle-photo" src="${escapeHtml(whisky.imageUrl)}"${fallbackAttr} alt="${escapeHtml(whisky.name)} (${escapeHtml(whisky.nameEn || whisky.name)}) 위스키 병" loading="lazy" decoding="async" referrerpolicy="no-referrer" onload="this.parentElement.classList.add('photo-loaded')" onerror="if(this.dataset.fallbackSrc && this.src !== this.dataset.fallbackSrc){this.src = this.dataset.fallbackSrc; return;} this.parentElement.classList.remove('photo-loaded'); this.remove()">` : "";
   const credit = whisky.imageCredit ? whisky.imagePage
     ? `<a class="photo-credit" href="${escapeHtml(whisky.imagePage)}" target="_blank" rel="noreferrer" aria-label="사진 출처: ${escapeHtml(whisky.imageCredit)}">${escapeHtml(whisky.imageCredit)}</a>`
     : `<span class="photo-credit">${escapeHtml(whisky.imageCredit)}</span>` : "";
