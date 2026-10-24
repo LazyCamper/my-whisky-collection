@@ -824,7 +824,7 @@ function renderDetail(id, draft = {}) {
   const naverSearchUrl = new URL("https://search.naver.com/search.naver");
   naverSearchUrl.searchParams.set("query", whisky.name);
   document.getElementById("detailContent").innerHTML = `
-    <div class="detail-hero">${bottleArt(whisky, "", true)}<div><p class="detail-distillery">${escapeHtml(whisky.distillery.toUpperCase())}</p><h2 id="detailName">${escapeHtml(whisky.name)}</h2><p class="detail-name-en">${escapeHtml(currentNameEn)}</p><div class="detail-meta"><span>${escapeHtml(whisky.type)}</span><span>${whisky.abv}% ABV</span><span>${escapeHtml(whisky.region)}</span></div><p class="detail-price"><span>참고 가격</span>${escapeHtml(whisky.averagePrice)}</p><a class="naver-search-button" data-naver-search href="${escapeHtml(naverSearchUrl.href)}" target="_blank" rel="noopener noreferrer"><span class="naver-mark" aria-hidden="true">N</span><span>네이버에서 검색</span><span class="naver-arrow" aria-hidden="true">↗</span></a></div></div>
+    <div class="detail-hero">${bottleArt(whisky, "", true)}<div><p class="detail-distillery">${escapeHtml(whisky.distillery.toUpperCase())}</p><h2 id="detailName">${escapeHtml(whisky.name)}</h2><p class="detail-name-en">${escapeHtml(currentNameEn)}</p><div class="detail-meta"><span>${escapeHtml(whisky.type)}</span><span>${whisky.abv}% ABV</span><span>${escapeHtml(whisky.region)}</span></div><p class="detail-price"><span>참고 가격</span>${escapeHtml(whisky.averagePrice)}</p><a class="naver-search-button" data-naver-search href="${escapeHtml(naverSearchUrl.href)}" target="_blank" rel="noopener noreferrer"><span class="search-icon" aria-hidden="true"></span><span>인터넷 검색</span><span class="naver-arrow" aria-hidden="true">↗</span></a></div></div>
     <section class="notes-section"><div class="detail-section-title"><h3>테이스팅 노트</h3><span>TASTING PROFILE</span></div><div class="note-groups"><div class="note-group"><span>AROMA</span><p>${escapeHtml(whisky.notes.aroma)}</p></div><div class="note-group"><span>TASTE</span><p>${escapeHtml(whisky.notes.taste)}</p></div><div class="note-group"><span>FINISH</span><p>${escapeHtml(whisky.notes.finish)}</p></div></div></section>
     <section class="review-section"><div class="detail-section-title"><h3>나의 기록</h3><span>PERSONAL JOURNAL</span></div>
       <div class="rating-row"><span class="field-label">나의 평점</span><div class="stars" role="group" aria-label="별점">${stars}<span class="rating-value">${Number(review.rating || 0) ? Number(review.rating).toFixed(1) : "—"}</span></div></div>
@@ -1114,8 +1114,11 @@ function closeDetail() {
 }
 
 function buildNaverAppIntent(query, fallbackUrl) {
-  const encodedQuery = encodeURIComponent(query);
-  return `intent://search?query=${encodedQuery}#Intent;scheme=naversearchapp;package=com.nhn.android.search;S.browser_fallback_url=${encodeURIComponent(fallbackUrl)};end`;
+  const mobileSearchUrl = new URL("https://m.search.naver.com/search.naver");
+  mobileSearchUrl.searchParams.set("query", query);
+  const encodedMobileUrl = encodeURIComponent(mobileSearchUrl.href);
+  const encodedFallbackUrl = encodeURIComponent(fallbackUrl || mobileSearchUrl.href);
+  return `intent://inappbrowser?url=${encodedMobileUrl}&target=new&version=6#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;S.browser_fallback_url=${encodedFallbackUrl};end`;
 }
 
 document.addEventListener("click", (event) => {
