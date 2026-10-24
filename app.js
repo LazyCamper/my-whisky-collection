@@ -402,6 +402,132 @@ seedWhiskies.push(...additionalWhiskies.map(([id, name, distillery, type, region
   notes: { aroma, taste, finish },
 })));
 
+const summariesById = {
+  "macallan-12-sherry": "올로로소 셰리 오크통 숙성으로 완성한 건과일과 스파이스의 정석 싱글몰트",
+  "glenfiddich-12": "서양배의 상큼함과 부드러운 목넘김으로 전 세계에서 가장 사랑받는 입문용 싱글몰트",
+  "laphroaig-10": "강렬한 요오드와 바닷바람·장작 연기 풍미가 매력적인 아일라 피트 위스키의 아이콘",
+  "balvenie-12": "버번 캐스크의 바닐라에 셰리 캐스크의 꿀 같은 달콤함을 입힌 수제 싱글몰트의 대명사",
+  "hibiki-harmony": "일본 사계절의 섬세함과 미즈나라 오크의 꽃·과일 향을 조화롭게 블렌딩한 프리미엄 위스키",
+  "jim-beam-black": "일반 라인보다 긴 숙성으로 깊어진 구운 오크와 캐러멜 풍미의 아메리칸 버번",
+  "wild-turkey-101": "50.5도의 높은 도수와 호밀 스파이스, 짙은 바닐라 타격감이 살아있는 정통 켄터키 버번",
+  "makers-mark": "붉은 밀랍 봉인과 겨울 밀 원료 특유의 부드럽고 달콤한 목넘김이 돋보이는 핸드메이드 버번",
+  "woodford-reserve": "구리 단식 증류기를 거쳐 다크초콜릿과 말린 과일 등 복합 풍미를 지닌 프리미엄 버번",
+  "johnnie-walker-black": "스코틀랜드 전역 40여 종 원액을 12년 이상 숙성해 스모키함과 과일향의 균형을 이룬 블렌디드",
+  "chivas-18": "85가지 이상의 아로마 노트와 다크초콜릿·버터스카치의 벨벳 같은 질감을 선사하는 18년 블렌디드",
+  "bulleit-rye": "95%의 높은 호밀 함량으로 체리와 후추, 허브 스파이스가 선명하게 살아있는 라이 위스키",
+  "glenlivet-12": "화사한 열대과일과 꽃향기로 스페이사이드 싱글몰트의 표준을 세운 클래식 위스키",
+  "glenlivet-15": "프랑스 리무쟁 오크통 피니시로 살구와 버터, 은은한 향신료의 우아한 깊이를 더한 싱글몰트",
+  "glenmorangie-original-10": "스코틀랜드 최고 높이 증류기로 빚어낸 시트러스와 바닐라 크림의 산뜻한 하이랜드 싱글몰트",
+  "glenmorangie-original-12": "12년 숙성으로 한층 더 깊고 실키해진 꿀·복숭아·바닐라 풍미의 하이랜드 대표 싱글몰트",
+  "glenmorangie-quinta-ruban": "루비 포트 와인 캐스크 추가 숙성으로 다크초콜릿과 민트 풍미가 농밀한 14년 싱글몰트",
+  "ardbeg-10": "강렬한 피트 연기 속에 상큼한 레몬과 청사과의 반전 단맛이 숨어 있는 아일라 대표 싱글몰트",
+  "ardbeg-uigeadail": "아드벡의 강력한 스모크에 올로로소 셰리 캐스크의 건포도·에스프레소 단맛을 결합한 고도수 명작",
+  "lagavulin-16": "묵직한 피트 연기와 바다 소금기, 진한 셰리 단맛이 장엄한 여운을 남기는 아일라의 제왕",
+  "talisker-10": "스카이섬의 거친 바닷바람과 흑후추 스파이스, 모닥불 스모크가 어우러진 해양성 싱글몰트",
+  "highland-park-12": "오크니 제도의 헤더 꿀 단맛과 은은한 향나무 피트가 조화를 이루는 올라운더 싱글몰트",
+  "aberlour-12": "버번과 올로로소 셰리 더블 캐스크 숙성으로 사과·초콜릿·시나몬의 균형을 살린 스페이사이드 몰트",
+  "glenallachie-12": "마스터 디스틸러 빌리 워커가 완성한 모카·꿀·진한 셰리의 고밀도 스페이사이드 싱글몰트",
+  "macallan-double-cask-12": "유러피안과 아메리칸 두 종류의 셰리 오크통이 만나 바닐라와 건과일이 부드럽게 어우러지는 맥캘란",
+  "macallan-sherry-oak-18": "18년 숙성 올로로소 셰리 오크의 농후한 건과일과 다크초콜릿 풍미가 절정에 달한 아이코닉 싱글몰트",
+  "glenfiddich-15": "솔레라 배트 공법으로 세 가지 캐스크 원액을 블렌딩해 꿀과 마지팬 풍미가 깊은 15년 싱글몰트",
+  "glenfiddich-18": "소량씩 엄선한 스몰 배치 오크통에서 18년간 숙성해 구운 사과와 성숙한 오크의 품격을 담은 싱글몰트",
+  "balvenie-caribbean-cask-14": "카리브해 럼 캐스크 피니시로 열대과일 망고와 달콤한 토피 향을 풍성하게 입힌 14년 싱글몰트",
+  "oban-14": "서부 하이랜드 해안과 내륙의 특징을 함께 품어 오렌지 껍질·무화과·소금기가 조화로운 14년 몰트",
+  "caol-ila-12": "산뜻한 레몬 시트러스와 깔끔한 바닷바람 피트가 어우러져 피트 입문자에게도 좋은 아일라 싱글몰트",
+  "springbank-10": "몰팅부터 병입까지 100% 수작업 전통 방식을 고수하는 캠벨타운의 독보적인 복합 풍미 싱글몰트",
+  "dalmore-12": "왕실 수사슴 엠블럼과 함께 오렌지 마멀레이드·다크초콜릿·올로로소 셰리 풍미를 뽐내는 싱글몰트",
+  "bowmore-12": "레몬과 헤더 꿀, 다크초콜릿 위에 부드러운 피트 연기가 감도는 아일라 최고(最古) 증류소의 몰트",
+  "singleton-dufftown-12": "구운 사과와 브라운슈가의 매끄럽고 편안한 풍미로 니트와 하이볼 모두에 잘 어울리는 데일리 몰트",
+  "auchentoshan-three-wood": "로우랜드 전통 3회 증류의 깔끔함에 버번·올로로소·PX 3가지 캐스크의 진한 셰리를 입힌 싱글몰트",
+  "tamnavulin-double-cask": "아메리칸 오크 숙성 후 셰리 캐스크 피니시로 달콤한 과일 풍미를 합리적으로 담아낸 가성비 싱글몰트",
+  "tamnavulin-sherry-cask": "3종 올로로소 셰리 캐스크 피니시를 거쳐 건포도와 바닐라, 과일 케이크의 달콤함이 풍부한 싱글몰트",
+  "benromach-10": "전통 스페이사이드 방식을 재현해 달콤한 셰리 과일향과 은은한 피트 스모크가 공존하는 수제 싱글몰트",
+  "tamdhu-12": "처음부터 끝까지 최상급 올로로소 셰리 오크통에서만 숙성해 깊고 정직한 셰리 풍미를 전하는 12년 몰트",
+  "bunnahabhain-12": "아일라 위스키 중 드물게 논피트 스타일과 46.3% 비냉각여과로 고소한 견과류·셰리·해풍을 살린 몰트",
+  "mortlach-16": "독창적인 2.81회 증류 공법이 만든 묵직한 바디와 진한 셰리 풍미로 ‘더프타운의 야수’라 불리는 16년 몰트",
+  "jura-12-sherry-cask": "주라섬 특유의 부드러운 주질에 올로로소 셰리 피니시를 더해 구운 바나나와 다크초콜릿이 돋보이는 몰트",
+  "glen-grant-arboralis": "‘나무 사이로 비치는 빛’이라는 이름처럼 청사과·배·꽃향기가 화사하고 가볍게 퍼지는 입문용 싱글몰트",
+  "smoky-scot": "아일라 쿨일라 증류소 원액을 담아 강렬한 모닥불 피트와 해풍을 뛰어난 가성비로 즐기는 싱글몰트",
+  "glenfarclas-12": "6대째 가족 경영을 이어오며 직화 증류와 올로로소 셰리 캐스크 숙성을 고수하는 정통 스페이사이드 몰트",
+  "cardhu-12": "조니워커의 핵심 몰트 원액으로 유명하며, 배와 헤더 꿀처럼 실키하고 온화한 달콤함을 지닌 싱글몰트",
+  "kirkland-single-malt": "코스트코 시그니처 라인으로 선보이는 고도수(46%) 셰리 캐스크 피니시 하이랜드 싱글몰트",
+  "yamazaki-12": "일본 최초의 몰트 증류소에서 미즈나라 오크통 숙성으로 완성한 복숭아와 침향의 우아한 재패니즈 몰트",
+  "hakushu-12": "남알프스 숲속 증류소에서 빚어내 상쾌한 민트·청사과·은은한 스모크가 살아있는 산림욕 같은 싱글몰트",
+  "yoichi-single-malt": "석탄 직화 증류를 고수해 홋카이도 바닷바람의 짭조름함과 묵직한 피트·과일향이 어우러진 일본 싱글몰트",
+  "kavalan-classic": "대만의 아열대 기후가 빚어낸 망고·코코넛·바닐라의 화려한 열대과일 아로마를 자랑하는 대표 싱글몰트",
+  "kavalan-distillery-select-no1": "카발란 특유의 크리미한 토피와 열대과일 풍미를 데일리와 하이볼로도 편하게 즐기기 좋은 엔트리 몰트",
+  "kavalan-solist-oloroso": "물 한 방울 섞지 않은 단일 올로로소 셰리 캐스크 원액으로 압도적인 다크초콜릿·건과일 타격감을 주는 CS 위스키",
+  "teachers-highland-cream": "아드모어 피트 몰트 원액 함량이 높아 구운 맥아와 스모키한 여운을 1~2만 원대에 즐기는 가성비 스카치",
+  "kirkland-blended-scotch": "넉넉한 1.75L 대용량과 깔끔한 목넘김으로 홈바 하이볼 베이스로 인기가 높은 코스트코 가성비 스카치",
+  "kirkland-12-scotch": "12년 숙성 원액만을 블렌딩해 말린 과일과 꿀, 구운 오크의 균형 잡힌 풍미를 합리적으로 즐기는 위스키",
+  "kirkland-canadian-whisky": "6년 숙성 캐나디안 위스키 특유의 메이플·버터스카치 단맛과 실키한 목넘김이 돋보이는 대용량 데일리 보틀",
+  "famous-grouse": "맥캘란과 하이랜드 파크 원액이 블렌딩되어 스코틀랜드 현지 판매 1위를 오랫동안 지켜온 국민 스카치",
+  "grants-triple-wood": "세 가지 서로 다른 오크통 숙성으로 바닐라와 바나나, 브라운슈가 같은 부드러움을 살린 가성비 블렌디드",
+  "bells-original": "블레어 애솔 몰트를 중심으로 사과·생강·고소한 곡물과 은은한 스파이시함이 어우러진 영국 데일리 스카치",
+  "black-bottle": "아일라 스타일의 은은한 피트 연기와 달콤한 과일·꽃향기가 조화를 이루는 개성파 블렌디드 스카치",
+  "naked-malt": "맥캘란·하이랜드 파크·글렌로세스 등 싱글몰트 원액만 블렌딩해 퍼스트필 셰리 오크에 숙성한 블렌디드 몰트",
+  "john-barr-reserve": "화이트 앤 맥카이의 블렌딩 노하우로 사과와 초콜릿, 부드러운 오크 스파이스를 담아낸 가성비 블랙 라벨",
+  "cutty-sark-prohibition": "미국 금주법 시대 전설의 선장을 기리며 50% 도수와 비냉각여과로 바닐라·흑후추의 강렬함을 담은 스몰 배치",
+  "black-and-white": "귀여운 테리어 강아지 라벨로 유명하며 상큼한 레몬·비스킷 풍미로 하이볼에 최적화된 클래식 블렌디드",
+  "monkey-shoulder": "스페이사이드 세 증류소의 100% 몰트 원액만 블렌딩해 오렌지·바닐라·꿀 풍미가 풍부한 인기 블렌디드 몰트",
+  "johnnie-walker-red": "생동감 넘치는 사과·시나몬 스파이스와 스모키한 피니시로 하이볼과 칵테일에 가장 널리 쓰이는 스카치",
+  "johnnie-walker-double-black": "블랙 라벨보다 한층 더 짙은 아일라 피트 원액과 깊게 그을린 오크통을 사용해 훈연향을 극대화한 블렌디드",
+  "johnnie-walker-green-15": "그레인 위스키 없이 탈리스커·링크우드·크래겐모어·쿨일라 15년 숙성 싱글몰트만으로 완성한 블렌디드 몰트",
+  "johnnie-walker-gold-reserve": "클라이넬리쉬 원액을 중심으로 헤더 꿀과 크리미한 바닐라, 꽃향기가 화려하게 펼쳐지는 축하용 블렌디드",
+  "johnnie-walker-blue": "수만 개의 오크통 중 엄선한 희귀 원액을 블렌딩해 벨벳 같은 질감과 긴 스모키 여운을 주는 최고급 위스키",
+  "ballantines-finest": "꿀과 사과, 바닐라의 가볍고 깔끔한 밸런스로 부담 없이 즐기기 좋은 발렌타인의 엔트리 블렌디드",
+  "ballantines-12": "크리미한 밀크초콜릿과 꿀, 오크 풍미가 매끄럽게 이어져 한국에서 유독 사랑받는 12년 숙성 블렌디드",
+  "ballantines-17": "발렌타인 라인업의 황금 밸런스로 꼽히며 바닐라·사과·피트 스모크가 우아하게 이어지는 정통 17년 스카치",
+  "ballantines-21": "21년 이상의 긴 숙성이 만들어낸 헤더 꿀, 감초, 말린 과일과 실키한 오크의 격조 높은 블렌디드 위스키",
+  "chivas-12": "스트라아일라 싱글몰트를 중심으로 사과와 꿀, 헤이즐넛의 크리미한 부드러움을 자랑하는 대표 블렌디드",
+  "chivas-15-xv": "15년 숙성 원액을 프랑스 그랑 샴페인 코냑 캐스크에서 피니시해 자두와 마멀레이드 풍미가 화려한 스카치",
+  "chivas-mizunara": "스코틀랜드 원액을 일본산 미즈나라 오크통에서 마무리해 서양배와 오렌지, 이국적인 향신료가 감도는 위스키",
+  "royal-salute-21": "영국 여왕 대관식을 기념해 탄생했으며 21년 이상 숙성 원액과 도자기 보틀이 상징적인 프레스티지 스카치",
+  "dewars-white-label": "꿀과 배의 산뜻한 아로마와 깔끔한 피니시로 전 세계 바텐더들이 하이볼 베이스로 애용하는 스카치",
+  "dewars-12": "블렌딩 후 다시 오크통에서 숙성하는 더블 에이징 공법으로 한층 더 부드러운 꿀·토피 풍미를 완성한 스카치",
+  "jameson-irish": "피트 없이 3회 증류해 고소한 견과류와 바닐라, 놀랍도록 부드러운 목넘김을 지닌 세계 1위 아이리시 위스키",
+  "bushmills-black-bush": "높은 비율의 올로로소 셰리 캐스크 몰트 원액을 블렌딩해 진한 건과일과 초콜릿 풍미가 돋보이는 아이리시",
+  "redbreast-12": "발아 보리와 비발아 보리를 함께 단식 증류해 과일 케이크 같은 질감과 깊은 셰리를 뽐내는 싱글 팟 스틸의 정점",
+  "crown-royal": "영국 국왕의 캐나다 방문을 기념해 탄생했으며 메이플·바닐라의 실키한 단맛과 보라색 파우치가 상징적인 위스키",
+  "suntory-kakubin": "거북이 등껍질 모양 보틀로 유명하며 상큼한 레몬·비스킷 풍미로 일본 이자카야 하이볼의 대명사가 된 위스키",
+  "suntory-toki": "하쿠슈 몰트와 치타 그레인 위스키를 중심으로 청사과·자몽·허브의 산뜻함을 살려 하이볼에 특화한 위스키",
+  "nikka-from-the-barrel": "사각형 병 속에 51.4% 고도수와 100여 종 원액의 폭발적인 오크·스파이스·캐러멜 응축미를 담아낸 블렌디드",
+  "hibiki-17": "장기 숙성 원액이 빚어내는 매실·다크초콜릿·미즈나라 오크의 깊고 신비로운 여운을 지닌 단종 프리미엄 위스키",
+  "kirkland-small-batch-bourbon": "바튼 1792 증류소 원액으로 빚어내 46% 도수의 풍부한 캐러멜·구운 오크 풍미를 선사하는 코스트코 버번",
+  "jack-daniels-old-no7": "사탕단풍나무 숯 여과(차콜 멜로잉) 공법으로 바나나·바닐라·구운 오크의 스모키한 단맛을 완성한 테네시 위스키",
+  "jack-daniels-tennessee-apple": "올드 넘버 7의 고소한 오크·캐러멜 풍미에 상큼한 청사과 리큐르를 더해 하이볼에 완벽한 플레이버 위스키",
+  "gentleman-jack": "숙성 전후 두 번의 사탕단풍나무 숯 여과를 거쳐 특유의 거친 맛을 줄이고 실키한 깔끔함을 극대화한 위스키",
+  "jim-beam-white": "200년 넘게 이어온 효모와 4년 이상 숙성으로 가볍고 경쾌한 바닐라·옥수수 단향을 전하는 세계 판매 1위 버번",
+  "evan-williams-black": "켄터키 최초 상업 증류소의 역사를 이어받아 바닐라와 브라운슈가의 진한 단맛을 합리적으로 담은 데일리 버번",
+  "bulleit-bourbon": "일반 버번보다 약 2배 높은 호밀(28%) 함량을 사용해 오렌지·메이플 뒤에 스파이시하고 드라이한 여운이 남는 버번",
+  "1792-small-batch": "높은 호밀 함량과 엄선된 배럴 스몰 배치 병입으로 버터스카치와 정향 스파이스가 우아하게 조화된 켄터키 버번",
+  "buffalo-trace": "수많은 명작을 탄생시킨 증류소의 간판 버번으로 바닐라·민트·토피의 뛰어난 밸런스를 보여주는 입문 필수 버번",
+  "eagle-rare-10": "10년 숙성으로 체리·오렌지 껍질·깊은 오크와 카카오의 복합적인 풍미를 선사하는 버팔로 트레이스의 상급 버번",
+  "four-roses-single-barrel": "10가지 독창적 레시피 중 자두·체리·메이플과 호밀 스파이스가 풍성한 단일 배럴 원액을 50%로 병입한 버번",
+  "four-roses-yellow": "최대 10가지 원액 레시피를 블렌딩해 배와 사과, 꿀처럼 화사하고 부드러운 과일 아로마가 매력적인 입문용 버번",
+  "woodford-double-oaked": "깊게 토스팅하고 얇게 태운 두 번째 새 오크통에 추가 숙성해 다크초콜릿·메이플·헤이즐넛 단맛을 극대화한 버번",
+  "makers-mark-46": "오크통 안에 구운 프렌치 오크 스태브 10개를 넣어 추가 숙성해 바닐라와 베이킹 스파이스를 짙게 끌어올린 버번",
+  "knob-creek-9": "금주법 이전의 묵직한 스타일을 복원해 9년 숙성과 50% 도수로 강렬한 구운 견과류·오크·메이플을 전하는 버번",
+  "elijah-craig-small-batch": "‘버번의 아버지’ 이름을 따 따뜻한 바닐라와 스모키한 오크, 육두구 스파이스의 정석을 보여주는 스몰 배치 버번",
+  "blantons-original": "세계 최초의 싱글 배럴 버번으로 경주마 피규어 코르크와 함께 감귤·꿀·바닐라의 화려한 풍미를 자랑하는 명작",
+  "russells-reserve-10": "와일드 터키의 전설적인 부자(父子) 마스터 디스틸러가 엄선한 10년 숙성 배럴로 토피와 체리 풍미를 담은 버번",
+  "wild-turkey-rare-breed": "6·8·12년 숙성 원액을 물 한 방울 섞지 않은 배럴 프루프(58.4%)로 블렌딩해 폭발적인 오렌지·캐러멜을 주는 버번",
+  "rittenhouse-rye": "바틀드 인 본드(50%·4년 숙성) 규정을 충족하며 클래식 칵테일과 니트 모두에서 호밀·코코아 존재감이 뚜렷한 라이",
+  "sazerac-rye": "뉴올리언스의 전설적인 사제락 칵테일을 탄생시켰으며 상쾌한 민트·감귤·후추 스파이스가 산뜻하게 어우러지는 라이",
+  "royal-brackla-12": "영국 왕실 최초 ‘로열’ 칭호를 받은 증류소로 올로로소 셰리 피니시를 통해 화사한 과일과 스파이스를 담은 12년 몰트",
+};
+
+function defaultSummaryForWhisky(whisky) {
+  const aroma = whisky.notes?.aroma && whisky.notes.aroma !== "기록 없음" ? whisky.notes.aroma : "";
+  const taste = whisky.notes?.taste && whisky.notes.taste !== "기록 없음" ? whisky.notes.taste : "";
+  if (aroma && taste) return `${aroma} 향과 ${taste} 풍미가 어우러지는 ${whisky.region || ""} ${whisky.type || "위스키"}`.replace(/\s+/g, " ").trim();
+  return `${whisky.distillery || "증류소"}에서 선보이는 개성 있는 ${whisky.type || "위스키"}`;
+}
+
+seedWhiskies.forEach((whisky) => {
+  whisky.summary = whisky.summary || summariesById[whisky.id] || defaultSummaryForWhisky(whisky);
+});
+
 const storyCategories = [
   { id: "all", label: "전체" },
   { id: "types", label: "위스키 종류" },
@@ -661,6 +787,7 @@ function loadWhiskies() {
           userReview: { rating: 0, purchasePrice: "", openDate: "", personalNote: "", ...saved?.userReview },
           name: seed.name,
           nameEn: (saved?.nameEn && saved.nameEn !== seed.name) ? saved.nameEn : seed.nameEn,
+          summary: seed.summary,
           ...(preserveUploadedPhoto ? {
             imageUrl: saved.imageUrl,
             fallbackImageUrl: "",
@@ -679,6 +806,7 @@ function loadWhiskies() {
         .map((whisky) => ({
           ...whisky,
           nameEn: whisky.nameEn || whisky.name || "",
+          summary: whisky.summary || defaultSummaryForWhisky(whisky),
         }));
       return [...savedSeeds, ...customWhiskies];
     }
@@ -723,7 +851,7 @@ function normalizeSearchText(value = "") {
 function matchesWhiskyQuery(whisky, rawQuery = "") {
   const trimmed = rawQuery.trim();
   if (!trimmed) return true;
-  const rawHaystack = `${whisky.name || ""} ${whisky.nameEn || ""} ${whisky.distillery || ""} ${whisky.type || ""} ${whisky.region || ""} ${(whisky.id || "").replace(/-/g, " ")}`.toLocaleLowerCase("ko");
+  const rawHaystack = `${whisky.name || ""} ${whisky.nameEn || ""} ${whisky.distillery || ""} ${whisky.type || ""} ${whisky.region || ""} ${whisky.summary || ""} ${(whisky.id || "").replace(/-/g, " ")}`.toLocaleLowerCase("ko");
   const normalizedHaystack = normalizeSearchText(rawHaystack);
   const compactHaystack = normalizedHaystack.replace(/\s+/g, "");
   const loweredQuery = trimmed.toLocaleLowerCase("ko");
@@ -754,6 +882,7 @@ function cardMarkup(whisky, isExplore = false) {
     <div class="card-info"><p class="card-distillery">${escapeHtml(whisky.distillery)} <span>· ${escapeHtml(whisky.type)}</span></p>
       <h3 class="card-name">${escapeHtml(whisky.name)}</h3>
       <p class="card-name-en">${escapeHtml(whisky.nameEn || "")}</p>
+      ${whisky.summary ? `<p class="card-summary">${escapeHtml(whisky.summary)}</p>` : ""}
       <div class="card-meta"><span>${whisky.abv}% ABV</span><span class="card-rating">${rating ? `★ ${rating.toFixed(1)}` : "☆ 평가 전"}</span></div>
       ${isExplore ? `<div class="card-price"><span>참고가</span>${escapeHtml(whisky.averagePrice)}</div>` : ""}
     </div>
@@ -898,7 +1027,7 @@ function renderDetail(id, draft = {}) {
   const naverSearchUrl = new URL("https://search.naver.com/search.naver");
   naverSearchUrl.searchParams.set("query", whisky.name);
   document.getElementById("detailContent").innerHTML = `
-    <div class="detail-hero">${bottleArt(whisky, "", true)}<div><p class="detail-distillery">${escapeHtml(whisky.distillery.toUpperCase())}</p><h2 id="detailName">${escapeHtml(whisky.name)}</h2><p class="detail-name-en">${escapeHtml(currentNameEn)}</p><div class="detail-meta"><span>${escapeHtml(whisky.type)}</span><span>${whisky.abv}% ABV</span><span>${escapeHtml(whisky.region)}</span></div><p class="detail-price"><span>참고 가격</span>${escapeHtml(whisky.averagePrice)}</p><a class="naver-search-button" data-naver-search href="${escapeHtml(naverSearchUrl.href)}" target="_blank" rel="noopener noreferrer"><span class="search-icon" aria-hidden="true"></span><span>인터넷 검색</span><span class="naver-arrow" aria-hidden="true">↗</span></a></div></div>
+    <div class="detail-hero">${bottleArt(whisky, "", true)}<div><p class="detail-distillery">${escapeHtml(whisky.distillery.toUpperCase())}</p><h2 id="detailName">${escapeHtml(whisky.name)}</h2><p class="detail-name-en">${escapeHtml(currentNameEn)}</p>${whisky.summary ? `<p class="detail-summary">${escapeHtml(whisky.summary)}</p>` : ""}<div class="detail-meta"><span>${escapeHtml(whisky.type)}</span><span>${whisky.abv}% ABV</span><span>${escapeHtml(whisky.region)}</span></div><p class="detail-price"><span>참고 가격</span>${escapeHtml(whisky.averagePrice)}</p><a class="naver-search-button" data-naver-search href="${escapeHtml(naverSearchUrl.href)}" target="_blank" rel="noopener noreferrer"><span class="search-icon" aria-hidden="true"></span><span>인터넷 검색</span><span class="naver-arrow" aria-hidden="true">↗</span></a></div></div>
     <section class="notes-section"><div class="detail-section-title"><h3>테이스팅 노트</h3><span>TASTING PROFILE</span></div><div class="note-groups"><div class="note-group"><span>AROMA</span><p>${escapeHtml(whisky.notes.aroma)}</p></div><div class="note-group"><span>TASTE</span><p>${escapeHtml(whisky.notes.taste)}</p></div><div class="note-group"><span>FINISH</span><p>${escapeHtml(whisky.notes.finish)}</p></div></div></section>
     <section class="review-section"><div class="detail-section-title"><h3>나의 기록</h3><span>PERSONAL JOURNAL</span></div>
       <div class="rating-row"><span class="field-label">나의 평점</span><div class="stars" role="group" aria-label="별점">${stars}<span class="rating-value">${Number(review.rating || 0) ? Number(review.rating).toFixed(1) : "—"}</span></div></div>
@@ -927,6 +1056,7 @@ function renderNewWhiskyForm() {
       <div class="review-fields">
         <div class="form-field"><label for="newName">위스키 이름 *</label><input id="newName" name="name" required maxlength="80" placeholder="예: 아드벡 우거다일" /></div>
         <div class="form-field"><label for="newEnglishName">영문 이름</label><input id="newEnglishName" name="nameEn" maxlength="100" placeholder="예: Ardbeg Uigeadail" /></div>
+        <div class="form-field note-field"><label for="newSummary">한줄 설명</label><input id="newSummary" name="summary" maxlength="120" placeholder="예: 강력한 피트 스모크와 진한 셰리 단맛이 조화로운 아일라 싱글몰트" /></div>
         <div class="form-field"><label for="newDistillery">증류소 / 브랜드 *</label><input id="newDistillery" name="distillery" required maxlength="60" placeholder="예: Ardbeg" /></div>
         <div class="form-field"><label for="newType">종류 *</label><select id="newType" name="type" required>${types.filter((type) => type !== "전체").map((type) => `<option value="${type}">${type}</option>`).join("")}</select></div>
         <div class="form-field"><label for="newAbv">도수 (% ABV) *</label><input id="newAbv" name="abv" type="number" min="0" max="100" step="0.1" required placeholder="예: 46.6" /></div>
@@ -1150,25 +1280,30 @@ function saveNewWhisky(event) {
   const nameEn = formData.get("nameEn").trim() || name;
   const distillery = formData.get("distillery").trim();
   const id = `custom-${crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`}`;
+  const notes = {
+    aroma: formData.get("aroma").trim() || "기록 없음",
+    taste: formData.get("taste").trim() || "기록 없음",
+    finish: formData.get("finish").trim() || "기록 없음",
+  };
+  const type = formData.get("type");
+  const region = formData.get("region").trim() || "정보 없음";
+  const summary = formData.get("summary")?.trim() || defaultSummaryForWhisky({ distillery, type, region, notes });
   const whisky = {
     id,
     name,
     nameEn,
+    summary,
     distillery,
-    type: formData.get("type"),
+    type,
     abv: Number(formData.get("abv")),
-    region: formData.get("region").trim() || "정보 없음",
+    region,
     averagePrice: formData.get("averagePrice").trim() || "가격 정보 없음",
     priceValue: 0,
     tone: "tone-clear",
     imageUrl: newWhiskyPhoto,
     imagePage: newWhiskyPhotoSource?.page || "",
     imageCredit: newWhiskyPhotoSource?.credit || "",
-    notes: {
-      aroma: formData.get("aroma").trim() || "기록 없음",
-      taste: formData.get("taste").trim() || "기록 없음",
-      finish: formData.get("finish").trim() || "기록 없음",
-    },
+    notes,
     isSaved: true,
     isCustom: true,
     addedAt: Date.now(),
