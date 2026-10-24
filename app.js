@@ -1187,6 +1187,388 @@ function closeDetail() {
   activeWhiskyId = null;
 }
 
+function hasUserReviewData(review = {}) {
+  return Boolean(
+    Number(review.rating || 0) > 0 ||
+    String(review.purchasePrice || "").trim() ||
+    String(review.openDate || "").trim() ||
+    String(review.personalNote || "").trim()
+  );
+}
+
+function buildCompactSyncObject(includeDataPhotos = false) {
+  const seedIds = new Set(seedWhiskies.map((item) => item.id));
+  const seedEntries = [];
+  const customEntries = [];
+
+  whiskies.forEach((whisky) => {
+    const review = whisky.userReview || {};
+    const hasCustomPhoto = includeDataPhotos && whisky.imageCredit === "내가 등록한 사진" && String(whisky.imageUrl || "").startsWith("data:");
+    if (seedIds.has(whisky.id)) {
+      const seed = seedWhiskies.find((item) => item.id === whisky.id);
+      const customNameEn = whisky.nameEn && seed && whisky.nameEn !== seed.nameEn ? whisky.nameEn : "";
+      if (whisky.isSaved || hasUserReviewData(review) || customNameEn || hasCustomPhoto) {
+        const entry = {
+          i: whisky.id,
+          s: whisky.isSaved ? 1 : 0,
+          t: whisky.addedAt || 0,
+          r: Number(review.rating || 0),
+          p: review.purchasePrice || "",
+          d: review.openDate || "",
+          n: review.personalNote || "",
+        };
+        if (customNameEn) entry.e = customNameEn;
+        if (hasCustomPhoto) entry.img = whisky.imageUrl;
+        seedEntries.push(entry);
+      }
+    } else {
+      const copy = { ...whisky };
+      if (!includeDataPhotos && String(copy.imageUrl || "").startsWith("data:")) {
+        copy.imageUrl = "";
+        copy.imageCredit = "";
+      }
+      customEntries.push(copy);
+    }
+  });
+
+  return {
+    v: 1,
+    exportedAt: new Date().toISOString(),
+    seeds: seedEntries,
+    customs: customEntries,
+  };
+}
+
+function encodeSyncCode(dataObj) {
+  const json = JSON.stringify(dataObj);
+  const bytes = new TextEncoder().encode(json);
+  let binary = "";
+  bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
+
+function decodeSyncCode(rawInput = "") {
+  const trimmed = String(rawInput).trim();
+  if (!trimmed) throw new Error("백업 코드나 링크를 입력해 주세요.");
+  if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
+    return JSON.parse(trimmed);
+  }
+  let code = trimmed.replace(/^STILLNOTE1:/i, "").trim();
+  if (code.includes("sync=")) {
+    try {
+      const url = new URL(code);
+      code = url.searchParams.get("sync") || new URLSearchParams(url.hash.replace(/^#/, "")).get("sync") || code;
+    } catch {
+      const match = code.match(/[?#&]sync=([^&#\s]+)/);
+      if (match) code = match[1];
+    }
+  }
+  const base64 = code.replace(/-/g, "+").replace(/_/g, "/");
+  const padded = base64 + "=".repeat((4 - (base64.length % 4)) % 4);
+  const binary = atob(padded);
+  const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+  const json = new TextDecoder().decode(bytes);
+  return JSON.parse(json);
+}
+
+function getSelectedSyncMode() {
+  return document.querySelector('input[name="syncImportMode"]:checked')?.value || "merge";
+}
+
+function applySyncData(data, mode = "merge") {
+  const seedIds = new Set(seedWhiskies.map((item) => item.id));
+  let incomingSeeds = [];
+  let incomingCustoms = [];
+
+  if (Array.isArray(data)) {
+    data.forEach((item) => {
+      if (!item || !item.id) return;
+      if (seedIds.has(item.id)) {
+        incomingSeeds.push({
+          i: item.id,
+          s: item.isSaved ? 1 : 0,
+          t: item.addedAt || 0,
+          r: Number(item.userReview?.rating || 0),
+          p: item.userReview?.purchasePrice || "",
+          d: item.userReview?.openDate || "",
+          n: item.userReview?.personalNote || "",
+          e: item.nameEn || "",
+          img: item.imageCredit === "내가 등록한 사진" ? item.imageUrl : "",
+        });
+      } else {
+        incomingCustoms.push(item);
+      }
+    });
+  } else if (data && typeof data === "object") {
+    incomingSeeds = Array.isArray(data.seeds) ? data.seeds : [];
+    incomingCustoms = Array.isArray(data.customs) ? data.customs : [];
+  } else {
+    throw new Error("올바른 백업 데이터 형식이 아닙니다.");
+  }
+
+  if (mode === "replace") {
+    whiskies = seedWhiskies.map((whisky) => ({
+      ...whisky,
+      isSaved: false,
+      addedAt: null,
+      userReview: { rating: 0, purchasePrice: "", openDate: "", personalNote: "" },
+    }));
+  }
+
+  incomingSeeds.forEach((entry) => {
+    const target = whiskies.find((item) => item.id === entry.i);
+    if (!target) return;
+    const isSaved = Boolean(entry.s);
+    target.isSaved = mode === "replace" ? isSaved : Boolean(target.isSaved || isSaved);
+    target.addedAt = entry.t || target.addedAt || (target.isSaved ? Date.now() : null);
+    if (entry.e) target.nameEn = entry.e;
+    if (entry.img) {
+      target.imageUrl = entry.img;
+      target.fallbackImageUrl = "";
+      target.imagePage = "";
+      target.imageCredit = "내가 등록한 사진";
+    }
+    const currentReview = target.userReview || { rating: 0, purchasePrice: "", openDate: "", personalNote: "" };
+    target.userReview = {
+      rating: Number(entry.r || 0) || currentReview.rating || 0,
+      purchasePrice: entry.p || currentReview.purchasePrice || "",
+      openDate: entry.d || currentReview.openDate || "",
+      personalNote: entry.n || currentReview.personalNote || "",
+    };
+  });
+
+  incomingCustoms.forEach((customItem) => {
+    if (!customItem || !customItem.name) return;
+    const existingIndex = whiskies.findIndex((item) => item.id === customItem.id || (!seedIds.has(item.id) && item.name === customItem.name));
+    const normalizedCustom = {
+      ...customItem,
+      id: customItem.id || `custom-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      nameEn: customItem.nameEn || customItem.name || "",
+      isSaved: customItem.isSaved !== undefined ? Boolean(customItem.isSaved) : true,
+      isCustom: true,
+      addedAt: customItem.addedAt || Date.now(),
+      userReview: {
+        rating: Number(customItem.userReview?.rating || 0),
+        purchasePrice: customItem.userReview?.purchasePrice || "",
+        openDate: customItem.userReview?.openDate || "",
+        personalNote: customItem.userReview?.personalNote || "",
+      },
+    };
+    if (existingIndex >= 0) {
+      whiskies[existingIndex] = { ...whiskies[existingIndex], ...normalizedCustom };
+    } else {
+      whiskies.unshift(normalizedCustom);
+    }
+  });
+
+  persist();
+  render();
+  return whiskies.filter((item) => item.isSaved).length;
+}
+
+function buildSyncShareUrl() {
+  const payload = buildCompactSyncObject(false);
+  const code = encodeSyncCode(payload);
+  const url = new URL(window.location.href);
+  url.search = "";
+  url.hash = "";
+  url.searchParams.set("sync", code);
+  return { url: url.href, code: `STILLNOTE1:${code}`, savedCount: whiskies.filter((item) => item.isSaved).length };
+}
+
+function renderSyncModal() {
+  activeWhiskyId = null;
+  const savedCount = whiskies.filter((item) => item.isSaved).length;
+  const reviewedCount = whiskies.filter((item) => hasUserReviewData(item.userReview)).length;
+  document.getElementById("detailContent").innerHTML = `
+    <div class="new-whisky-heading">
+      <p class="detail-distillery">BACKUP &amp; DEVICE SYNC</p>
+      <h2 id="detailName">보관함 백업 · 기기 이동</h2>
+      <p>별도 회원가입 없이 공유 링크나 백업 파일로 다른 스마트폰·PC·태블릿에 내 위스키 보관함을 그대로 옮길 수 있습니다.</p>
+    </div>
+    <div class="sync-sheet-body">
+      <div class="sync-summary-bar">
+        <span>현재 기기 보관함</span>
+        <span>보관 <strong>${savedCount}</strong>병 · 시음 기록 <strong>${reviewedCount}</strong>건</span>
+      </div>
+
+      <section class="sync-card" aria-label="공유 링크로 기기 이동">
+        <div class="sync-card-head">
+          <h3>1. 공유 링크로 다른 기기에 보내기</h3>
+          <span>RECOMMENDED</span>
+        </div>
+        <p>내 보관함과 시음 노트가 담긴 전용 링크를 생성합니다. 카카오톡 <strong>나에게 보내기</strong>나 메시지로 다른 기기에 보낸 뒤 링크를 열면 즉시 동기화됩니다.</p>
+        <div class="sync-button-row">
+          <button class="sync-action-btn" type="button" id="shareSyncLinkButton">공유 링크 보내기 · 복사</button>
+          <button class="sync-action-btn secondary" type="button" id="copySyncCodeButton">백업 코드만 복사</button>
+        </div>
+      </section>
+
+      <div class="sync-mode-box">
+        <span>가져오기 · 복원 방식 선택</span>
+        <div class="sync-mode-options">
+          <label class="sync-mode-option">
+            <input type="radio" name="syncImportMode" value="merge" checked />
+            <span>기존 보관함과 합치기(병합)</span>
+          </label>
+          <label class="sync-mode-option">
+            <input type="radio" name="syncImportMode" value="replace" />
+            <span>백업 데이터로 덮어쓰기</span>
+          </label>
+        </div>
+      </div>
+
+      <section class="sync-card" aria-label="백업 파일 내보내기 및 불러오기">
+        <div class="sync-card-head">
+          <h3>2. 백업 파일(.json) 저장 · 불러오기</h3>
+          <span>FULL BACKUP</span>
+        </div>
+        <p>직접 촬영해 등록한 위스키 사진까지 100% 모두 포함하여 파일로 백업하거나 다른 기기에서 복원합니다.</p>
+        <div class="sync-button-row">
+          <button class="sync-action-btn secondary" type="button" id="downloadBackupButton">백업 파일 다운로드 (.json)</button>
+          <label class="sync-action-btn" for="uploadBackupInput">
+            <span>백업 파일 불러오기</span>
+            <input id="uploadBackupInput" type="file" accept=".json,application/json" />
+          </label>
+        </div>
+      </section>
+
+      <section class="sync-card" aria-label="백업 코드 붙여넣기">
+        <div class="sync-card-head">
+          <h3>3. 백업 코드 · 링크 직접 붙여넣기</h3>
+          <span>PASTE CODE</span>
+        </div>
+        <p>다른 기기에서 복사한 공유 링크나 백업 코드(<code>STILLNOTE1:...</code>)를 아래에 붙여넣어 바로 복원할 수 있습니다.</p>
+        <textarea class="sync-code-textarea" id="syncCodeInput" placeholder="복사한 공유 링크 또는 백업 코드(STILLNOTE1:...)를 여기에 붙여넣으세요"></textarea>
+        <div class="sync-button-row">
+          <button class="sync-action-btn" type="button" id="applySyncCodeButton">코드로 보관함 복원하기</button>
+        </div>
+      </section>
+    </div>`;
+  document.getElementById("detailBackdrop").classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
+
+async function copyTextToClipboard(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return true;
+  }
+  const temp = document.createElement("textarea");
+  temp.value = text;
+  temp.setAttribute("readonly", "");
+  temp.style.position = "fixed";
+  temp.style.opacity = "0";
+  document.body.appendChild(temp);
+  temp.select();
+  const ok = document.execCommand("copy");
+  document.body.removeChild(temp);
+  return ok;
+}
+
+async function shareSyncLink() {
+  try {
+    const { url, savedCount } = buildSyncShareUrl();
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "내 위스키 리스트 보관함 동기화",
+          text: `내 위스키 보관함(${savedCount}병) 동기화 링크입니다.`,
+          url,
+        });
+        showToast("공유 창을 열었어요. 다른 기기로 링크를 보내보세요!");
+        return;
+      } catch (shareError) {
+        if (shareError?.name === "AbortError") return;
+      }
+    }
+    await copyTextToClipboard(url);
+    showToast("동기화 링크를 복사했어요! 카카오톡 등으로 다른 기기에 보내보세요.");
+  } catch (error) {
+    showToast("링크를 생성하지 못했어요.");
+  }
+}
+
+async function copySyncCode() {
+  try {
+    const { code } = buildSyncShareUrl();
+    await copyTextToClipboard(code);
+    showToast("백업 코드를 복사했어요! 다른 기기에서 붙여넣어 복원하세요.");
+  } catch (error) {
+    showToast("백업 코드를 복사하지 못했어요.");
+  }
+}
+
+function downloadBackupFile() {
+  try {
+    const payload = buildCompactSyncObject(true);
+    const json = JSON.stringify(payload, null, 2);
+    const blob = new Blob([json], { type: "application/json;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const dateStr = new Date().toISOString().slice(0, 10);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `my-whisky-backup-${dateStr}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => URL.revokeObjectURL(url), 1500);
+    showToast("백업 파일(.json)을 다운로드했어요.");
+  } catch (error) {
+    showToast("백업 파일을 생성하지 못했어요.");
+  }
+}
+
+function handleSyncCodeImport() {
+  const input = document.getElementById("syncCodeInput");
+  if (!input || !input.value.trim()) {
+    showToast("붙여넣은 백업 코드나 링크가 없어요.");
+    input?.focus();
+    return;
+  }
+  try {
+    const decoded = decodeSyncCode(input.value);
+    const totalSaved = applySyncData(decoded, getSelectedSyncMode());
+    closeDetail();
+    setTab("collection");
+    showToast(`보관함 복원 완료! 현재 총 ${totalSaved}병이 저장되어 있어요.`);
+  } catch (error) {
+    showToast("백업 코드나 링크 형식을 확인해 주세요.");
+  }
+}
+
+async function handleBackupFileImport(file) {
+  if (!file) return;
+  try {
+    const text = await file.text();
+    const parsed = JSON.parse(text);
+    const totalSaved = applySyncData(parsed, getSelectedSyncMode());
+    closeDetail();
+    setTab("collection");
+    showToast(`파일에서 복원 완료! 현재 총 ${totalSaved}병이 저장되어 있어요.`);
+  } catch (error) {
+    showToast("올바른 백업 파일(.json)이 아닙니다.");
+  }
+}
+
+function checkUrlSyncOnLoad() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+  const syncParam = searchParams.get("sync") || hashParams.get("sync");
+  if (!syncParam) return;
+  try {
+    const decoded = decodeSyncCode(syncParam);
+    const totalSaved = applySyncData(decoded, "merge");
+    const cleanUrl = window.location.pathname;
+    window.history.replaceState({}, document.title, cleanUrl);
+    setTimeout(() => {
+      showToast(`공유 링크에서 보관함을 동기화했어요! (총 ${totalSaved}병)`);
+    }, 180);
+  } catch (error) {
+    console.warn("URL 동기화 데이터를 읽지 못했습니다.", error);
+  }
+}
+
 function buildNaverAppIntent(query, fallbackUrl) {
   const mobileSearchUrl = new URL("https://m.search.naver.com/search.naver");
   mobileSearchUrl.searchParams.set("query", query);
@@ -1206,6 +1588,11 @@ document.addEventListener("click", (event) => {
   if (tabButton) { setTab(tabButton.dataset.tab); return; }
   const goButton = event.target.closest("[data-go]");
   if (goButton) { setTab(goButton.dataset.go); return; }
+  if (event.target.closest("[data-open-sync]")) { renderSyncModal(); return; }
+  if (event.target.closest("#shareSyncLinkButton")) { shareSyncLink(); return; }
+  if (event.target.closest("#copySyncCodeButton")) { copySyncCode(); return; }
+  if (event.target.closest("#downloadBackupButton")) { downloadBackupFile(); return; }
+  if (event.target.closest("#applySyncCodeButton")) { handleSyncCodeImport(); return; }
   const jumpExplore = event.target.closest("[data-jump-explore]");
   if (jumpExplore) {
     selectedExploreType = jumpExplore.dataset.jumpExplore;
@@ -1258,7 +1645,6 @@ document.addEventListener("keydown", (event) => {
 document.getElementById("searchInput").addEventListener("input", renderExplore);
 document.getElementById("sortSelect").addEventListener("change", renderCollection);
 document.getElementById("closeDetail").addEventListener("click", closeDetail);
-document.getElementById("profileButton").addEventListener("click", () => showToast(`${whiskies.filter((whisky) => whisky.isSaved).length}병을 보관 중이에요.`));
 document.getElementById("detailContent").addEventListener("click", (event) => {
   if (event.target.id === "saveNewWhisky") return;
   if (event.target.id !== "saveReview") return;
@@ -1296,6 +1682,12 @@ document.getElementById("detailContent").addEventListener("keydown", (event) => 
 });
 
 document.getElementById("detailContent").addEventListener("change", async (event) => {
+  if (event.target.id === "uploadBackupInput") {
+    const backupFile = event.target.files?.[0];
+    if (backupFile) await handleBackupFileImport(backupFile);
+    event.target.value = "";
+    return;
+  }
   if (event.target.id !== "photoInput" && event.target.id !== "newWhiskyPhotoInput") return;
   const file = event.target.files?.[0];
   if (!file) return;
@@ -1324,3 +1716,4 @@ document.getElementById("detailContent").addEventListener("change", async (event
 });
 
 render();
+checkUrlSyncOnLoad();

@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=internet-search-fix" />
+    <link rel="stylesheet" href="styles.css?v=sync-backup" />
   </head>
   <body>
     <div class="app-shell">
@@ -18,9 +18,15 @@
           <span class="brand-mark" aria-hidden="true">W</span>
           <span>still<span class="wordmark-light">note</span></span>
         </a>
-        <button class="icon-button profile-button" id="profileButton" aria-label="내 컬렉션 요약">
-          <span>J</span>
-        </button>
+        <div class="topbar-actions">
+          <button class="sync-top-button" id="syncOpenButton" type="button" data-open-sync aria-label="보관함 백업 및 기기 이동">
+            <span aria-hidden="true">⇄</span>
+            <span>기기 이동 · 백업</span>
+          </button>
+          <button class="icon-button profile-button" id="profileButton" type="button" data-open-sync aria-label="내 컬렉션 백업 및 요약">
+            <span>J</span>
+          </button>
+        </div>
       </header>
 
       <main>
@@ -40,7 +46,10 @@
             <div class="feature-copy">
               <span class="feature-kicker">YOUR COLLECTION</span>
               <p><strong id="featureCount">0</strong>병의 위스키와<br />함께한 순간들</p>
-              <button class="text-link" data-go="explore">새로운 위스키 찾기 <span aria-hidden="true">↗</span></button>
+              <div class="feature-links">
+                <button class="text-link" data-go="explore">새로운 위스키 찾기 <span aria-hidden="true">↗</span></button>
+                <button class="text-link" type="button" data-open-sync>다른 기기와 동기화 <span aria-hidden="true">⇄</span></button>
+              </div>
             </div>
             <div class="feature-stilllife" aria-hidden="true">
               <div class="still-bottle bottle-one"><i></i></div>
@@ -144,6 +153,6 @@
       </section>
     </div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="app.js?v=whisky-110"></script>
+    <script src="app.js?v=sync-backup"></script>
   </body>
 </html>
