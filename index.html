@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#171a17" />
+    <meta name="description" content="나만의 위스키 컬렉션과 시음 기록을 관리하는 앱" />
+    <title>내 위스키 리스트</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="wordmark" href="#" aria-label="내 위스키 리스트 홈">
+          <span class="brand-mark" aria-hidden="true">W</span>
+          <span>still<span class="wordmark-light">note</span></span>
+        </a>
+        <button class="icon-button profile-button" id="profileButton" aria-label="내 컬렉션 요약">
+          <span>J</span>
+        </button>
+      </header>
+
+      <main>
+        <section class="view active" id="collectionView" aria-labelledby="collectionTitle">
+          <div class="page-heading">
+            <p class="eyebrow">YOUR PERSONAL ARCHIVE</p>
+            <div class="heading-row">
+              <div>
+                <h1 id="collectionTitle">내 보관함<span class="heading-period">.</span></h1>
+                <p class="page-subtitle">한 잔의 기억을 모아두는 곳</p>
+              </div>
+              <div class="collection-count"><strong id="savedCount">0</strong><span> bottles</span></div>
+            </div>
+          </div>
+
+          <section class="collection-feature" aria-label="컬렉션 요약">
+            <div class="feature-copy">
+              <span class="feature-kicker">YOUR COLLECTION</span>
+              <p><strong id="featureCount">0</strong>병의 위스키와<br />함께한 순간들</p>
+              <button class="text-link" data-go="explore">새로운 위스키 찾기 <span aria-hidden="true">↗</span></button>
+            </div>
+            <div class="feature-stilllife" aria-hidden="true">
+              <div class="still-bottle bottle-one"><i></i></div>
+              <div class="still-bottle bottle-two"><i></i></div>
+              <div class="still-glass"></div>
+              <div class="still-glow"></div>
+            </div>
+            <span class="feature-index">01 / 04</span>
+          </section>
+
+          <div class="section-heading collection-section-heading">
+            <div><p class="eyebrow">THE SHELF</p><h2>내 위스키</h2></div>
+            <label class="sort-control" for="sortSelect">
+              <span class="sr-only">정렬 기준</span>
+              <select id="sortSelect" aria-label="정렬 기준">
+                <option value="recent">최근 추가순</option>
+                <option value="rating">평점 높은순</option>
+                <option value="name">이름순</option>
+              </select>
+              <span aria-hidden="true">⌄</span>
+            </label>
+          </div>
+          <div class="filter-row" id="filterRow" aria-label="종류별 필터"></div>
+          <div class="whisky-grid" id="collectionGrid"></div>
+          <div class="empty-state hidden" id="collectionEmpty">
+            <span class="empty-icon" aria-hidden="true">＋</span>
+            <h3>아직 비어 있는 선반</h3>
+            <p>마음에 드는 위스키를 찾아<br />나만의 컬렉션을 시작해 보세요.</p>
+            <button class="primary-button" data-go="explore">위스키 둘러보기 <span aria-hidden="true">↗</span></button>
+          </div>
+        </section>
+
+        <section class="view" id="exploreView" aria-labelledby="exploreTitle">
+          <div class="page-heading explore-heading">
+            <p class="eyebrow">A WORLD IN A GLASS</p>
+            <h1 id="exploreTitle">위스키를<span class="heading-period">.</span><br />발견하다</h1>
+            <p class="page-subtitle">다음 한 잔의 주인공을 찾아보세요.</p>
+          </div>
+          <label class="search-box" for="searchInput">
+            <span class="search-icon" aria-hidden="true"></span>
+            <input id="searchInput" type="search" placeholder="이름이나 증류소로 검색" autocomplete="off" />
+            <kbd>⌘ K</kbd>
+          </label>
+          <div class="explore-meta"><span id="resultCount">62</span> bottles to discover <span class="meta-rule"></span><span>CURATED SELECTION</span></div>
+          <div class="explore-actions"><button class="add-whisky-button" id="addWhiskyButton"><span aria-hidden="true">＋</span> 위스키 직접 추가</button></div>
+          <div class="explore-filters" id="exploreFilterRow" aria-label="탐색 종류별 필터"></div>
+          <div class="whisky-grid explore-grid" id="exploreGrid"></div>
+          <div class="empty-state hidden" id="exploreEmpty">
+            <span class="empty-icon" aria-hidden="true">⌕</span>
+            <h3>검색 결과가 없어요</h3>
+            <p>다른 이름이나 증류소로 검색해 보세요.</p>
+          </div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav" aria-label="메인 메뉴">
+        <button class="nav-item active" data-tab="collection" aria-current="page">
+          <span class="nav-icon shelf-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>내 보관함</span>
+        </button>
+        <button class="nav-item" data-tab="explore">
+          <span class="nav-icon explore-icon" aria-hidden="true"></span>
+          <span>탐색</span>
+        </button>
+      </nav>
+    </div>
+
+    <div class="modal-backdrop hidden" id="detailBackdrop" role="presentation">
+      <section class="detail-sheet" id="detailSheet" role="dialog" aria-modal="true" aria-labelledby="detailName">
+        <div class="sheet-grab" aria-hidden="true"></div>
+        <button class="icon-button close-button" id="closeDetail" aria-label="상세 닫기">×</button>
+        <div id="detailContent"></div>
+      </section>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
