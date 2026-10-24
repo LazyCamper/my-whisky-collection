@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=whisky-summaries" />
+    <link rel="stylesheet" href="styles.css?v=official-ratings" />
   </head>
   <body>
     <div class="app-shell">
@@ -66,7 +66,8 @@
               <span class="sr-only">정렬 기준</span>
               <select id="sortSelect" aria-label="정렬 기준">
                 <option value="recent">최근 추가순</option>
-                <option value="rating">평점 높은순</option>
+                <option value="rating">내 평점 높은순</option>
+                <option value="official">공식 평점 높은순</option>
                 <option value="name">이름순</option>
               </select>
               <span aria-hidden="true">⌄</span>
@@ -93,7 +94,7 @@
             <input id="searchInput" type="search" placeholder="한글·영문 이름이나 증류소로 검색" autocomplete="off" />
             <kbd>⌘ K</kbd>
           </label>
-          <div class="explore-meta"><span id="resultCount">110</span> bottles to discover <span class="meta-rule"></span><span>CURATED SELECTION</span></div>
+          <div class="explore-meta"><span id="resultCount">114</span> bottles to discover <span class="meta-rule"></span><span>CURATED SELECTION</span></div>
           <div class="explore-actions"><button class="add-whisky-button" id="addWhiskyButton"><span aria-hidden="true">＋</span> 위스키 직접 추가</button></div>
           <div class="explore-filters" id="exploreFilterRow" aria-label="탐색 종류별 필터"></div>
           <div class="whisky-grid explore-grid" id="exploreGrid"></div>
@@ -153,6 +154,6 @@
       </section>
     </div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="app.js?v=whisky-summaries"></script>
+    <script src="app.js?v=official-ratings"></script>
   </body>
 </html>

@@ -107,7 +107,8 @@ h1, h2, h3, p { margin-top: 0; }
 .card-name { margin: 0; overflow: hidden; font: 13px/1.4 var(--serif); text-overflow: ellipsis; white-space: nowrap; }
 .card-name-en { margin: 3px 0 0; overflow: hidden; color: var(--muted); font: 9px/1.35 var(--sans); text-overflow: ellipsis; white-space: nowrap; }
 .card-summary { display: -webkit-box; overflow: hidden; min-height: 27px; margin: 7px 0 0; color: #c4c2b6; font: 9.5px/1.45 var(--sans); -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
-.card-meta { display: flex; justify-content: space-between; gap: 5px; margin-top: 9px; color: #a3a69d; font-size: 9px; }
+.card-meta { display: flex; justify-content: space-between; align-items: center; gap: 5px; margin-top: 9px; color: #a3a69d; font-size: 9px; }
+.official-score { color: #d8c396; font-weight: 600; }
 .card-rating { color: var(--amber-light); }
 .card-price { margin-top: 9px; padding-top: 8px; border-top: 1px solid rgba(240,238,231,.07); color: #c9c6bb; font-size: 10px; }
 .card-price span { margin-right: 4px; color: #7c8279; font-size: 8px; }
@@ -215,7 +216,8 @@ h1, h2, h3, p { margin-top: 0; }
 .detail-hero h2 { margin: 0; padding-right: 15px; font: 22px/1.45 var(--serif); }
 .detail-name-en { margin: 4px 0 0; color: var(--muted); font: 11px/1.4 var(--sans); }
 .detail-summary { margin: 9px 0 0; padding: 7px 10px; border-left: 2px solid var(--amber); background: rgba(217,163,74,.07); color: #dbd8cc; font: 10.5px/1.55 var(--serif); }
-.detail-meta { display: flex; flex-wrap: wrap; gap: 7px 13px; margin-top: 11px; color: #a9aca2; font-size: 10px; }
+.detail-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 7px 13px; margin-top: 11px; color: #a9aca2; font-size: 10px; }
+.detail-official-badge { padding: 1px 6px; border: 1px solid rgba(217,163,74,.4); background: rgba(217,163,74,.1); color: var(--amber-light); font-weight: 600; }
 .detail-price { margin: 14px 0 0; color: var(--paper); font-size: 12px; }
 .detail-price span { margin-right: 5px; color: var(--muted); font-size: 9px; }
 .naver-search-button { width: fit-content; min-height: 34px; display: inline-flex; align-items: center; gap: 8px; margin-top: 11px; padding: 0 11px; border: 1px solid #4a4538; background: #23251f; color: var(--paper); font-size: 9px; text-decoration: none; }

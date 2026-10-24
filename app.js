@@ -70,6 +70,8 @@ const additionalWhiskies = [
   ["black-and-white", "블랙 앤 화이트", "Black & White", "블렌디드", "스코틀랜드", 40, "₩16,000 – 25,000", "신선한 곡물 · 레몬 · 꿀 · 은은한 허브", "부드러운 몰트 · 비스킷 · 바닐라 · 가벼운 스모크", "하이볼과 데일리에 잘 어울리는 깔끔한 목넘김", "tone-clear"],
   ["monkey-shoulder", "몽키숄더 오리지널", "Monkey Shoulder", "블렌디드", "스코틀랜드", 40, "₩55,000 – 75,000", "오렌지 · 바닐라 · 몰트", "꿀 · 향신료 · 과일", "부드럽고 달콤한 몰트", "tone-ruby"],
   ["johnnie-walker-red", "조니워커 레드 라벨", "Johnnie Walker", "블렌디드", "스코틀랜드", 40, "₩30,000 – 45,000", "바닐라 · 사과 · 스모크", "캐러멜 · 후추 · 몰트", "가볍고 스파이시한 여운", "tone-ruby"],
+  ["johnnie-walker-blonde", "조니워커 블론드", "Johnnie Walker", "블렌디드", "스코틀랜드", 40, "₩32,000 – 45,000", "달콤한 바닐라 · 토피 · 상큼한 베리 · 시트러스", "아메리칸 오크 숙성의 크리미한 캐러멜 · 사과 · 부드러운 몰트", "피트 연기 없이 가볍고 산뜻하게 떨어지는 하이볼 특화 여운", "tone-clear"],
+  ["johnnie-walker-black-ruby", "조니워커 블랙 루비", "Johnnie Walker", "블렌디드", "스코틀랜드", 40, "₩52,000 – 68,000", "라즈베리 잼 · 블랙베리 · 무화과 · 은은한 연기", "PX·올로로소 셰리 및 레드와인 캐스크의 진한 다크체리 · 자두 · 꿀", "벨벳 같은 과일 단맛과 부드러운 스모키 여운", "tone-ruby"],
   ["johnnie-walker-double-black", "조니워커 더블 블랙", "Johnnie Walker", "블렌디드", "스코틀랜드", 40, "₩55,000 – 75,000", "짙은 피트 · 포도 · 오크", "훈연 · 후추 · 바닐라", "깊고 묵직한 스모크", "tone-blue"],
   ["johnnie-walker-green-15", "조니워커 그린 라벨 15년", "Johnnie Walker", "블렌디드", "스코틀랜드", 43, "₩90,000 – 125,000", "허브 · 과수원 과일 · 오크", "몰트 · 후추 · 연기", "균형 잡힌 허브와 스모크", "tone-green"],
   ["johnnie-walker-gold-reserve", "조니워커 골드 라벨 리저브", "Johnnie Walker", "블렌디드", "스코틀랜드", 40, "₩75,000 – 105,000", "헤더 꿀 · 꽃향기 · 바닐라", "크리미한 토피 · 잘 익은 과일", "부드러운 오크와 은은한 스모크", "tone-clear"],
@@ -98,6 +100,8 @@ const additionalWhiskies = [
   ["gentleman-jack", "젠틀맨 잭", "Jack Daniel's", "버번", "테네시 · 미국", 40, "₩52,000 – 72,000", "바닐라 · 시트러스 · 사과", "브라운슈가 · 시나몬 · 실키한 오크", "두 번 여과해 한층 깔끔한 피니시", "tone-blue"],
   ["jim-beam-white", "짐빔 화이트", "Jim Beam", "버번", "켄터키 · 미국", 40, "₩26,000 – 38,000", "바닐라 · 옥수수 단향 · 오크", "캐러멜 · 구운 곡물 · 가벼운 스파이스", "산뜻하고 경쾌한 여운", "tone-clear"],
   ["evan-williams-black", "에반 윌리엄스 블랙", "Evan Williams", "버번", "켄터키 · 미국", 43, "₩28,000 – 40,000", "바닐라 · 민트 · 브라운슈가", "캐러멜 · 사과 · 구운 오크", "부드럽고 달콤한 데일리 버번", "tone-clear"],
+  ["evan-williams-bib", "에반 윌리엄스 바틀드 인 본드 (화이트)", "Evan Williams", "버번", "켄터키 · 미국", 50, "₩32,000 – 45,000", "캐러멜 · 바닐라 · 구운 오크 · 흑후추", "100프루프 바틀드 인 본드의 묵직한 타격감 · 흑설탕 · 아몬드 · 감귤", "길고 따뜻하게 이어지는 정통 버번 스파이스", "tone-clear"],
+  ["evan-williams-12", "에반 윌리엄스 12년 (레드)", "Evan Williams", "버번", "켄터키 · 미국", 50.5, "₩65,000 – 95,000", "진한 오크 · 다크 캐러멜 · 바닐라 · 말린 오렌지", "12년 장기 숙성과 101프루프가 빚어낸 농밀한 토피 · 초콜릿 · 정향", "묵직한 오크 탄닌과 깊고 긴 달콤쌉싸름한 여운", "tone-ruby"],
   ["bulleit-bourbon", "불릿 버번", "Bulleit", "버번", "켄터키 · 미국", 45, "₩48,000 – 65,000", "구운 오크 · 바닐라 · 오렌지", "메이플 · 육두구 · 호밀 스파이스", "드라이하고 깔끔한 새틴 피니시", "tone-ruby"],
   ["1792-small-batch", "1792 스몰 배치", "1792 Bourbon", "버번", "켄터키 · 미국", 46.85, "₩55,000 – 75,000", "캐러멜 · 바닐라 · 호밀 스파이스", "버터스카치 · 정향 · 구운 오크", "진하고 균형 잡힌 스파이시 여운", "tone-ruby"],
   ["buffalo-trace", "버팔로 트레이스", "Buffalo Trace", "버번", "켄터키 · 미국", 40, "₩45,000 – 65,000", "바닐라 · 민트 · 캐러멜", "옥수수 · 브라운슈가 · 오크", "부드럽고 달콤한 여운", "tone-clear"],
@@ -185,6 +189,8 @@ const englishNamesById = {
   "black-and-white": "Black & White Blended Scotch Whisky",
   "monkey-shoulder": "Monkey Shoulder Original",
   "johnnie-walker-red": "Johnnie Walker Red Label",
+  "johnnie-walker-blonde": "Johnnie Walker Blonde",
+  "johnnie-walker-black-ruby": "Johnnie Walker Black Ruby",
   "johnnie-walker-double-black": "Johnnie Walker Double Black",
   "johnnie-walker-green-15": "Johnnie Walker Green Label 15 Year Old",
   "johnnie-walker-gold-reserve": "Johnnie Walker Gold Label Reserve",
@@ -213,6 +219,8 @@ const englishNamesById = {
   "gentleman-jack": "Gentleman Jack Double Mellowed Tennessee Whiskey",
   "jim-beam-white": "Jim Beam Kentucky Straight Bourbon",
   "evan-williams-black": "Evan Williams Black Label Bourbon",
+  "evan-williams-bib": "Evan Williams Bottled-in-Bond (White Label)",
+  "evan-williams-12": "Evan Williams 12 Year Old (Red Label)",
   "bulleit-bourbon": "Bulleit Bourbon Frontier Whiskey",
   "1792-small-batch": "1792 Small Batch Kentucky Straight Bourbon",
   "buffalo-trace": "Buffalo Trace Kentucky Straight Bourbon",
@@ -297,6 +305,18 @@ const additionalPhotoSourcesById = {
     fallbackImageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Johnnie_Walker_Red_Label.jpg",
     imagePage: "https://commons.wikimedia.org/wiki/File:Johnnie_Walker_Red_Label.jpg",
     imageCredit: "kallerna · CC BY-SA 3.0",
+  },
+  "johnnie-walker-blonde": {
+    imageUrl: "https://images.ctfassets.net/waruwpig3jxu/5Ae99FJqkSPEqn1CgXRHEv/9b77cef7333e8f63ebff7084a1293b87/blonde-750ml_producthero_halffront_desktop.webp",
+    fallbackImageUrl: "assets/johnnie-walker-blonde.svg",
+    imagePage: "https://www.johnniewalker.com/",
+    imageCredit: "Johnnie Walker Blonde · Bottle",
+  },
+  "johnnie-walker-black-ruby": {
+    imageUrl: "assets/johnnie-walker-black-ruby.svg",
+    fallbackImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Johnnie_Walker_Black_Label.jpg/500px-Johnnie_Walker_Black_Label.jpg",
+    imagePage: "https://www.johnniewalker.com/",
+    imageCredit: "Johnnie Walker Black Ruby · Bottle",
   },
   "johnnie-walker-double-black": {
     imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/JW_Double_Black.jpg/500px-JW_Double_Black.jpg",
@@ -471,6 +491,8 @@ const summariesById = {
   "black-and-white": "귀여운 테리어 강아지 라벨로 유명하며 상큼한 레몬·비스킷 풍미로 하이볼에 최적화된 클래식 블렌디드",
   "monkey-shoulder": "스페이사이드 세 증류소의 100% 몰트 원액만 블렌딩해 오렌지·바닐라·꿀 풍미가 풍부한 인기 블렌디드 몰트",
   "johnnie-walker-red": "생동감 넘치는 사과·시나몬 스파이스와 스모키한 피니시로 하이볼과 칵테일에 가장 널리 쓰이는 스카치",
+  "johnnie-walker-blonde": "아메리칸 오크 숙성으로 화사한 바닐라와 베리 단맛을 극대화해 상큼한 하이볼에 최적화한 블렌디드",
+  "johnnie-walker-black-ruby": "PX·올로로소 셰리와 레드 와인 캐스크 숙성 원액으로 진한 무화과·블랙베리 과실미를 입힌 스카치",
   "johnnie-walker-double-black": "블랙 라벨보다 한층 더 짙은 아일라 피트 원액과 깊게 그을린 오크통을 사용해 훈연향을 극대화한 블렌디드",
   "johnnie-walker-green-15": "그레인 위스키 없이 탈리스커·링크우드·크래겐모어·쿨일라 15년 숙성 싱글몰트만으로 완성한 블렌디드 몰트",
   "johnnie-walker-gold-reserve": "클라이넬리쉬 원액을 중심으로 헤더 꿀과 크리미한 바닐라, 꽃향기가 화려하게 펼쳐지는 축하용 블렌디드",
@@ -499,6 +521,8 @@ const summariesById = {
   "gentleman-jack": "숙성 전후 두 번의 사탕단풍나무 숯 여과를 거쳐 특유의 거친 맛을 줄이고 실키한 깔끔함을 극대화한 위스키",
   "jim-beam-white": "200년 넘게 이어온 효모와 4년 이상 숙성으로 가볍고 경쾌한 바닐라·옥수수 단향을 전하는 세계 판매 1위 버번",
   "evan-williams-black": "켄터키 최초 상업 증류소의 역사를 이어받아 바닐라와 브라운슈가의 진한 단맛을 합리적으로 담은 데일리 버번",
+  "evan-williams-bib": "1897년 미국 바틀드 인 본드 법규(50%·4년 이상 숙성)를 지켜 강렬한 캐러멜·구운 아몬드 타격감을 주는 가성비 버번",
+  "evan-williams-12": "12년 장기 숙성과 50.5% 높은 도수로 농후한 다크체리·오크·가죽의 깊은 풍미를 선사하는 레드 라벨 버번",
   "bulleit-bourbon": "일반 버번보다 약 2배 높은 호밀(28%) 함량을 사용해 오렌지·메이플 뒤에 스파이시하고 드라이한 여운이 남는 버번",
   "1792-small-batch": "높은 호밀 함량과 엄선된 배럴 스몰 배치 병입으로 버터스카치와 정향 스파이스가 우아하게 조화된 켄터키 버번",
   "buffalo-trace": "수많은 명작을 탄생시킨 증류소의 간판 버번으로 바닐라·민트·토피의 뛰어난 밸런스를 보여주는 입문 필수 버번",
@@ -517,6 +541,124 @@ const summariesById = {
   "royal-brackla-12": "영국 왕실 최초 ‘로열’ 칭호를 받은 증류소로 올로로소 셰리 피니시를 통해 화사한 과일과 스파이스를 담은 12년 몰트",
 };
 
+const officialRatingsById = {
+  "macallan-12": 91,
+  "lagavulin-16": 95,
+  "balvenie-12": 90,
+  "hibiki-harmony": 90,
+  "woodford-reserve": 89,
+  "glenfiddich-12": 86,
+  "glenlivet-12": 86,
+  "glenmorangie-10": 88,
+  "glenmorangie-original-12": 90,
+  "glenallachie-12": 90,
+  "glenallachie-15": 92,
+  "aberlour-12": 88,
+  "aberlour-abunadh": 93,
+  "ardbeg-10": 93,
+  "ardbeg-uigeadail": 95,
+  "laphroaig-10": 91,
+  "talisker-10": 92,
+  "highland-park-12": 90,
+  "bruichladdich-classic-laddie": 89,
+  "makers-mark": 87,
+  "wild-turkey-101": 90,
+  "johnnie-walker-black": 89,
+  "bulleit-rye": 88,
+  "macallan-double-cask-12": 89,
+  "macallan-sherry-oak-18": 95,
+  "glenfiddich-15": 90,
+  "glenfiddich-18": 92,
+  "balvenie-caribbean-cask-14": 91,
+  "oban-14": 91,
+  "caol-ila-12": 90,
+  "springbank-10": 94,
+  "dalmore-12": 89,
+  "bowmore-12": 88,
+  "singleton-dufftown-12": 86,
+  "auchentoshan-three-wood": 88,
+  "tamnavulin-double-cask": 85,
+  "tamnavulin-sherry-cask": 86,
+  "benromach-10": 91,
+  "tamdhu-12": 90,
+  "bunnahabhain-12": 92,
+  "mortlach-16": 93,
+  "jura-12-sherry-cask": 86,
+  "glen-grant-arboralis": 84,
+  "smoky-scot": 85,
+  "glenfarclas-12": 89,
+  "cardhu-12": 86,
+  "kirkland-single-malt": 88,
+  "yamazaki-12": 93,
+  "hakushu-12": 92,
+  "yoichi-single-malt": 90,
+  "kavalan-classic": 89,
+  "kavalan-distillery-select-no1": 86,
+  "kavalan-solist-oloroso": 95,
+  "teachers-highland-cream": 82,
+  "kirkland-blended-scotch": 81,
+  "kirkland-12-scotch": 86,
+  "kirkland-canadian-whisky": 84,
+  "famous-grouse": 82,
+  "grants-triple-wood": 83,
+  "bells-original": 80,
+  "black-bottle": 85,
+  "naked-malt": 88,
+  "john-barr-reserve": 84,
+  "cutty-sark-prohibition": 88,
+  "black-and-white": 81,
+  "monkey-shoulder": 88,
+  "johnnie-walker-red": 81,
+  "johnnie-walker-blonde": 84,
+  "johnnie-walker-black-ruby": 89,
+  "johnnie-walker-double-black": 89,
+  "johnnie-walker-green-15": 92,
+  "johnnie-walker-gold-reserve": 89,
+  "johnnie-walker-blue": 94,
+  "ballantines-finest": 82,
+  "ballantines-12": 86,
+  "ballantines-17": 91,
+  "ballantines-21": 92,
+  "chivas-12": 86,
+  "chivas-15-xv": 88,
+  "chivas-mizunara": 88,
+  "royal-salute-21": 92,
+  "dewars-white-label": 83,
+  "dewars-12": 87,
+  "jameson-irish": 86,
+  "bushmills-black-bush": 88,
+  "redbreast-12": 94,
+  "crown-royal": 85,
+  "suntory-kakubin": 83,
+  "suntory-toki": 85,
+  "nikka-from-the-barrel": 92,
+  "hibiki-17": 95,
+  "kirkland-small-batch-bourbon": 88,
+  "jack-daniels-old-no7": 84,
+  "jack-daniels-tennessee-apple": 83,
+  "gentleman-jack": 85,
+  "jim-beam-white": 82,
+  "evan-williams-black": 85,
+  "evan-williams-bib": 89,
+  "evan-williams-12": 91,
+  "bulleit-bourbon": 88,
+  "1792-small-batch": 89,
+  "buffalo-trace": 90,
+  "eagle-rare-10": 92,
+  "four-roses-single-barrel": 92,
+  "four-roses-yellow": 85,
+  "woodford-double-oaked": 92,
+  "makers-mark-46": 90,
+  "knob-creek-9": 91,
+  "elijah-craig-small-batch": 90,
+  "blantons-original": 92,
+  "russells-reserve-10": 90,
+  "wild-turkey-rare-breed": 93,
+  "rittenhouse-rye": 90,
+  "sazerac-rye": 89,
+  "royal-brackla-12": 89,
+};
+
 function defaultSummaryForWhisky(whisky) {
   const aroma = whisky.notes?.aroma && whisky.notes.aroma !== "기록 없음" ? whisky.notes.aroma : "";
   const taste = whisky.notes?.taste && whisky.notes.taste !== "기록 없음" ? whisky.notes.taste : "";
@@ -526,6 +668,7 @@ function defaultSummaryForWhisky(whisky) {
 
 seedWhiskies.forEach((whisky) => {
   whisky.summary = whisky.summary || summariesById[whisky.id] || defaultSummaryForWhisky(whisky);
+  whisky.officialRating = whisky.officialRating || officialRatingsById[whisky.id] || 86;
 });
 
 const storyCategories = [
@@ -788,6 +931,7 @@ function loadWhiskies() {
           name: seed.name,
           nameEn: (saved?.nameEn && saved.nameEn !== seed.name) ? saved.nameEn : seed.nameEn,
           summary: seed.summary,
+          officialRating: seed.officialRating || officialRatingsById[seed.id] || 86,
           ...(preserveUploadedPhoto ? {
             imageUrl: saved.imageUrl,
             fallbackImageUrl: "",
@@ -807,6 +951,7 @@ function loadWhiskies() {
           ...whisky,
           nameEn: whisky.nameEn || whisky.name || "",
           summary: whisky.summary || defaultSummaryForWhisky(whisky),
+          officialRating: whisky.officialRating || 86,
         }));
       return [...savedSeeds, ...customWhiskies];
     }
@@ -874,6 +1019,7 @@ function bottleArt(whisky, extraClass = "", allowPhotoChange = false) {
 
 function cardMarkup(whisky, isExplore = false) {
   const rating = Number(whisky.userReview?.rating || 0);
+  const official = Number(whisky.officialRating || 86);
   const saved = Boolean(whisky.isSaved);
   return `<article class="whisky-card" data-open="${escapeHtml(whisky.id)}" tabindex="0" aria-label="${escapeHtml(whisky.name)} ${escapeHtml(whisky.nameEn || "")} 상세 정보">
     <div class="card-visual">${bottleArt(whisky)}
@@ -883,7 +1029,7 @@ function cardMarkup(whisky, isExplore = false) {
       <h3 class="card-name">${escapeHtml(whisky.name)}</h3>
       <p class="card-name-en">${escapeHtml(whisky.nameEn || "")}</p>
       ${whisky.summary ? `<p class="card-summary">${escapeHtml(whisky.summary)}</p>` : ""}
-      <div class="card-meta"><span>${whisky.abv}% ABV</span><span class="card-rating">${rating ? `★ ${rating.toFixed(1)}` : "☆ 평가 전"}</span></div>
+      <div class="card-meta"><span>${whisky.abv}% · <strong class="official-score" title="글로벌 전문가·커뮤니티 종합 평점 (100점 만점)">공식 ${official}점</strong></span><span class="card-rating">${rating ? `★ ${rating.toFixed(1)}` : "☆ 평가 전"}</span></div>
       ${isExplore ? `<div class="card-price"><span>참고가</span>${escapeHtml(whisky.averagePrice)}</div>` : ""}
     </div>
   </article>`;
@@ -943,6 +1089,7 @@ function renderCollection() {
   const sortBy = document.getElementById("sortSelect").value;
   const filtered = saved.filter((whisky) => selectedType === "전체" || whisky.type === selectedType);
   if (sortBy === "rating") filtered.sort((a, b) => Number(b.userReview?.rating || 0) - Number(a.userReview?.rating || 0));
+  if (sortBy === "official") filtered.sort((a, b) => Number(b.officialRating || 0) - Number(a.officialRating || 0));
   if (sortBy === "name") filtered.sort((a, b) => a.name.localeCompare(b.name, "ko") || (a.nameEn || "").localeCompare(b.nameEn || "", "en"));
   if (sortBy === "recent") filtered.sort((a, b) => (b.addedAt || 0) - (a.addedAt || 0));
   document.getElementById("savedCount").textContent = String(saved.length).padStart(2, "0");
@@ -1027,7 +1174,7 @@ function renderDetail(id, draft = {}) {
   const naverSearchUrl = new URL("https://search.naver.com/search.naver");
   naverSearchUrl.searchParams.set("query", whisky.name);
   document.getElementById("detailContent").innerHTML = `
-    <div class="detail-hero">${bottleArt(whisky, "", true)}<div><p class="detail-distillery">${escapeHtml(whisky.distillery.toUpperCase())}</p><h2 id="detailName">${escapeHtml(whisky.name)}</h2><p class="detail-name-en">${escapeHtml(currentNameEn)}</p>${whisky.summary ? `<p class="detail-summary">${escapeHtml(whisky.summary)}</p>` : ""}<div class="detail-meta"><span>${escapeHtml(whisky.type)}</span><span>${whisky.abv}% ABV</span><span>${escapeHtml(whisky.region)}</span></div><p class="detail-price"><span>참고 가격</span>${escapeHtml(whisky.averagePrice)}</p><a class="naver-search-button" data-naver-search href="${escapeHtml(naverSearchUrl.href)}" target="_blank" rel="noopener noreferrer"><span class="search-icon" aria-hidden="true"></span><span>인터넷 검색</span><span class="naver-arrow" aria-hidden="true">↗</span></a></div></div>
+    <div class="detail-hero">${bottleArt(whisky, "", true)}<div><p class="detail-distillery">${escapeHtml(whisky.distillery.toUpperCase())}</p><h2 id="detailName">${escapeHtml(whisky.name)}</h2><p class="detail-name-en">${escapeHtml(currentNameEn)}</p>${whisky.summary ? `<p class="detail-summary">${escapeHtml(whisky.summary)}</p>` : ""}<div class="detail-meta"><span>${escapeHtml(whisky.type)}</span><span>${whisky.abv}% ABV</span><span>${escapeHtml(whisky.region)}</span><span class="detail-official-badge" title="Whisky Advocate · Wine Enthusiast · Whiskybase 등 글로벌 전문가·커뮤니티 종합 평점">★ 공식 평점 ${Number(whisky.officialRating || 86)} / 100</span></div><p class="detail-price"><span>참고 가격</span>${escapeHtml(whisky.averagePrice)}</p><a class="naver-search-button" data-naver-search href="${escapeHtml(naverSearchUrl.href)}" target="_blank" rel="noopener noreferrer"><span class="search-icon" aria-hidden="true"></span><span>인터넷 검색</span><span class="naver-arrow" aria-hidden="true">↗</span></a></div></div>
     <section class="notes-section"><div class="detail-section-title"><h3>테이스팅 노트</h3><span>TASTING PROFILE</span></div><div class="note-groups"><div class="note-group"><span>AROMA</span><p>${escapeHtml(whisky.notes.aroma)}</p></div><div class="note-group"><span>TASTE</span><p>${escapeHtml(whisky.notes.taste)}</p></div><div class="note-group"><span>FINISH</span><p>${escapeHtml(whisky.notes.finish)}</p></div></div></section>
     <section class="review-section"><div class="detail-section-title"><h3>나의 기록</h3><span>PERSONAL JOURNAL</span></div>
       <div class="rating-row"><span class="field-label">나의 평점</span><div class="stars" role="group" aria-label="별점">${stars}<span class="rating-value">${Number(review.rating || 0) ? Number(review.rating).toFixed(1) : "—"}</span></div></div>
