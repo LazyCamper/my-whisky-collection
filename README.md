@@ -4,7 +4,7 @@
 
 ## 구현 계획
 
-1. 한국에서 익숙한 위스키 64종과 국문·영문 이름, 가격·종류·테이스팅 노트를 기본 데이터로 준비합니다.
+1. 한국에서 익숙한 위스키와 국내 코스트코 인기 라인업(티처스·커클랜드 시그니처 등)을 포함한 96종의 국문·영문 이름, 가격·종류·테이스팅 노트를 기본 데이터로 준비합니다.
 2. 보관함·탐색·위스키 이야기 탭, 종류 필터, 한글·영문 이름·증류소 검색 및 정렬을 구현합니다.
 3. 위스키 이야기 탭에서 위스키 종류(싱글몰트·블렌디드·버번·라이), 올바른 보관법, 즐기는 방법(니트·트와이스업·온더락·하이볼·테이스팅 3단계), 관련 상식(천사의 몫·오크통·피트·라벨 용어)을 제공합니다.
 4. 상세 화면에서 테이스팅 노트와 영문 이름·평점·구매가·개봉일·메모를 편집합니다.
@@ -34,7 +34,7 @@ location.reload();
 
 ## 사진 출처
 
-브랜드 병 사진은 Wikimedia Commons에서 제공하며, 사진을 선택하면 원본 페이지가 열립니다. 화면에 맞게 사진을 잘라 표시할 수 있습니다. Rittenhouse Rye와 Russell's Reserve는 확인 가능한 브랜드 병 사진이 없어 실제 위스키 사진을 대신 사용하며, 화면에 출처를 표시합니다.
+브랜드 병 사진은 Wikimedia Commons에서 제공하며, 사진을 선택하면 원본 페이지가 열립니다. 화면에 맞게 사진을 잘라 표시할 수 있습니다. Rittenhouse Rye와 Russell's Reserve 등 일부 품목은 확인 가능한 브랜드 병 사진이 없어 실제 위스키 사진을 대신 사용하며, 화면에 출처를 표시합니다.
 
 - Macallan: [Ssu, CC BY-SA 4.0](https://commons.wikimedia.org/wiki/File:Macallan_whisky,_12-15-18_years.jpg)
 - Glenfiddich: [Pbrundel, CC BY-SA 3.0](https://commons.wikimedia.org/wiki/File:GlenfiddichSpecialReserve12Years.jpg)
@@ -49,6 +49,7 @@ location.reload();
 - Johnnie Walker Red Label: [kallerna, CC BY-SA 3.0](https://commons.wikimedia.org/wiki/File:Johnnie_Walker_Red_Label.jpg)
 - Johnnie Walker Double Black: [Iceman7840, CC BY-SA 3.0](https://commons.wikimedia.org/wiki/File:JW_Double_Black.jpg)
 - Johnnie Walker Green Label: [Iceman7840, CC BY-SA 3.0](https://commons.wikimedia.org/wiki/File:JW_Greens.jpg)
+- Johnnie Walker Gold Label Reserve: [Wikimedia Commons, CC BY-SA 3.0](https://commons.wikimedia.org/wiki/File:Johnnie_Walker_Gold_Label_Reserve.jpg)
 - Johnnie Walker Blue Label: [Iceman7840, CC BY-SA 3.0](https://commons.wikimedia.org/wiki/File:JW_Blue_Label.jpg)
 - Chivas Regal: [Oleg Yunakov, CC BY-SA 4.0](https://commons.wikimedia.org/wiki/File:Chivas_Regal_The_Icon_Blended_Scotch_Whisky_(700mL).jpg)
 - Bulleit: [Ethan Prater, CC BY 2.0](https://commons.wikimedia.org/wiki/File:Bulleit_Bourbon_Frontier_Whiskey.jpg)
