@@ -94,6 +94,7 @@ const additionalWhiskies = [
   ["hibiki-17", "히비키 17년", "Suntory", "블렌디드", "일본", 43, "₩700,000 – 1,000,000", "매실 · 말린 과일 · 오크", "다크초콜릿 · 꿀 · 향신료", "섬세하고 긴 미즈나라 여운", "tone-ruby"],
   ["kirkland-small-batch-bourbon", "커클랜드 시그니처 스몰 배치 버번", "Kirkland Signature", "버번", "켄터키 · 미국", 46, "₩45,000 – 58,000", "바닐라 · 브라운슈가 · 구운 오크", "캐러멜 · 시나몬 · 옥수수 단맛", "따뜻한 스파이스와 긴 오크 여운", "tone-ruby"],
   ["jack-daniels-old-no7", "잭 다니엘스 올드 넘버 7", "Jack Daniel's", "버번", "테네시 · 미국", 40, "₩38,000 – 52,000", "바나나 · 바닐라 · 구운 오크", "캐러멜 · 메이플 차콜 멜로잉 · 아몬드", "부드럽고 달콤한 스모키 여운", "tone-clear"],
+  ["jack-daniels-tennessee-apple", "잭 다니엘스 테네시 애플", "Jack Daniel's", "버번", "테네시 · 미국", 35, "₩38,000 – 52,000", "신선한 청사과 · 캐러멜 · 바닐라 · 구운 오크", "풋사과의 상큼한 과즙 · 올드 넘버 7 특유의 토피 · 은은한 향신료", "달콤하고 산뜻한 사과와 부드러운 오크 여운", "tone-green"],
   ["gentleman-jack", "젠틀맨 잭", "Jack Daniel's", "버번", "테네시 · 미국", 40, "₩52,000 – 72,000", "바닐라 · 시트러스 · 사과", "브라운슈가 · 시나몬 · 실키한 오크", "두 번 여과해 한층 깔끔한 피니시", "tone-blue"],
   ["jim-beam-white", "짐빔 화이트", "Jim Beam", "버번", "켄터키 · 미국", 40, "₩26,000 – 38,000", "바닐라 · 옥수수 단향 · 오크", "캐러멜 · 구운 곡물 · 가벼운 스파이스", "산뜻하고 경쾌한 여운", "tone-clear"],
   ["evan-williams-black", "에반 윌리엄스 블랙", "Evan Williams", "버번", "켄터키 · 미국", 43, "₩28,000 – 40,000", "바닐라 · 민트 · 브라운슈가", "캐러멜 · 사과 · 구운 오크", "부드럽고 달콤한 데일리 버번", "tone-clear"],
@@ -208,6 +209,7 @@ const englishNamesById = {
   "hibiki-17": "Hibiki 17 Year Old",
   "kirkland-small-batch-bourbon": "Kirkland Signature Small Batch Bourbon",
   "jack-daniels-old-no7": "Jack Daniel's Old No. 7 Tennessee Whiskey",
+  "jack-daniels-tennessee-apple": "Jack Daniel's Tennessee Apple",
   "gentleman-jack": "Gentleman Jack Double Mellowed Tennessee Whiskey",
   "jim-beam-white": "Jim Beam Kentucky Straight Bourbon",
   "evan-williams-black": "Evan Williams Black Label Bourbon",
@@ -343,6 +345,12 @@ const additionalPhotoSourcesById = {
     fallbackImageUrl: "https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=500&q=85",
     imagePage: "https://www.thewhiskyexchange.com/",
     imageCredit: "Naked Malt · Bottle",
+  },
+  "jack-daniels-tennessee-apple": {
+    imageUrl: "assets/jack-daniels-apple.svg",
+    fallbackImageUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Jack_Daniel%27s_whiskey_99.JPG?width=500",
+    imagePage: "https://www.jackdaniels.com/",
+    imageCredit: "Jack Daniel's Tennessee Apple · Bottle",
   },
   "suntory-kakubin": ["Suntory_Kakubin.jpg", "Wikimedia Commons · CC BY-SA 3.0"],
 };
@@ -705,6 +713,8 @@ function normalizeSearchText(value = "") {
     .replace(/쉐리/g, "셰리")
     .replace(/케스크/g, "캐스크")
     .replace(/피니쉬/g, "피니시")
+    .replace(/젝\s*다니엘스?|잭\s*다니엘스?/g, "잭 다니엘")
+    .replace(/제네시/g, "테네시")
     .replace(/['’`\-_./&]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
