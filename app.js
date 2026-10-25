@@ -906,7 +906,7 @@ const storageKey = "stillnote-whisky-collection-v1";
 const types = ["전체", "싱글몰트", "버번", "블렌디드", "라이"];
 const shelfCategories = [
   { id: "all", label: "전체" },
-  { id: "owned", label: "가지고 있는 위스키" },
+  { id: "owned", label: "평가한 위스키" },
   { id: "wishlist", label: "관심 위스키" },
 ];
 let selectedShelfStatus = "all";
@@ -1046,10 +1046,10 @@ function cardMarkup(whisky, isExplore = false) {
   const shelfStatus = getShelfStatus(whisky);
   const visualActions = isExplore
     ? `<div class="card-shelf-actions">
-        <button type="button" class="card-shelf-btn ${shelfStatus === "owned" ? "active owned" : ""}" data-shelf-id="${escapeHtml(whisky.id)}" data-shelf-target="owned" aria-label="${shelfStatus === "owned" ? "가지고 있는 위스키에서 해제" : "가지고 있는 위스키로 저장"}" title="${shelfStatus === "owned" ? "가지고 있는 위스키에서 해제" : "가지고 있는 위스키로 저장"}">${shelfStatus === "owned" ? "✓ 보유" : "+ 보유"}</button>
+        <button type="button" class="card-shelf-btn ${shelfStatus === "owned" ? "active owned" : ""}" data-shelf-id="${escapeHtml(whisky.id)}" data-shelf-target="owned" aria-label="${shelfStatus === "owned" ? "평가한 위스키에서 해제" : "평가한 위스키로 저장"}" title="${shelfStatus === "owned" ? "평가한 위스키에서 해제" : "평가한 위스키로 저장"}">${shelfStatus === "owned" ? "★ 평가" : "+ 평가"}</button>
         <button type="button" class="card-shelf-btn ${shelfStatus === "wishlist" ? "active wishlist" : ""}" data-shelf-id="${escapeHtml(whisky.id)}" data-shelf-target="wishlist" aria-label="${shelfStatus === "wishlist" ? "관심 위스키에서 해제" : "관심 위스키로 저장"}" title="${shelfStatus === "wishlist" ? "관심 위스키에서 해제" : "관심 위스키로 저장"}">${shelfStatus === "wishlist" ? "♥ 관심" : "♡ 관심"}</button>
       </div>`
-    : (shelfStatus ? `<button type="button" class="card-status-badge ${shelfStatus}" data-shelf-id="${escapeHtml(whisky.id)}" data-shelf-target="${shelfStatus === "owned" ? "wishlist" : "owned"}" title="클릭하여 ${shelfStatus === "owned" ? "관심 위스키" : "가지고 있는 위스키"}로 변경">${shelfStatus === "wishlist" ? "♥ 관심" : "✓ 보유"}</button>` : "");
+    : (shelfStatus ? `<button type="button" class="card-status-badge ${shelfStatus}" data-shelf-id="${escapeHtml(whisky.id)}" data-shelf-target="${shelfStatus === "owned" ? "wishlist" : "owned"}" title="클릭하여 ${shelfStatus === "owned" ? "관심 위스키" : "평가한 위스키"}로 변경">${shelfStatus === "wishlist" ? "♥ 관심" : "★ 평가"}</button>` : "");
   return `<article class="whisky-card" data-open="${escapeHtml(whisky.id)}" tabindex="0" aria-label="${escapeHtml(whisky.name)} ${escapeHtml(whisky.nameEn || "")} 상세 정보">
     <div class="card-visual">${bottleArt(whisky)}
       ${visualActions}
@@ -1152,7 +1152,7 @@ function renderCollection() {
     const emptyMsg = selectedShelfStatus === "wishlist" && wishlistList.length === 0
       ? "아직 담아둔 관심 위스키가 없어요. 탐색 탭에서 ‘♡ 관심’으로 저장해 보세요."
       : selectedShelfStatus === "owned" && ownedList.length === 0
-        ? "아직 등록한 보유 위스키가 없어요. 탐색 탭에서 ‘+ 보유’로 저장해 보세요."
+        ? "아직 등록한 평가한 위스키가 없어요. 탐색 탭에서 ‘+ 평가’로 저장하거나 시음 기록을 남겨보세요."
         : "선택한 조건의 위스키가 아직 없어요.";
     document.getElementById("collectionGrid").innerHTML = `<p class="filter-empty">${emptyMsg}</p>`;
   }
@@ -1212,7 +1212,7 @@ function setWhiskyShelfStatus(id, targetStatus, allowToggleOff = true) {
     whisky.isSaved = true;
     whisky.shelfStatus = targetStatus === "wishlist" ? "wishlist" : "owned";
     if (!whisky.addedAt) whisky.addedAt = Date.now();
-    showToast(whisky.shelfStatus === "wishlist" ? "관심 위스키로 보관함에 담았어요." : "가지고 있는 위스키로 보관함에 담았어요.");
+    showToast(whisky.shelfStatus === "wishlist" ? "관심 위스키로 보관함에 담았어요." : "평가한 위스키로 보관함에 담았어요.");
   }
   persist();
   render();
@@ -1277,7 +1277,7 @@ function renderDetail(id, draft = {}) {
       <div class="shelf-status-row">
         <span class="field-label">보관함 구분</span>
         <div class="shelf-status-picker" role="group" aria-label="보관함 구분 선택">
-          <button type="button" class="shelf-pick-btn ${currentShelfStatus === "owned" ? "active owned" : ""}" data-detail-shelf="owned">✓ 가지고 있는 위스키</button>
+          <button type="button" class="shelf-pick-btn ${currentShelfStatus === "owned" ? "active owned" : ""}" data-detail-shelf="owned">★ 평가한 위스키</button>
           <button type="button" class="shelf-pick-btn ${currentShelfStatus === "wishlist" ? "active wishlist" : ""}" data-detail-shelf="wishlist">♥ 관심 위스키</button>
         </div>
       </div>
@@ -1294,7 +1294,7 @@ function renderDetail(id, draft = {}) {
         </div>
       </div>
       <div class="review-fields"><div class="form-field note-field"><label for="detailEnglishName">영문 이름</label><input id="detailEnglishName" type="text" maxlength="100" placeholder="예: Johnnie Walker Black Label 12 Year Old" value="${escapeHtml(currentNameEn)}" /></div><div class="form-field"><label for="purchasePrice">구매 가격 (원)</label><input id="purchasePrice" type="number" inputmode="numeric" min="0" placeholder="예: 120000" value="${escapeHtml(review.purchasePrice || "")}" /></div><div class="form-field"><label for="openDate">개봉일</label><input id="openDate" type="date" value="${escapeHtml(review.openDate || "")}" /></div><div class="form-field note-field"><label for="personalNote">시음 메모</label><textarea id="personalNote" placeholder="오늘의 향과 맛, 함께한 순간을 기록해 보세요.">${escapeHtml(review.personalNote || "")}</textarea></div></div>
-      <div class="detail-actions">${whisky.isSaved ? `<button class="remove-button" data-remove="${escapeHtml(id)}">보관함 삭제</button>` : ""}<button class="primary-button" id="saveReview">${whisky.isSaved ? "기록 저장하기" : (currentShelfStatus === "wishlist" ? "관심 위스키로 담기" : "보유 위스키로 담기")} <span aria-hidden="true">↗</span></button></div>
+      <div class="detail-actions">${whisky.isSaved ? `<button class="remove-button" data-remove="${escapeHtml(id)}">보관함 삭제</button>` : ""}<button class="primary-button" id="saveReview">${whisky.isSaved ? "기록 저장하기" : (currentShelfStatus === "wishlist" ? "관심 위스키로 담기" : "평가한 위스키로 담기")} <span aria-hidden="true">↗</span></button></div>
     </section>`;
   document.getElementById("detailBackdrop").classList.remove("hidden");
   document.body.style.overflow = "hidden";
@@ -1318,7 +1318,7 @@ function renderNewWhiskyForm() {
       <div class="review-fields">
         <div class="form-field"><label for="newName">위스키 이름 *</label><input id="newName" name="name" required maxlength="80" placeholder="예: 아드벡 우거다일" /></div>
         <div class="form-field"><label for="newEnglishName">영문 이름</label><input id="newEnglishName" name="nameEn" maxlength="100" placeholder="예: Ardbeg Uigeadail" /></div>
-        <div class="form-field note-field"><label for="newShelfStatus">보관함 구분 *</label><select id="newShelfStatus" name="shelfStatus"><option value="owned">가지고 있는 위스키 (보유)</option><option value="wishlist">관심 위스키 (위시리스트)</option></select></div>
+        <div class="form-field note-field"><label for="newShelfStatus">보관함 구분 *</label><select id="newShelfStatus" name="shelfStatus"><option value="owned">평가한 위스키</option><option value="wishlist">관심 위스키 (위시리스트)</option></select></div>
         <div class="form-field note-field"><label for="newSummary">한줄 설명</label><input id="newSummary" name="summary" maxlength="120" placeholder="예: 강력한 피트 스모크와 진한 셰리 단맛이 조화로운 아일라 싱글몰트" /></div>
         <div class="form-field"><label for="newDistillery">증류소 / 브랜드 *</label><input id="newDistillery" name="distillery" required maxlength="60" placeholder="예: Ardbeg" /></div>
         <div class="form-field"><label for="newType">종류 *</label><select id="newType" name="type" required>${types.filter((type) => type !== "전체").map((type) => `<option value="${type}">${type}</option>`).join("")}</select></div>
@@ -1510,7 +1510,7 @@ function addCatalogueWhisky(id) {
   persist();
   render();
   closeDetail();
-  showToast(whisky.shelfStatus === "wishlist" ? "기본 위스키를 관심 위스키로 담았어요." : "기본 위스키를 보유 위스키로 담았어요.");
+  showToast(whisky.shelfStatus === "wishlist" ? "기본 위스키를 관심 위스키로 담았어요." : "기본 위스키를 평가한 위스키로 담았어요.");
 }
 
 function compressPhoto(file) {
@@ -1581,7 +1581,7 @@ function saveNewWhisky(event) {
   persist();
   render();
   closeDetail();
-  showToast(shelfStatus === "wishlist" ? "새 위스키를 관심 위스키에 추가했어요." : "새 위스키를 보유 위스키에 추가했어요.");
+  showToast(shelfStatus === "wishlist" ? "새 위스키를 관심 위스키에 추가했어요." : "새 위스키를 평가한 위스키에 추가했어요.");
 }
 
 function closeDetail() {
@@ -1805,7 +1805,7 @@ function renderSyncModal() {
     <div class="sync-sheet-body">
       <div class="sync-summary-bar">
         <span>현재 기기 보관함</span>
-        <span>보유 <strong>${ownedCount}</strong>병 · 관심 <strong>${wishlistCount}</strong>병 · 기록 <strong>${reviewedCount}</strong>건</span>
+        <span>평가 <strong>${ownedCount}</strong>병 · 관심 <strong>${wishlistCount}</strong>병 · 기록 <strong>${reviewedCount}</strong>건</span>
       </div>
 
       <section class="sync-card" aria-label="공유 링크로 기기 이동">
@@ -2045,7 +2045,7 @@ document.addEventListener("click", (event) => {
       whisky.shelfStatus = targetShelf;
       persist();
       render();
-      showToast(targetShelf === "wishlist" ? "관심 위스키로 변경했어요." : "가지고 있는 위스키로 변경했어요.");
+      showToast(targetShelf === "wishlist" ? "관심 위스키로 변경했어요." : "평가한 위스키로 변경했어요.");
     }
     renderDetail(activeWhiskyId, { ...getReviewDraft(), shelfStatus: targetShelf });
     return;
@@ -2122,7 +2122,7 @@ document.getElementById("detailContent").addEventListener("click", (event) => {
   persist();
   render();
   closeDetail();
-  showToast(whisky.shelfStatus === "wishlist" ? "관심 위스키로 기록을 저장했어요." : "보유 위스키로 기록을 저장했어요.");
+  showToast(whisky.shelfStatus === "wishlist" ? "관심 위스키로 기록을 저장했어요." : "평가한 위스키로 기록을 저장했어요.");
 });
 
 document.getElementById("detailContent").addEventListener("submit", (event) => {
