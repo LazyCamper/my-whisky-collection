@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=official-ratings" />
+    <link rel="stylesheet" href="styles.css?v=half-star-shelf-status" />
   </head>
   <body>
     <div class="app-shell">
@@ -45,7 +45,7 @@
           <section class="collection-feature" aria-label="컬렉션 요약">
             <div class="feature-copy">
               <span class="feature-kicker">YOUR COLLECTION</span>
-              <p><strong id="featureCount">0</strong>병의 위스키와<br />함께한 순간들</p>
+              <p>보유 <strong id="featureCount">0</strong>병 · 관심 <strong id="wishlistCount">0</strong>병<br />함께한 위스키의 순간들</p>
               <div class="feature-links">
                 <button class="text-link" data-go="explore">새로운 위스키 찾기 <span aria-hidden="true">↗</span></button>
                 <button class="text-link" type="button" data-open-sync>다른 기기와 동기화 <span aria-hidden="true">⇄</span></button>
@@ -73,6 +73,7 @@
               <span aria-hidden="true">⌄</span>
             </label>
           </div>
+          <div class="shelf-tabs" id="shelfStatusRow" role="tablist" aria-label="보관함 구분"></div>
           <div class="filter-row" id="filterRow" aria-label="종류별 필터"></div>
           <div class="whisky-grid" id="collectionGrid"></div>
           <div class="empty-state hidden" id="collectionEmpty">
@@ -154,6 +155,6 @@
       </section>
     </div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="app.js?v=official-ratings"></script>
+    <script src="app.js?v=half-star-shelf-status"></script>
   </body>
 </html>

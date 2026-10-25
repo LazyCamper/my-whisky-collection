@@ -904,6 +904,12 @@ const whiskyStorySections = [
 
 const storageKey = "stillnote-whisky-collection-v1";
 const types = ["전체", "싱글몰트", "버번", "블렌디드", "라이"];
+const shelfCategories = [
+  { id: "all", label: "전체" },
+  { id: "owned", label: "가지고 있는 위스키" },
+  { id: "wishlist", label: "관심 위스키" },
+];
+let selectedShelfStatus = "all";
 let selectedType = "전체";
 let selectedExploreType = "전체";
 let selectedStoryCategory = "all";
@@ -914,6 +920,16 @@ let newWhiskyPhoto = "";
 let newWhiskyPhotoSource = null;
 let onlineLookupCandidates = [];
 
+function normalizeShelfStatus(isSaved, shelfStatus) {
+  if (!isSaved) return "";
+  return shelfStatus === "wishlist" ? "wishlist" : "owned";
+}
+
+function getShelfStatus(whisky) {
+  if (!whisky) return "";
+  return normalizeShelfStatus(Boolean(whisky.isSaved), whisky.shelfStatus);
+}
+
 function loadWhiskies() {
   try {
     const stored = JSON.parse(localStorage.getItem(storageKey));
@@ -923,9 +939,11 @@ function loadWhiskies() {
       const savedSeeds = seedWhiskies.map((seed) => {
         const saved = storedById.get(seed.id);
         const preserveUploadedPhoto = saved?.imageCredit === "내가 등록한 사진";
+        const isSaved = Boolean(saved?.isSaved);
         return {
           ...seed,
-          isSaved: Boolean(saved?.isSaved),
+          isSaved,
+          shelfStatus: normalizeShelfStatus(isSaved, saved?.shelfStatus),
           addedAt: saved?.addedAt || null,
           userReview: { rating: 0, purchasePrice: "", openDate: "", personalNote: "", ...saved?.userReview },
           name: seed.name,
@@ -947,18 +965,23 @@ function loadWhiskies() {
       });
       const customWhiskies = stored
         .filter((whisky) => !seedIds.has(whisky.id))
-        .map((whisky) => ({
-          ...whisky,
-          nameEn: whisky.nameEn || whisky.name || "",
-          summary: whisky.summary || defaultSummaryForWhisky(whisky),
-          officialRating: whisky.officialRating || 86,
-        }));
+        .map((whisky) => {
+          const isSaved = whisky.isSaved !== undefined ? Boolean(whisky.isSaved) : true;
+          return {
+            ...whisky,
+            isSaved,
+            shelfStatus: normalizeShelfStatus(isSaved, whisky.shelfStatus),
+            nameEn: whisky.nameEn || whisky.name || "",
+            summary: whisky.summary || defaultSummaryForWhisky(whisky),
+            officialRating: whisky.officialRating || 86,
+          };
+        });
       return [...savedSeeds, ...customWhiskies];
     }
   } catch (error) {
     console.warn("컬렉션 데이터를 불러오지 못했습니다.", error);
   }
-  return seedWhiskies.map((whisky) => ({ ...whisky, isSaved: false, addedAt: null, userReview: { rating: 0, purchasePrice: "", openDate: "", personalNote: "" } }));
+  return seedWhiskies.map((whisky) => ({ ...whisky, isSaved: false, shelfStatus: "", addedAt: null, userReview: { rating: 0, purchasePrice: "", openDate: "", personalNote: "" } }));
 }
 
 function persist() {
@@ -1020,10 +1043,16 @@ function bottleArt(whisky, extraClass = "", allowPhotoChange = false) {
 function cardMarkup(whisky, isExplore = false) {
   const rating = Number(whisky.userReview?.rating || 0);
   const official = Number(whisky.officialRating || 86);
-  const saved = Boolean(whisky.isSaved);
+  const shelfStatus = getShelfStatus(whisky);
+  const visualActions = isExplore
+    ? `<div class="card-shelf-actions">
+        <button type="button" class="card-shelf-btn ${shelfStatus === "owned" ? "active owned" : ""}" data-shelf-id="${escapeHtml(whisky.id)}" data-shelf-target="owned" aria-label="${shelfStatus === "owned" ? "가지고 있는 위스키에서 해제" : "가지고 있는 위스키로 저장"}" title="${shelfStatus === "owned" ? "가지고 있는 위스키에서 해제" : "가지고 있는 위스키로 저장"}">${shelfStatus === "owned" ? "✓ 보유" : "+ 보유"}</button>
+        <button type="button" class="card-shelf-btn ${shelfStatus === "wishlist" ? "active wishlist" : ""}" data-shelf-id="${escapeHtml(whisky.id)}" data-shelf-target="wishlist" aria-label="${shelfStatus === "wishlist" ? "관심 위스키에서 해제" : "관심 위스키로 저장"}" title="${shelfStatus === "wishlist" ? "관심 위스키에서 해제" : "관심 위스키로 저장"}">${shelfStatus === "wishlist" ? "♥ 관심" : "♡ 관심"}</button>
+      </div>`
+    : (shelfStatus ? `<button type="button" class="card-status-badge ${shelfStatus}" data-shelf-id="${escapeHtml(whisky.id)}" data-shelf-target="${shelfStatus === "owned" ? "wishlist" : "owned"}" title="클릭하여 ${shelfStatus === "owned" ? "관심 위스키" : "가지고 있는 위스키"}로 변경">${shelfStatus === "wishlist" ? "♥ 관심" : "✓ 보유"}</button>` : "");
   return `<article class="whisky-card" data-open="${escapeHtml(whisky.id)}" tabindex="0" aria-label="${escapeHtml(whisky.name)} ${escapeHtml(whisky.nameEn || "")} 상세 정보">
     <div class="card-visual">${bottleArt(whisky)}
-      ${isExplore ? `<button class="card-save ${saved ? "saved" : ""}" data-save="${escapeHtml(whisky.id)}" aria-label="${saved ? "보관함에서 제거" : "보관함에 추가"}" title="${saved ? "보관함에서 제거" : "보관함에 추가"}">${saved ? "♥" : "+"}</button>` : ""}
+      ${visualActions}
     </div>
     <div class="card-info"><p class="card-distillery">${escapeHtml(whisky.distillery)} <span>· ${escapeHtml(whisky.type)}</span></p>
       <h3 class="card-name">${escapeHtml(whisky.name)}</h3>
@@ -1036,6 +1065,19 @@ function cardMarkup(whisky, isExplore = false) {
 }
 
 function renderFilters() {
+  const saved = whiskies.filter((whisky) => whisky.isSaved);
+  const ownedCount = saved.filter((whisky) => getShelfStatus(whisky) === "owned").length;
+  const wishlistCount = saved.filter((whisky) => getShelfStatus(whisky) === "wishlist").length;
+  const countsByStatus = { all: saved.length, owned: ownedCount, wishlist: wishlistCount };
+  const shelfStatusRow = document.getElementById("shelfStatusRow");
+  if (shelfStatusRow) {
+    shelfStatusRow.innerHTML = shelfCategories.map((category) => `
+      <button type="button" class="shelf-tab ${selectedShelfStatus === category.id ? "active" : ""} ${category.id}" data-shelf-filter="${category.id}" role="tab" aria-selected="${selectedShelfStatus === category.id}">
+        <span>${category.label}</span>
+        <strong>${countsByStatus[category.id] || 0}</strong>
+      </button>
+    `).join("");
+  }
   document.getElementById("filterRow").innerHTML = types.map((type) => `<button class="filter-chip ${selectedType === type ? "active" : ""}" data-filter="${type}">${type}</button>`).join("");
   document.getElementById("exploreFilterRow").innerHTML = types.map((type) => `<button class="filter-chip ${selectedExploreType === type ? "active" : ""}" data-explore-filter="${type}">${type}</button>`).join("");
   const storyFilterRow = document.getElementById("storyFilterRow");
@@ -1086,20 +1128,33 @@ function renderStories() {
 
 function renderCollection() {
   const saved = whiskies.filter((whisky) => whisky.isSaved);
+  const ownedList = saved.filter((whisky) => getShelfStatus(whisky) === "owned");
+  const wishlistList = saved.filter((whisky) => getShelfStatus(whisky) === "wishlist");
   const sortBy = document.getElementById("sortSelect").value;
-  const filtered = saved.filter((whisky) => selectedType === "전체" || whisky.type === selectedType);
+  const filtered = saved.filter((whisky) => {
+    const matchesShelf = selectedShelfStatus === "all" || getShelfStatus(whisky) === selectedShelfStatus;
+    const matchesType = selectedType === "전체" || whisky.type === selectedType;
+    return matchesShelf && matchesType;
+  });
   if (sortBy === "rating") filtered.sort((a, b) => Number(b.userReview?.rating || 0) - Number(a.userReview?.rating || 0));
   if (sortBy === "official") filtered.sort((a, b) => Number(b.officialRating || 0) - Number(a.officialRating || 0));
   if (sortBy === "name") filtered.sort((a, b) => a.name.localeCompare(b.name, "ko") || (a.nameEn || "").localeCompare(b.nameEn || "", "en"));
   if (sortBy === "recent") filtered.sort((a, b) => (b.addedAt || 0) - (a.addedAt || 0));
   document.getElementById("savedCount").textContent = String(saved.length).padStart(2, "0");
-  document.getElementById("featureCount").textContent = String(saved.length).padStart(2, "0");
+  document.getElementById("featureCount").textContent = String(ownedList.length).padStart(2, "0");
+  const wishlistCountEl = document.getElementById("wishlistCount");
+  if (wishlistCountEl) wishlistCountEl.textContent = String(wishlistList.length).padStart(2, "0");
   document.getElementById("collectionGrid").innerHTML = filtered.map((whisky) => cardMarkup(whisky)).join("");
   document.getElementById("collectionEmpty").classList.toggle("hidden", saved.length > 0);
   document.getElementById("collectionGrid").classList.toggle("hidden", filtered.length === 0);
   if (saved.length > 0 && filtered.length === 0) {
     document.getElementById("collectionGrid").classList.remove("hidden");
-    document.getElementById("collectionGrid").innerHTML = `<p class="filter-empty">이 종류의 위스키가 아직 없어요.</p>`;
+    const emptyMsg = selectedShelfStatus === "wishlist" && wishlistList.length === 0
+      ? "아직 담아둔 관심 위스키가 없어요. 탐색 탭에서 ‘♡ 관심’으로 저장해 보세요."
+      : selectedShelfStatus === "owned" && ownedList.length === 0
+        ? "아직 등록한 보유 위스키가 없어요. 탐색 탭에서 ‘+ 보유’로 저장해 보세요."
+        : "선택한 조건의 위스키가 아직 없어요.";
+    document.getElementById("collectionGrid").innerHTML = `<p class="filter-empty">${emptyMsg}</p>`;
   }
 }
 
@@ -1144,15 +1199,30 @@ function setTab(tab) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+function setWhiskyShelfStatus(id, targetStatus, allowToggleOff = true) {
+  const whisky = whiskies.find((item) => item.id === id);
+  if (!whisky) return;
+  const currentStatus = getShelfStatus(whisky);
+  if (!targetStatus || (allowToggleOff && currentStatus === targetStatus)) {
+    whisky.isSaved = false;
+    whisky.shelfStatus = "";
+    whisky.addedAt = null;
+    showToast("보관함에서 삭제했어요.");
+  } else {
+    whisky.isSaved = true;
+    whisky.shelfStatus = targetStatus === "wishlist" ? "wishlist" : "owned";
+    if (!whisky.addedAt) whisky.addedAt = Date.now();
+    showToast(whisky.shelfStatus === "wishlist" ? "관심 위스키로 보관함에 담았어요." : "가지고 있는 위스키로 보관함에 담았어요.");
+  }
+  persist();
+  render();
+  if (activeWhiskyId === id) renderDetail(id, getReviewDraft());
+}
+
 function toggleSaved(id) {
   const whisky = whiskies.find((item) => item.id === id);
   if (!whisky) return;
-  whisky.isSaved = !whisky.isSaved;
-  whisky.addedAt = whisky.isSaved ? Date.now() : null;
-  persist();
-  render();
-  if (activeWhiskyId === id) renderDetail(id);
-  showToast(whisky.isSaved ? "내 보관함에 담았어요." : "보관함에서 삭제했어요.");
+  setWhiskyShelfStatus(id, whisky.isSaved ? "" : "owned", false);
 }
 
 function getReviewDraft() {
@@ -1161,7 +1231,32 @@ function getReviewDraft() {
     purchasePrice: document.getElementById("purchasePrice")?.value || "",
     openDate: document.getElementById("openDate")?.value || "",
     personalNote: document.getElementById("personalNote")?.value || "",
+    shelfStatus: document.querySelector("[data-detail-shelf].active")?.dataset.detailShelf,
   };
+}
+
+function clampHalfRating(value) {
+  const num = Math.round(Number(value || 0) * 2) / 2;
+  return Math.max(0, Math.min(5, num));
+}
+
+function buildHalfStarRatingMarkup(ratingValue) {
+  const currentRating = clampHalfRating(ratingValue);
+  return Array.from({ length: 5 }, (_, index) => {
+    const starNumber = index + 1;
+    const leftScore = (starNumber - 0.5).toFixed(1);
+    const rightScore = starNumber.toFixed(1);
+    const stateClass = currentRating >= starNumber
+      ? "full"
+      : currentRating >= starNumber - 0.5
+        ? "half"
+        : "";
+    return `<span class="star-unit ${stateClass}">
+      <span class="star-glyph" aria-hidden="true">★</span>
+      <button type="button" class="star-hit left" data-rating="${leftScore}" aria-label="${leftScore}점"></button>
+      <button type="button" class="star-hit right" data-rating="${rightScore}" aria-label="${rightScore}점"></button>
+    </span>`;
+  }).join("");
 }
 
 function renderDetail(id, draft = {}) {
@@ -1169,17 +1264,37 @@ function renderDetail(id, draft = {}) {
   if (!whisky) return;
   activeWhiskyId = id;
   const review = { rating: 0, purchasePrice: "", openDate: "", personalNote: "", ...whisky.userReview, ...draft };
+  const currentRating = clampHalfRating(review.rating);
   const currentNameEn = draft.nameEn !== undefined ? draft.nameEn : (whisky.nameEn || "");
-  const stars = Array.from({ length: 5 }, (_, index) => `<button type="button" class="star-button ${index < Number(review.rating || 0) ? "active" : ""}" data-rating="${index + 1}" aria-label="${index + 1}점">★</button>`).join("");
+  const currentShelfStatus = draft.shelfStatus || getShelfStatus(whisky) || "owned";
+  const stars = buildHalfStarRatingMarkup(currentRating);
   const naverSearchUrl = new URL("https://search.naver.com/search.naver");
   naverSearchUrl.searchParams.set("query", whisky.name);
   document.getElementById("detailContent").innerHTML = `
     <div class="detail-hero">${bottleArt(whisky, "", true)}<div><p class="detail-distillery">${escapeHtml(whisky.distillery.toUpperCase())}</p><h2 id="detailName">${escapeHtml(whisky.name)}</h2><p class="detail-name-en">${escapeHtml(currentNameEn)}</p>${whisky.summary ? `<p class="detail-summary">${escapeHtml(whisky.summary)}</p>` : ""}<div class="detail-meta"><span>${escapeHtml(whisky.type)}</span><span>${whisky.abv}% ABV</span><span>${escapeHtml(whisky.region)}</span><span class="detail-official-badge" title="Whisky Advocate · Wine Enthusiast · Whiskybase 등 글로벌 전문가·커뮤니티 종합 평점">★ 공식 평점 ${Number(whisky.officialRating || 86)} / 100</span></div><p class="detail-price"><span>참고 가격</span>${escapeHtml(whisky.averagePrice)}</p><a class="naver-search-button" data-naver-search href="${escapeHtml(naverSearchUrl.href)}" target="_blank" rel="noopener noreferrer"><span class="search-icon" aria-hidden="true"></span><span>인터넷 검색</span><span class="naver-arrow" aria-hidden="true">↗</span></a></div></div>
     <section class="notes-section"><div class="detail-section-title"><h3>테이스팅 노트</h3><span>TASTING PROFILE</span></div><div class="note-groups"><div class="note-group"><span>AROMA</span><p>${escapeHtml(whisky.notes.aroma)}</p></div><div class="note-group"><span>TASTE</span><p>${escapeHtml(whisky.notes.taste)}</p></div><div class="note-group"><span>FINISH</span><p>${escapeHtml(whisky.notes.finish)}</p></div></div></section>
     <section class="review-section"><div class="detail-section-title"><h3>나의 기록</h3><span>PERSONAL JOURNAL</span></div>
-      <div class="rating-row"><span class="field-label">나의 평점</span><div class="stars" role="group" aria-label="별점">${stars}<span class="rating-value">${Number(review.rating || 0) ? Number(review.rating).toFixed(1) : "—"}</span></div></div>
+      <div class="shelf-status-row">
+        <span class="field-label">보관함 구분</span>
+        <div class="shelf-status-picker" role="group" aria-label="보관함 구분 선택">
+          <button type="button" class="shelf-pick-btn ${currentShelfStatus === "owned" ? "active owned" : ""}" data-detail-shelf="owned">✓ 가지고 있는 위스키</button>
+          <button type="button" class="shelf-pick-btn ${currentShelfStatus === "wishlist" ? "active wishlist" : ""}" data-detail-shelf="wishlist">♥ 관심 위스키</button>
+        </div>
+      </div>
+      <div class="rating-row">
+        <div>
+          <span class="field-label">나의 평점 (0.5점 단위)</span>
+        </div>
+        <div class="rating-controls">
+          <div class="stars" role="group" aria-label="별점 (0.5점 단위)">${stars}<span class="rating-value">${currentRating ? currentRating.toFixed(1) : "—"}</span></div>
+          <div class="rating-stepper" aria-label="별점 0.5점 미세 조절">
+            <button type="button" class="rating-step-btn" data-rating-step="-0.5" aria-label="0.5점 낮추기">-0.5</button>
+            <button type="button" class="rating-step-btn" data-rating-step="0.5" aria-label="0.5점 높이기">+0.5</button>
+          </div>
+        </div>
+      </div>
       <div class="review-fields"><div class="form-field note-field"><label for="detailEnglishName">영문 이름</label><input id="detailEnglishName" type="text" maxlength="100" placeholder="예: Johnnie Walker Black Label 12 Year Old" value="${escapeHtml(currentNameEn)}" /></div><div class="form-field"><label for="purchasePrice">구매 가격 (원)</label><input id="purchasePrice" type="number" inputmode="numeric" min="0" placeholder="예: 120000" value="${escapeHtml(review.purchasePrice || "")}" /></div><div class="form-field"><label for="openDate">개봉일</label><input id="openDate" type="date" value="${escapeHtml(review.openDate || "")}" /></div><div class="form-field note-field"><label for="personalNote">시음 메모</label><textarea id="personalNote" placeholder="오늘의 향과 맛, 함께한 순간을 기록해 보세요.">${escapeHtml(review.personalNote || "")}</textarea></div></div>
-      <div class="detail-actions">${whisky.isSaved ? `<button class="remove-button" data-remove="${escapeHtml(id)}">보관함 삭제</button>` : ""}<button class="primary-button" id="saveReview">${whisky.isSaved ? "기록 저장하기" : "내 리스트에 담기"} <span aria-hidden="true">↗</span></button></div>
+      <div class="detail-actions">${whisky.isSaved ? `<button class="remove-button" data-remove="${escapeHtml(id)}">보관함 삭제</button>` : ""}<button class="primary-button" id="saveReview">${whisky.isSaved ? "기록 저장하기" : (currentShelfStatus === "wishlist" ? "관심 위스키로 담기" : "보유 위스키로 담기")} <span aria-hidden="true">↗</span></button></div>
     </section>`;
   document.getElementById("detailBackdrop").classList.remove("hidden");
   document.body.style.overflow = "hidden";
@@ -1203,6 +1318,7 @@ function renderNewWhiskyForm() {
       <div class="review-fields">
         <div class="form-field"><label for="newName">위스키 이름 *</label><input id="newName" name="name" required maxlength="80" placeholder="예: 아드벡 우거다일" /></div>
         <div class="form-field"><label for="newEnglishName">영문 이름</label><input id="newEnglishName" name="nameEn" maxlength="100" placeholder="예: Ardbeg Uigeadail" /></div>
+        <div class="form-field note-field"><label for="newShelfStatus">보관함 구분 *</label><select id="newShelfStatus" name="shelfStatus"><option value="owned">가지고 있는 위스키 (보유)</option><option value="wishlist">관심 위스키 (위시리스트)</option></select></div>
         <div class="form-field note-field"><label for="newSummary">한줄 설명</label><input id="newSummary" name="summary" maxlength="120" placeholder="예: 강력한 피트 스모크와 진한 셰리 단맛이 조화로운 아일라 싱글몰트" /></div>
         <div class="form-field"><label for="newDistillery">증류소 / 브랜드 *</label><input id="newDistillery" name="distillery" required maxlength="60" placeholder="예: Ardbeg" /></div>
         <div class="form-field"><label for="newType">종류 *</label><select id="newType" name="type" required>${types.filter((type) => type !== "전체").map((type) => `<option value="${type}">${type}</option>`).join("")}</select></div>
@@ -1383,16 +1499,18 @@ async function selectOnlineWhisky(index) {
 function addCatalogueWhisky(id) {
   const whisky = whiskies.find((item) => item.id === id);
   if (!whisky) return;
-  if (whisky.isSaved) {
+  const selectedStatus = document.getElementById("newShelfStatus")?.value || "owned";
+  if (whisky.isSaved && getShelfStatus(whisky) === selectedStatus) {
     showToast("이미 내 보관함에 있어요.");
     return;
   }
   whisky.isSaved = true;
+  whisky.shelfStatus = selectedStatus === "wishlist" ? "wishlist" : "owned";
   whisky.addedAt = Date.now();
   persist();
   render();
   closeDetail();
-  showToast("기본 위스키 정보를 내 보관함에 담았어요.");
+  showToast(whisky.shelfStatus === "wishlist" ? "기본 위스키를 관심 위스키로 담았어요." : "기본 위스키를 보유 위스키로 담았어요.");
 }
 
 function compressPhoto(file) {
@@ -1426,6 +1544,7 @@ function saveNewWhisky(event) {
   const name = formData.get("name").trim();
   const nameEn = formData.get("nameEn").trim() || name;
   const distillery = formData.get("distillery").trim();
+  const shelfStatus = formData.get("shelfStatus") === "wishlist" ? "wishlist" : "owned";
   const id = `custom-${crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`}`;
   const notes = {
     aroma: formData.get("aroma").trim() || "기록 없음",
@@ -1446,12 +1565,14 @@ function saveNewWhisky(event) {
     region,
     averagePrice: formData.get("averagePrice").trim() || "가격 정보 없음",
     priceValue: 0,
+    officialRating: 86,
     tone: "tone-clear",
     imageUrl: newWhiskyPhoto,
     imagePage: newWhiskyPhotoSource?.page || "",
     imageCredit: newWhiskyPhotoSource?.credit || "",
     notes,
     isSaved: true,
+    shelfStatus,
     isCustom: true,
     addedAt: Date.now(),
     userReview: { rating: 0, purchasePrice: "", openDate: "", personalNote: "" },
@@ -1460,7 +1581,7 @@ function saveNewWhisky(event) {
   persist();
   render();
   closeDetail();
-  showToast("새 위스키를 내 보관함에 추가했어요.");
+  showToast(shelfStatus === "wishlist" ? "새 위스키를 관심 위스키에 추가했어요." : "새 위스키를 보유 위스키에 추가했어요.");
 }
 
 function closeDetail() {
@@ -1490,11 +1611,12 @@ function buildCompactSyncObject(includeDataPhotos = false) {
       const seed = seedWhiskies.find((item) => item.id === whisky.id);
       const customNameEn = whisky.nameEn && seed && whisky.nameEn !== seed.nameEn ? whisky.nameEn : "";
       if (whisky.isSaved || hasUserReviewData(review) || customNameEn || hasCustomPhoto) {
+        const shelfStatus = getShelfStatus(whisky);
         const entry = {
           i: whisky.id,
-          s: whisky.isSaved ? 1 : 0,
+          s: whisky.isSaved ? (shelfStatus === "wishlist" ? 2 : 1) : 0,
           t: whisky.addedAt || 0,
-          r: Number(review.rating || 0),
+          r: clampHalfRating(review.rating),
           p: review.purchasePrice || "",
           d: review.openDate || "",
           n: review.personalNote || "",
@@ -1566,11 +1688,12 @@ function applySyncData(data, mode = "merge") {
     data.forEach((item) => {
       if (!item || !item.id) return;
       if (seedIds.has(item.id)) {
+        const shelfStatus = normalizeShelfStatus(Boolean(item.isSaved), item.shelfStatus);
         incomingSeeds.push({
           i: item.id,
-          s: item.isSaved ? 1 : 0,
+          s: item.isSaved ? (shelfStatus === "wishlist" ? 2 : 1) : 0,
           t: item.addedAt || 0,
-          r: Number(item.userReview?.rating || 0),
+          r: clampHalfRating(item.userReview?.rating),
           p: item.userReview?.purchasePrice || "",
           d: item.userReview?.openDate || "",
           n: item.userReview?.personalNote || "",
@@ -1592,6 +1715,7 @@ function applySyncData(data, mode = "merge") {
     whiskies = seedWhiskies.map((whisky) => ({
       ...whisky,
       isSaved: false,
+      shelfStatus: "",
       addedAt: null,
       userReview: { rating: 0, purchasePrice: "", openDate: "", personalNote: "" },
     }));
@@ -1601,7 +1725,13 @@ function applySyncData(data, mode = "merge") {
     const target = whiskies.find((item) => item.id === entry.i);
     if (!target) return;
     const isSaved = Boolean(entry.s);
+    const incomingStatus = entry.s === 2 || entry.st === "wishlist" ? "wishlist" : isSaved ? "owned" : "";
     target.isSaved = mode === "replace" ? isSaved : Boolean(target.isSaved || isSaved);
+    if (mode === "replace") {
+      target.shelfStatus = incomingStatus;
+    } else if (isSaved) {
+      target.shelfStatus = incomingStatus || getShelfStatus(target) || "owned";
+    }
     target.addedAt = entry.t || target.addedAt || (target.isSaved ? Date.now() : null);
     if (entry.e) target.nameEn = entry.e;
     if (entry.img) {
@@ -1612,7 +1742,7 @@ function applySyncData(data, mode = "merge") {
     }
     const currentReview = target.userReview || { rating: 0, purchasePrice: "", openDate: "", personalNote: "" };
     target.userReview = {
-      rating: Number(entry.r || 0) || currentReview.rating || 0,
+      rating: clampHalfRating(entry.r || currentReview.rating || 0),
       purchasePrice: entry.p || currentReview.purchasePrice || "",
       openDate: entry.d || currentReview.openDate || "",
       personalNote: entry.n || currentReview.personalNote || "",
@@ -1622,15 +1752,17 @@ function applySyncData(data, mode = "merge") {
   incomingCustoms.forEach((customItem) => {
     if (!customItem || !customItem.name) return;
     const existingIndex = whiskies.findIndex((item) => item.id === customItem.id || (!seedIds.has(item.id) && item.name === customItem.name));
+    const isSaved = customItem.isSaved !== undefined ? Boolean(customItem.isSaved) : true;
     const normalizedCustom = {
       ...customItem,
       id: customItem.id || `custom-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
       nameEn: customItem.nameEn || customItem.name || "",
-      isSaved: customItem.isSaved !== undefined ? Boolean(customItem.isSaved) : true,
+      isSaved,
+      shelfStatus: normalizeShelfStatus(isSaved, customItem.shelfStatus),
       isCustom: true,
       addedAt: customItem.addedAt || Date.now(),
       userReview: {
-        rating: Number(customItem.userReview?.rating || 0),
+        rating: clampHalfRating(customItem.userReview?.rating),
         purchasePrice: customItem.userReview?.purchasePrice || "",
         openDate: customItem.userReview?.openDate || "",
         personalNote: customItem.userReview?.personalNote || "",
@@ -1660,7 +1792,9 @@ function buildSyncShareUrl() {
 
 function renderSyncModal() {
   activeWhiskyId = null;
-  const savedCount = whiskies.filter((item) => item.isSaved).length;
+  const saved = whiskies.filter((item) => item.isSaved);
+  const ownedCount = saved.filter((item) => getShelfStatus(item) === "owned").length;
+  const wishlistCount = saved.filter((item) => getShelfStatus(item) === "wishlist").length;
   const reviewedCount = whiskies.filter((item) => hasUserReviewData(item.userReview)).length;
   document.getElementById("detailContent").innerHTML = `
     <div class="new-whisky-heading">
@@ -1671,7 +1805,7 @@ function renderSyncModal() {
     <div class="sync-sheet-body">
       <div class="sync-summary-bar">
         <span>현재 기기 보관함</span>
-        <span>보관 <strong>${savedCount}</strong>병 · 시음 기록 <strong>${reviewedCount}</strong>건</span>
+        <span>보유 <strong>${ownedCount}</strong>병 · 관심 <strong>${wishlistCount}</strong>병 · 기록 <strong>${reviewedCount}</strong>건</span>
       </div>
 
       <section class="sync-card" aria-label="공유 링크로 기기 이동">
@@ -1888,23 +2022,59 @@ document.addEventListener("click", (event) => {
   const onlineResult = event.target.closest("[data-online-result]");
   if (onlineResult) { selectOnlineWhisky(Number(onlineResult.dataset.onlineResult)); return; }
   if (event.target.closest("#addWhiskyButton")) { renderNewWhiskyForm(); return; }
+  const shelfFilter = event.target.closest("[data-shelf-filter]");
+  if (shelfFilter) { selectedShelfStatus = shelfFilter.dataset.shelfFilter; render(); return; }
   const filterButton = event.target.closest("[data-filter]");
   if (filterButton) { selectedType = filterButton.dataset.filter; render(); return; }
   const exploreFilter = event.target.closest("[data-explore-filter]");
   if (exploreFilter) { selectedExploreType = exploreFilter.dataset.exploreFilter; render(); return; }
   const storyFilter = event.target.closest("[data-story-filter]");
   if (storyFilter) { selectedStoryCategory = storyFilter.dataset.storyFilter; render(); return; }
+  const shelfActionButton = event.target.closest("[data-shelf-id]");
+  if (shelfActionButton) {
+    event.stopPropagation();
+    const isBadgeSwitch = shelfActionButton.classList.contains("card-status-badge");
+    setWhiskyShelfStatus(shelfActionButton.dataset.shelfId, shelfActionButton.dataset.shelfTarget, !isBadgeSwitch);
+    return;
+  }
+  const detailShelfButton = event.target.closest("[data-detail-shelf]");
+  if (detailShelfButton && activeWhiskyId) {
+    const targetShelf = detailShelfButton.dataset.detailShelf;
+    const whisky = whiskies.find((item) => item.id === activeWhiskyId);
+    if (whisky && whisky.isSaved) {
+      whisky.shelfStatus = targetShelf;
+      persist();
+      render();
+      showToast(targetShelf === "wishlist" ? "관심 위스키로 변경했어요." : "가지고 있는 위스키로 변경했어요.");
+    }
+    renderDetail(activeWhiskyId, { ...getReviewDraft(), shelfStatus: targetShelf });
+    return;
+  }
   const saveButton = event.target.closest("[data-save]");
   if (saveButton) { event.stopPropagation(); toggleSaved(saveButton.dataset.save); return; }
+  const ratingStepButton = event.target.closest("[data-rating-step]");
+  if (ratingStepButton && activeWhiskyId) {
+    const whisky = whiskies.find((item) => item.id === activeWhiskyId);
+    const step = Number(ratingStepButton.dataset.ratingStep || 0);
+    whisky.userReview.rating = clampHalfRating(Number(whisky.userReview?.rating || 0) + step);
+    renderDetail(activeWhiskyId, getReviewDraft());
+    return;
+  }
   const starButton = event.target.closest("[data-rating]");
   if (starButton && activeWhiskyId) {
     const whisky = whiskies.find((item) => item.id === activeWhiskyId);
-    whisky.userReview.rating = Number(starButton.dataset.rating);
+    const clickedRating = clampHalfRating(starButton.dataset.rating);
+    const currentRating = clampHalfRating(whisky.userReview?.rating);
+    if (clickedRating === currentRating) {
+      whisky.userReview.rating = clickedRating === 0.5 ? 0 : clampHalfRating(clickedRating - 0.5);
+    } else {
+      whisky.userReview.rating = clickedRating;
+    }
     renderDetail(activeWhiskyId, getReviewDraft());
     return;
   }
   const removeButton = event.target.closest("[data-remove]");
-  if (removeButton) { toggleSaved(removeButton.dataset.remove); closeDetail(); return; }
+  if (removeButton) { setWhiskyShelfStatus(removeButton.dataset.remove, "", false); closeDetail(); return; }
   const card = event.target.closest("[data-open]");
   if (event.target.closest(".photo-credit")) return;
   if (card) { renderDetail(card.dataset.open); return; }
@@ -1936,20 +2106,23 @@ document.getElementById("detailContent").addEventListener("click", (event) => {
   if (editedNameEn) {
     whisky.nameEn = editedNameEn;
   }
+  const pickedShelfStatus = document.querySelector("[data-detail-shelf].active")?.dataset.detailShelf || getShelfStatus(whisky) || "owned";
   whisky.userReview = {
     ...whisky.userReview,
+    rating: clampHalfRating(whisky.userReview?.rating),
     purchasePrice: document.getElementById("purchasePrice").value,
     openDate: document.getElementById("openDate").value,
     personalNote: document.getElementById("personalNote").value,
   };
-  if (!whisky.isSaved) {
-    whisky.isSaved = true;
+  whisky.isSaved = true;
+  whisky.shelfStatus = pickedShelfStatus === "wishlist" ? "wishlist" : "owned";
+  if (!whisky.addedAt) {
     whisky.addedAt = Date.now();
   }
   persist();
   render();
   closeDetail();
-  showToast("나의 시음 기록을 저장했어요.");
+  showToast(whisky.shelfStatus === "wishlist" ? "관심 위스키로 기록을 저장했어요." : "보유 위스키로 기록을 저장했어요.");
 });
 
 document.getElementById("detailContent").addEventListener("submit", (event) => {
