@@ -385,14 +385,14 @@ const additionalPhotoSourcesById = {
     imageCredit: "Rittenhouse Rye BiB · Bottle",
   },
   "royal-brackla-12": {
-    imageUrl: "assets/royal-brackla-12.svg",
-    fallbackImageUrl: "",
+    imageUrl: "assets/royal-brackla-12.png",
+    fallbackImageUrl: "assets/royal-brackla-12.svg",
     imagePage: "https://www.royalbrackla.com/",
     imageCredit: "Royal Brackla 12 · Bottle",
   },
   "russells-reserve-10": {
-    imageUrl: "assets/russells-reserve-10.svg",
-    fallbackImageUrl: "",
+    imageUrl: "assets/russells-reserve-10.png",
+    fallbackImageUrl: "assets/russells-reserve-10.svg",
     imagePage: "https://www.russellsreserve.com/",
     imageCredit: "Russell's Reserve 10 · Bottle",
   },
