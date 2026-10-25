@@ -9,7 +9,7 @@ const seedWhiskies = [
   { id: "makers-mark", name: "메이커스 마크", nameEn: "Maker's Mark", distillery: "Maker's Mark", type: "버번", region: "켄터키 · 미국", abv: 45, averagePrice: "₩45,000 – 65,000", priceValue: 55000, tone: "tone-green", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Bottle_of_Maker%27s_Mark_Whisky.JPG/500px-Bottle_of_Maker%27s_Mark_Whisky.JPG", imagePage: "https://commons.wikimedia.org/wiki/File:Bottle_of_Maker%27s_Mark_Whisky.JPG", imageCredit: "Brian Adler · Public domain", notes: { aroma: "달콤한 밀 · 바닐라", taste: "캐러멜 · 과일 · 스파이스", finish: "부드러운 오크" } },
   { id: "woodford-reserve", name: "우드포드 리저브", nameEn: "Woodford Reserve", distillery: "Woodford Reserve", type: "버번", region: "켄터키 · 미국", abv: 43.2, averagePrice: "₩55,000 – 75,000", priceValue: 65000, tone: "tone-blue", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Woodford_Reserve_2016.png/250px-Woodford_Reserve_2016.png", imagePage: "https://commons.wikimedia.org/wiki/File:Woodford_Reserve_2016.png", imageCredit: "Guerlin · CC BY-SA 4.0", notes: { aroma: "말린 과일 · 민트 · 오렌지", taste: "코코아 · 시나몬 · 토피", finish: "부드러운 초콜릿" } },
   { id: "johnnie-walker-black", name: "조니워커 블랙 라벨 12년", nameEn: "Johnnie Walker Black Label 12 Year Old", distillery: "Johnnie Walker", type: "블렌디드", region: "스코틀랜드", abv: 40, averagePrice: "₩45,000 – 60,000", priceValue: 52000, tone: "tone-blue", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Johnnie_Walker_Black_Label.jpg/500px-Johnnie_Walker_Black_Label.jpg", fallbackImageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/21/Johnnie_Walker_Black_Label.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Johnnie_Walker_Black_Label.jpg", imageCredit: "Iceman7840 · CC BY-SA 3.0", notes: { aroma: "바닐라 · 감귤 · 스모크", taste: "과일 · 캐러멜 · 향신료", finish: "은은한 피트 · 오크" } },
-  { id: "chivas-18", name: "시바스 리갈 18년", nameEn: "Chivas Regal 18 Year Old", distillery: "Chivas Regal", type: "블렌디드", region: "스코틀랜드", abv: 40, averagePrice: "₩100,000 – 140,000", priceValue: 120000, tone: "tone-ruby", imageUrl: "assets/chivas-18.svg", imagePage: "https://www.chivas.com/", imageCredit: "Chivas Regal 18 · Bottle", notes: { aroma: "말린 과일 · 버터스카치", taste: "다크초콜릿 · 시트러스", finish: "긴 여운 · 은은한 스모크" } },
+  { id: "chivas-18", name: "시바스 리갈 18년", nameEn: "Chivas Regal 18 Year Old", distillery: "Chivas Regal", type: "블렌디드", region: "스코틀랜드", abv: 40, averagePrice: "₩100,000 – 140,000", priceValue: 120000, tone: "tone-ruby", imageUrl: "assets/chivas-18.png", fallbackImageUrl: "assets/chivas-18.svg", imagePage: "https://www.chivas.com/", imageCredit: "Chivas Regal 18 · Bottle", notes: { aroma: "말린 과일 · 버터스카치", taste: "다크초콜릿 · 시트러스", finish: "긴 여운 · 은은한 스모크" } },
   { id: "bulleit-rye", name: "불릿 라이", nameEn: "Bulleit Rye", distillery: "Bulleit", type: "라이", region: "켄터키 · 미국", abv: 45, averagePrice: "₩50,000 – 70,000", priceValue: 60000, tone: "tone-clear", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0d/Bulleit_Bourbon_Frontier_Whiskey.jpg", imagePage: "https://commons.wikimedia.org/wiki/File:Bulleit_Bourbon_Frontier_Whiskey.jpg", imageCredit: "Ethan Prater · CC BY 2.0", notes: { aroma: "메이플 · 오크 · 스파이스", taste: "캐러멜 · 후추 · 체리", finish: "드라이한 호밀 · 오크" } },
 ];
 
@@ -348,21 +348,27 @@ const additionalPhotoSourcesById = {
     imagePage: "https://www.thewhiskyexchange.com/p/3545/bells-original",
     imageCredit: "Bell's Original · Bottle",
   },
-  "glen-grant-arboralis": {
-    imageUrl: "assets/glen-grant-arboralis.svg",
+  "glenlivet-15": {
+    imageUrl: "assets/glenlivet-15.png",
     fallbackImageUrl: "",
+    imagePage: "https://www.theglenlivet.com/",
+    imageCredit: "The Glenlivet 15 French Oak · Bottle",
+  },
+  "glen-grant-arboralis": {
+    imageUrl: "assets/glen-grant-arboralis.png",
+    fallbackImageUrl: "assets/glen-grant-arboralis.svg",
     imagePage: "https://www.glengrant.com/",
     imageCredit: "The Glen Grant Arboralis · Bottle",
   },
   "black-bottle": {
-    imageUrl: "assets/black-bottle.svg",
-    fallbackImageUrl: "",
+    imageUrl: "assets/black-bottle.png",
+    fallbackImageUrl: "assets/black-bottle.svg",
     imagePage: "https://www.blackbottle.com/",
     imageCredit: "Black Bottle · Bottle",
   },
   "john-barr-reserve": {
-    imageUrl: "assets/john-barr-reserve.svg",
-    fallbackImageUrl: "",
+    imageUrl: "assets/john-barr-reserve.png",
+    fallbackImageUrl: "assets/john-barr-reserve.svg",
     imagePage: "https://www.johnbarrwhisky.com/",
     imageCredit: "John Barr Reserve · Bottle",
   },
