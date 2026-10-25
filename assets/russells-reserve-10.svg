@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 540" role="img" aria-label="Russell's Reserve 10 Year Old Kentucky Straight Bourbon Bottle">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1b1512" />
+      <stop offset="100%" stop-color="#0d0908" />
+    </linearGradient>
+    <linearGradient id="bourbon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#692304" />
+      <stop offset="25%" stop-color="#b8540e" />
+      <stop offset="50%" stop-color="#d8741b" />
+      <stop offset="75%" stop-color="#a6470b" />
+      <stop offset="100%" stop-color="#4f1903" />
+    </linearGradient>
+    <linearGradient id="cream" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e5dbc6" />
+      <stop offset="50%" stop-color="#faf3e4" />
+      <stop offset="100%" stop-color="#d9ceb6" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9e7428" />
+      <stop offset="50%" stop-color="#e8c876" />
+      <stop offset="100%" stop-color="#87601c" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="540" fill="url(#bg)" />
+  <ellipse cx="200" cy="498" rx="86" ry="14" fill="#000000" opacity="0.5" />
+
+  <!-- Black Neck Wrap -->
+  <rect x="176" y="28" width="48" height="34" rx="3" fill="#181615" stroke="url(#gold)" stroke-width="1.2" />
+  <path d="M178 62 L222 62 L226 136 L174 136 Z" fill="#181615" />
+  <rect x="174" y="122" width="52" height="6" fill="#8c1d19" />
+
+  <!-- Bourbon Bottle Body -->
+  <path d="M174 136 C166 164 134 184 132 220 L132 474 C132 485 142 492 158 492 L242 492 C258 492 268 485 268 474 L268 220 C266 184 234 164 226 136 Z" fill="url(#bourbon)" stroke="#f2b258" stroke-opacity="0.33" stroke-width="1.5" />
+  <path d="M146 218 L146 470" stroke="#ffd899" stroke-width="6" stroke-linecap="round" opacity="0.28" />
+  <path d="M254 218 L254 470" stroke="#3b1302" stroke-width="7" stroke-linecap="round" opacity="0.38" />
+
+  <!-- Russell's Reserve 10 Label -->
+  <rect x="136" y="230" width="128" height="184" rx="3" fill="url(#cream)" stroke="url(#gold)" stroke-width="2.8" />
+  <rect x="142" y="236" width="116" height="172" rx="2" fill="none" stroke="#8c1d19" stroke-width="1.2" />
+
+  <text x="200" y="264" text-anchor="middle" fill="#1d1712" font-family="Georgia, 'Times New Roman', serif" font-size="18" font-weight="700" letter-spacing="1">RUSSELL'S</text>
+  <text x="200" y="286" text-anchor="middle" fill="#8c1d19" font-family="Georgia, serif" font-size="14" font-weight="700" letter-spacing="2">RESERVE</text>
+  <line x1="154" y1="298" x2="246" y2="298" stroke="url(#gold)" stroke-width="1.5" />
+
+  <circle cx="200" cy="332" r="22" fill="#8c1d19" stroke="url(#gold)" stroke-width="1.8" />
+  <text x="200" y="337" text-anchor="middle" fill="#ffffff" font-family="Georgia, 'Times New Roman', serif" font-size="19" font-weight="700">10</text>
+  <text x="200" y="348" text-anchor="middle" fill="#f5deb0" font-family="Georgia, serif" font-size="6.5" font-weight="700" letter-spacing="1">YEARS OLD</text>
+
+  <text x="200" y="376" text-anchor="middle" fill="#1d1712" font-family="Georgia, serif" font-size="8" font-weight="700" letter-spacing="1">KENTUCKY STRAIGHT</text>
+  <text x="200" y="389" text-anchor="middle" fill="#1d1712" font-family="Georgia, serif" font-size="8" font-weight="700" letter-spacing="1">BOURBON WHISKEY</text>
+  <text x="200" y="404" text-anchor="middle" fill="#6b4f2b" font-family="Georgia, serif" font-size="7.5" font-weight="700" letter-spacing="1">90 PROOF · 45% ALC/VOL</text>
+</svg>

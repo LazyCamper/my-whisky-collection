@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 540" role="img" aria-label="1792 Small Batch Kentucky Straight Bourbon Whiskey Bottle">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1b1612" />
+      <stop offset="100%" stop-color="#0d0a08" />
+    </linearGradient>
+    <linearGradient id="bourbon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#692605" />
+      <stop offset="24%" stop-color="#b9560f" />
+      <stop offset="50%" stop-color="#d8751b" />
+      <stop offset="76%" stop-color="#a8490b" />
+      <stop offset="100%" stop-color="#521b03" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9e7427" />
+      <stop offset="50%" stop-color="#ebd083" />
+      <stop offset="100%" stop-color="#8b621c" />
+    </linearGradient>
+    <linearGradient id="cream" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e3d8c1" />
+      <stop offset="50%" stop-color="#f9f2e2" />
+      <stop offset="100%" stop-color="#d9ccb2" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="540" fill="url(#bg)" />
+  <ellipse cx="200" cy="498" rx="102" ry="14" fill="#000000" opacity="0.5" />
+
+  <!-- Cork Stopper & Black/Gold Neck Wrap -->
+  <rect x="172" y="34" width="56" height="24" rx="4" fill="#181614" stroke="url(#gold)" stroke-width="1.4" />
+  <path d="M176 58 L224 58 L228 134 L172 134 Z" fill="#181614" />
+  <rect x="172" y="120" width="56" height="8" fill="url(#gold)" />
+  <text x="200" y="98" text-anchor="middle" fill="#ebd083" font-family="Georgia, serif" font-size="11" font-weight="700" letter-spacing="1.5">1792</text>
+
+  <!-- Distinctive Wide Flask/Decanter Shoulders of 1792 -->
+  <path d="M172 134 C142 150 104 176 102 224 L108 474 C108 486 120 492 140 492 L260 492 C280 492 292 486 292 474 L298 224 C296 176 258 150 228 134 Z" fill="url(#bourbon)" stroke="#f0ae54" stroke-opacity="0.34" stroke-width="1.6" />
+
+  <!-- Fluted Glass Ridges on Upper Body -->
+  <path d="M122 224 L126 468" stroke="#ffd899" stroke-width="6" stroke-linecap="round" opacity="0.26" />
+  <path d="M278 224 L274 468" stroke="#381101" stroke-width="7" stroke-linecap="round" opacity="0.38" />
+  <circle cx="200" cy="212" r="22" fill="#8c3909" opacity="0.55" stroke="url(#gold)" stroke-width="1.2" />
+  <text x="200" y="216" text-anchor="middle" fill="#f7dfa0" font-family="Georgia, serif" font-size="10" font-weight="700">1792</text>
+
+  <!-- Characteristic Lower Band Label of 1792 Small Batch -->
+  <rect x="112" y="304" width="176" height="136" rx="3" fill="url(#cream)" stroke="url(#gold)" stroke-width="3" />
+  <rect x="118" y="310" width="164" height="36" fill="#181512" />
+  <text x="200" y="334" text-anchor="middle" fill="#ebd083" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" letter-spacing="3">1792</text>
+
+  <text x="200" y="368" text-anchor="middle" fill="#8c2616" font-family="Georgia, serif" font-size="14" font-weight="700" letter-spacing="2">SMALL BATCH</text>
+  <line x1="136" y1="378" x2="264" y2="378" stroke="#8b621c" stroke-width="1.2" />
+  <text x="200" y="396" text-anchor="middle" fill="#231c14" font-family="Georgia, serif" font-size="9" font-weight="700" letter-spacing="1.2">KENTUCKY STRAIGHT</text>
+  <text x="200" y="410" text-anchor="middle" fill="#231c14" font-family="Georgia, serif" font-size="9" font-weight="700" letter-spacing="1.2">BOURBON WHISKEY</text>
+  <text x="200" y="428" text-anchor="middle" fill="#5e4930" font-family="Georgia, serif" font-size="8" font-weight="700" letter-spacing="1">93.7 PROOF · 46.85% ALC/VOL</text>
+</svg>

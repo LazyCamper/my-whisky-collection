@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 540" role="img" aria-label="Evan Williams Bottled-in-Bond White Label Kentucky Straight Bourbon Bottle">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#191814" />
+      <stop offset="100%" stop-color="#0d0c09" />
+    </linearGradient>
+    <linearGradient id="bourbon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6b2605" />
+      <stop offset="25%" stop-color="#ba5710" />
+      <stop offset="50%" stop-color="#d9771d" />
+      <stop offset="75%" stop-color="#a8490b" />
+      <stop offset="100%" stop-color="#511a03" />
+    </linearGradient>
+    <linearGradient id="whiteLabel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ece8dd" />
+      <stop offset="50%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e3ded1" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9e7428" />
+      <stop offset="50%" stop-color="#ebd082" />
+      <stop offset="100%" stop-color="#87601c" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="540" fill="url(#bg)" />
+  <ellipse cx="200" cy="498" rx="88" ry="14" fill="#000000" opacity="0.5" />
+
+  <!-- White & Gold BiB Neck Wrap with Green Tax Strip -->
+  <rect x="176" y="28" width="48" height="34" rx="3" fill="url(#gold)" />
+  <path d="M178 62 L222 62 L226 138 L174 138 Z" fill="url(#whiteLabel)" />
+  <rect x="194" y="28" width="12" height="110" fill="#2c633b" opacity="0.85" />
+  <rect x="174" y="106" width="52" height="24" fill="url(#gold)" />
+  <text x="200" y="122" text-anchor="middle" fill="#1b1407" font-family="Georgia, serif" font-size="8.5" font-weight="700" letter-spacing="1">100 PROOF</text>
+
+  <!-- Square-Shouldered Bourbon Bottle -->
+  <path d="M174 138 L128 180 L128 474 C128 485 136 492 150 492 L250 492 C264 492 272 485 272 474 L272 180 L226 138 Z" fill="url(#bourbon)" stroke="#f2b258" stroke-opacity="0.33" stroke-width="1.5" />
+  <path d="M142 186 L142 470" stroke="#ffd899" stroke-width="5" stroke-linecap="round" opacity="0.28" />
+  <path d="M258 186 L258 470" stroke="#3b1302" stroke-width="7" stroke-linecap="round" opacity="0.38" />
+
+  <!-- Iconic White Label of Evan Williams BiB -->
+  <rect x="134" y="218" width="132" height="202" rx="3" fill="url(#whiteLabel)" stroke="url(#gold)" stroke-width="3" />
+  <rect x="140" y="224" width="120" height="190" rx="2" fill="none" stroke="#87601c" stroke-width="1.2" />
+
+  <text x="200" y="248" text-anchor="middle" fill="#7c5819" font-family="Georgia, serif" font-size="8" font-weight="700" letter-spacing="1.4">SINCE 1783</text>
+  <text x="200" y="276" text-anchor="middle" fill="#181510" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="18" font-weight="700">Evan Williams</text>
+
+  <rect x="144" y="290" width="112" height="26" rx="2" fill="url(#gold)" />
+  <text x="200" y="307" text-anchor="middle" fill="#181308" font-family="Georgia, serif" font-size="9.5" font-weight="700" letter-spacing="1.2">BOTTLED-IN-BOND</text>
+
+  <text x="200" y="336" text-anchor="middle" fill="#181510" font-family="Georgia, serif" font-size="8.5" font-weight="700" letter-spacing="1">KENTUCKY STRAIGHT</text>
+  <text x="200" y="350" text-anchor="middle" fill="#181510" font-family="Georgia, serif" font-size="9" font-weight="700" letter-spacing="1.2">BOURBON WHISKEY</text>
+  <line x1="154" y1="362" x2="246" y2="362" stroke="#87601c" stroke-width="1.2" />
+  <text x="200" y="382" text-anchor="middle" fill="#2c633b" font-family="Georgia, serif" font-size="11" font-weight="700" letter-spacing="1.2">WHITE LABEL</text>
+  <text x="200" y="401" text-anchor="middle" fill="#4f3b16" font-family="Georgia, serif" font-size="8" font-weight="700" letter-spacing="1">100 PROOF · 50% ALC/VOL</text>
+</svg>

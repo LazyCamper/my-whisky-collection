@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 540" role="img" aria-label="Royal Brackla 12 Year Old Single Malt Scotch Whisky Bottle">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#151820" />
+      <stop offset="100%" stop-color="#0b0d12" />
+    </linearGradient>
+    <linearGradient id="whisky" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#783208" />
+      <stop offset="25%" stop-color="#c96b17" />
+      <stop offset="50%" stop-color="#e58c28" />
+      <stop offset="75%" stop-color="#b85b10" />
+      <stop offset="100%" stop-color="#5d2305" />
+    </linearGradient>
+    <linearGradient id="royalBlue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#14223d" />
+      <stop offset="50%" stop-color="#203761" />
+      <stop offset="100%" stop-color="#101b32" />
+    </linearGradient>
+    <linearGradient id="cream" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e8dfcc" />
+      <stop offset="50%" stop-color="#fbf6ea" />
+      <stop offset="100%" stop-color="#ddd2bc" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9e7428" />
+      <stop offset="50%" stop-color="#ebd082" />
+      <stop offset="100%" stop-color="#87601c" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="540" fill="url(#bg)" />
+  <ellipse cx="200" cy="498" rx="86" ry="14" fill="#000000" opacity="0.5" />
+
+  <!-- Royal Navy & Gold Neck -->
+  <rect x="176" y="26" width="48" height="36" rx="4" fill="url(#royalBlue)" stroke="url(#gold)" stroke-width="1.4" />
+  <path d="M178 62 L222 62 L226 136 L174 136 Z" fill="url(#royalBlue)" />
+  <rect x="174" y="122" width="52" height="6" fill="url(#gold)" />
+  <text x="200" y="98" text-anchor="middle" fill="#ebd082" font-family="Georgia, serif" font-size="8.5" font-weight="700" letter-spacing="1.4">ESTD 1812</text>
+
+  <!-- Regal Bottle Body -->
+  <path d="M174 136 C166 164 134 184 132 220 L132 474 C132 485 142 492 158 492 L242 492 C258 492 268 485 268 474 L268 220 C266 184 234 164 226 136 Z" fill="url(#whisky)" stroke="#f2b258" stroke-opacity="0.33" stroke-width="1.5" />
+  <path d="M146 218 L146 470" stroke="#ffd899" stroke-width="6" stroke-linecap="round" opacity="0.28" />
+  <path d="M254 218 L254 470" stroke="#3b1302" stroke-width="7" stroke-linecap="round" opacity="0.38" />
+
+  <!-- Main Label -->
+  <rect x="136" y="226" width="128" height="190" rx="3" fill="url(#cream)" stroke="url(#gold)" stroke-width="3" />
+  <rect x="142" y="232" width="116" height="178" rx="2" fill="none" stroke="#182a4a" stroke-width="1.2" />
+
+  <text x="200" y="254" text-anchor="middle" fill="#7c1d24" font-family="Georgia, serif" font-size="7.5" font-weight="700" letter-spacing="1.4">THE KING'S OWN WHISKY</text>
+  <text x="200" y="279" text-anchor="middle" fill="#14223d" font-family="Georgia, 'Times New Roman', serif" font-size="15" font-weight="700" letter-spacing="1.2">ROYAL BRACKLA</text>
+  <text x="200" y="294" text-anchor="middle" fill="#5e4928" font-family="Georgia, serif" font-size="7.5" font-weight="700" letter-spacing="1.2">HIGHLAND SINGLE MALT</text>
+
+  <rect x="148" y="308" width="104" height="44" rx="2" fill="url(#royalBlue)" stroke="url(#gold)" stroke-width="1.4" />
+  <text x="200" y="334" text-anchor="middle" fill="#ebd082" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" letter-spacing="1.5">12</text>
+  <text x="200" y="346" text-anchor="middle" fill="#ffffff" font-family="Georgia, serif" font-size="7" letter-spacing="1.6">YEARS OLD</text>
+
+  <text x="200" y="372" text-anchor="middle" fill="#7c1d24" font-family="Georgia, serif" font-size="8" font-weight="700" letter-spacing="1">OLOROSO SHERRY CASK</text>
+  <text x="200" y="396" text-anchor="middle" fill="#14223d" font-family="Georgia, serif" font-size="8" font-weight="700" letter-spacing="1.2">46% ALC/VOL · NON CHILL FILTERED</text>
+</svg>

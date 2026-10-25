@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 540" role="img" aria-label="John Barr Reserve Black Label Blended Scotch Whisky Bottle">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#191612" />
+      <stop offset="100%" stop-color="#0c0a08" />
+    </linearGradient>
+    <linearGradient id="whisky" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#753108" />
+      <stop offset="25%" stop-color="#c46615" />
+      <stop offset="50%" stop-color="#e08824" />
+      <stop offset="75%" stop-color="#b55910" />
+      <stop offset="100%" stop-color="#5e2405" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9c7326" />
+      <stop offset="50%" stop-color="#ebcb78" />
+      <stop offset="100%" stop-color="#88611c" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="540" fill="url(#bg)" />
+  <ellipse cx="200" cy="498" rx="88" ry="14" fill="#000000" opacity="0.5" />
+
+  <!-- Black & Gold Neck Wrap -->
+  <rect x="176" y="28" width="48" height="36" rx="3" fill="#161616" stroke="url(#gold)" stroke-width="1.2" />
+  <path d="M178 64 L222 64 L226 136 L174 136 Z" fill="#181818" />
+  <rect x="175" y="118" width="50" height="6" fill="url(#gold)" />
+  <text x="200" y="98" text-anchor="middle" fill="#ebcb78" font-family="Georgia, serif" font-size="8.5" font-weight="700" letter-spacing="1.4">ESTD 1881</text>
+
+  <!-- Faceted Shouldered Bottle Body -->
+  <path d="M174 136 L128 182 L128 474 C128 485 136 492 150 492 L250 492 C264 492 272 485 272 474 L272 182 L226 136 Z" fill="url(#whisky)" stroke="#f2b65d" stroke-opacity="0.32" stroke-width="1.5" />
+  <path d="M142 188 L142 472" stroke="#ffd899" stroke-width="5" stroke-linecap="round" opacity="0.28" />
+  <path d="M258 188 L258 472" stroke="#3d1502" stroke-width="7" stroke-linecap="round" opacity="0.38" />
+
+  <!-- Black Reserve Label -->
+  <rect x="134" y="224" width="132" height="186" rx="3" fill="#141414" stroke="url(#gold)" stroke-width="3" />
+  <rect x="140" y="230" width="120" height="174" rx="2" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.55" />
+
+  <text x="200" y="256" text-anchor="middle" fill="#d9b765" font-family="Georgia, serif" font-size="8" font-weight="700" letter-spacing="1.8">DISTILLED IN SCOTLAND</text>
+  <text x="200" y="292" text-anchor="middle" fill="#ffffff" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" letter-spacing="1.4">JOHN BARR</text>
+
+  <rect x="148" y="306" width="104" height="24" rx="2" fill="url(#gold)" />
+  <text x="200" y="322" text-anchor="middle" fill="#181308" font-family="Georgia, serif" font-size="11" font-weight="700" letter-spacing="2">RESERVE</text>
+
+  <text x="200" y="352" text-anchor="middle" fill="#ebcb78" font-family="Georgia, serif" font-size="9" font-weight="700" letter-spacing="1.5">BLACK LABEL</text>
+  <text x="200" y="370" text-anchor="middle" fill="#cccccc" font-family="Georgia, serif" font-size="8" letter-spacing="1">BLENDED SCOTCH WHISKY</text>
+  <text x="200" y="392" text-anchor="middle" fill="#d9b765" font-family="Georgia, serif" font-size="8" font-weight="700" letter-spacing="1.2">40% ALC/VOL · 70CL</text>
+</svg>

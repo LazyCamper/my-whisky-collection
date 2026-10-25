@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 540" role="img" aria-label="Gentleman Jack Double Mellowed Tennessee Whiskey Bottle">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#16191d" />
+      <stop offset="100%" stop-color="#0b0d10" />
+    </linearGradient>
+    <linearGradient id="whiskey" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#763209" />
+      <stop offset="25%" stop-color="#c96b17" />
+      <stop offset="50%" stop-color="#e58c28" />
+      <stop offset="75%" stop-color="#b85b10" />
+      <stop offset="100%" stop-color="#5d2305" />
+    </linearGradient>
+    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b929a" />
+      <stop offset="50%" stop-color="#e4e8ec" />
+      <stop offset="100%" stop-color="#7c838b" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="540" fill="url(#bg)" />
+  <ellipse cx="200" cy="498" rx="92" ry="14" fill="#000000" opacity="0.5" />
+
+  <!-- Matte Black & Silver Neck -->
+  <rect x="174" y="28" width="52" height="36" rx="4" fill="#17191c" stroke="url(#silver)" stroke-width="1.2" />
+  <path d="M176 64 L224 64 L228 132 L172 132 Z" fill="#17191c" />
+  <rect x="172" y="122" width="56" height="6" fill="url(#silver)" />
+  <text x="200" y="98" text-anchor="middle" fill="#e4e8ec" font-family="Georgia, serif" font-size="7.5" font-weight="700" letter-spacing="1.2">JACK DANIEL'S</text>
+
+  <!-- Wide Fluted Monolith Gentleman Jack Bottle -->
+  <path d="M172 132 L120 176 L126 476 C126 486 134 492 148 492 L252 492 C266 492 274 486 274 476 L280 176 L228 132 Z" fill="url(#whiskey)" stroke="#f3bc6c" stroke-opacity="0.35" stroke-width="1.6" />
+  <path d="M138 184 L142 474" stroke="#ffe0a6" stroke-width="6" stroke-linecap="round" opacity="0.28" />
+  <path d="M262 184 L258 474" stroke="#3c1502" stroke-width="7" stroke-linecap="round" opacity="0.36" />
+
+  <!-- Embossed Glass Arch -->
+  <path d="M148 214 Q200 194 252 214" fill="none" stroke="#ffdba0" stroke-width="1.8" opacity="0.4" />
+
+  <!-- Silver & Black Center Plaque Label -->
+  <rect x="138" y="246" width="124" height="156" rx="4" fill="#16181b" stroke="url(#silver)" stroke-width="3.2" />
+  <rect x="144" y="252" width="112" height="144" rx="2" fill="none" stroke="url(#silver)" stroke-width="1" opacity="0.65" />
+
+  <text x="200" y="278" text-anchor="middle" fill="#d8dde2" font-family="Georgia, serif" font-size="8.5" font-weight="700" letter-spacing="1.4">JACK DANIEL'S</text>
+  <text x="200" y="308" text-anchor="middle" fill="#ffffff" font-family="Georgia, 'Times New Roman', serif" font-size="17" font-weight="700" letter-spacing="1.2">GENTLEMAN</text>
+  <text x="200" y="334" text-anchor="middle" fill="#ffffff" font-family="Georgia, 'Times New Roman', serif" font-size="22" font-weight="700" letter-spacing="2">JACK</text>
+  <line x1="158" y1="346" x2="242" y2="346" stroke="url(#silver)" stroke-width="1.4" />
+  <text x="200" y="364" text-anchor="middle" fill="#cfd5dc" font-family="Georgia, serif" font-size="8" font-weight="700" letter-spacing="1.1">DOUBLE MELLOWED</text>
+  <text x="200" y="378" text-anchor="middle" fill="#aeb6bf" font-family="Georgia, serif" font-size="7.5" letter-spacing="1">TENNESSEE WHISKEY</text>
+  <text x="200" y="391" text-anchor="middle" fill="#d8dde2" font-family="Georgia, serif" font-size="7.5" font-weight="700" letter-spacing="1">40% ALC/VOL · 70CL</text>
+</svg>

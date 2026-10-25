@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 540" role="img" aria-label="Black Bottle Blended Scotch Whisky Bottle">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#17191c" />
+      <stop offset="100%" stop-color="#0b0c0e" />
+    </linearGradient>
+    <linearGradient id="blackGlass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#111214" />
+      <stop offset="26%" stop-color="#2c2e33" />
+      <stop offset="48%" stop-color="#3a3d42" />
+      <stop offset="76%" stop-color="#1d1f22" />
+      <stop offset="100%" stop-color="#0c0d0f" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9a7229" />
+      <stop offset="50%" stop-color="#e8c775" />
+      <stop offset="100%" stop-color="#87611f" />
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="540" fill="url(#bg)" />
+  <ellipse cx="200" cy="498" rx="88" ry="14" fill="#000000" opacity="0.55" />
+
+  <!-- Gold Foil Neck & Black Cap -->
+  <rect x="176" y="30" width="48" height="28" rx="3" fill="#18191b" stroke="url(#gold)" stroke-width="1.2" />
+  <path d="M178 58 L222 58 L226 132 L174 132 Z" fill="url(#gold)" />
+  <text x="200" y="102" text-anchor="middle" fill="#1b160c" font-family="Georgia, serif" font-size="11" font-weight="700" letter-spacing="1.5">1879</text>
+
+  <!-- Apothecary Black Glass Cylinder Body -->
+  <path d="M174 132 C164 160 132 178 130 212 L130 474 C130 485 140 492 156 492 L244 492 C260 492 270 485 270 474 L270 212 C268 178 236 160 226 132 Z" fill="url(#blackGlass)" stroke="#62666f" stroke-opacity="0.35" stroke-width="1.5" />
+
+  <!-- Subtle Dark Glass Highlights -->
+  <path d="M145 210 L145 470" stroke="#9ea4b0" stroke-width="5" stroke-linecap="round" opacity="0.22" />
+  <path d="M255 210 L255 470" stroke="#050607" stroke-width="7" stroke-linecap="round" opacity="0.5" />
+
+  <!-- Black & Gold Victorian Label -->
+  <rect x="136" y="226" width="128" height="190" rx="4" fill="#141518" stroke="url(#gold)" stroke-width="3" />
+  <rect x="142" y="232" width="116" height="178" rx="2" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.6" />
+
+  <text x="200" y="256" text-anchor="middle" fill="#d9b765" font-family="Georgia, serif" font-size="8" font-weight="700" letter-spacing="1.8">GORDON GRAHAM'S</text>
+  <text x="200" y="292" text-anchor="middle" fill="#f5e3b3" font-family="Georgia, 'Times New Roman', serif" font-size="24" font-weight="700" letter-spacing="2">BLACK</text>
+  <text x="200" y="320" text-anchor="middle" fill="#f5e3b3" font-family="Georgia, 'Times New Roman', serif" font-size="23" font-weight="700" letter-spacing="2">BOTTLE</text>
+
+  <line x1="154" y1="334" x2="246" y2="334" stroke="url(#gold)" stroke-width="1.5" />
+  <text x="200" y="354" text-anchor="middle" fill="#ffffff" font-family="Georgia, serif" font-size="8.5" font-weight="700" letter-spacing="1.4">BLENDED SCOTCH WHISKY</text>
+  <text x="200" y="372" text-anchor="middle" fill="#c9ab63" font-family="Georgia, serif" font-style="italic" font-size="9">Rich, Smoky &amp; Balanced</text>
+  <text x="200" y="396" text-anchor="middle" fill="#d9b765" font-family="Georgia, serif" font-size="8" font-weight="700" letter-spacing="1.2">ABERDEEN · 40% VOL</text>
+</svg>
