@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=bottle-photos-5pack" />
+    <link rel="stylesheet" href="styles.css?v=explore-sort" />
   </head>
   <body>
     <div class="app-shell">
@@ -96,7 +96,22 @@
             <kbd>⌘ K</kbd>
           </label>
           <div class="explore-meta"><span id="resultCount">114</span> bottles to discover <span class="meta-rule"></span><span>CURATED SELECTION</span></div>
-          <div class="explore-actions"><button class="add-whisky-button" id="addWhiskyButton"><span aria-hidden="true">＋</span> 위스키 직접 추가</button></div>
+          <div class="explore-actions">
+            <label class="sort-control explore-sort-control" for="exploreSortSelect">
+              <span class="sort-label">정렬</span>
+              <select id="exploreSortSelect" aria-label="탐색 정렬 기준">
+                <option value="default">기본 추천순</option>
+                <option value="official-desc">공식 평점 높은순</option>
+                <option value="official-asc">공식 평점 낮은순</option>
+                <option value="price-asc">가격 낮은순</option>
+                <option value="price-desc">가격 높은순</option>
+                <option value="name-asc">이름순 (가나다)</option>
+                <option value="name-desc">이름 역순 (하~가)</option>
+              </select>
+              <span class="sort-chevron" aria-hidden="true">⌄</span>
+            </label>
+            <button class="add-whisky-button" id="addWhiskyButton"><span aria-hidden="true">＋</span> 위스키 직접 추가</button>
+          </div>
           <div class="explore-filters" id="exploreFilterRow" aria-label="탐색 종류별 필터"></div>
           <div class="whisky-grid explore-grid" id="exploreGrid"></div>
           <div class="empty-state hidden" id="exploreEmpty">
@@ -155,6 +170,6 @@
       </section>
     </div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="app.js?v=bottle-photos-rittenhouse-1792-bells"></script>
+    <script src="app.js?v=explore-sort"></script>
   </body>
 </html>

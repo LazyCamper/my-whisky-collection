@@ -142,7 +142,12 @@ h1, h2, h3, p { margin-top: 0; }
 .explore-meta > span:first-child { color: var(--amber-light); font-size: 11px; }
 .explore-meta > span:last-child { color: #777e74; font-size: 7px; letter-spacing: 1px; }
 .meta-rule { width: 21px; height: 1px; background: #555a50; }
-.explore-actions { display: flex; justify-content: flex-end; margin: 12px 0; }
+.explore-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 12px 0; }
+.explore-sort-control { min-height: 36px; padding: 0 11px; border: 1px solid var(--line); background: #20241f; transition: border-color .18s; }
+.explore-sort-control:hover, .explore-sort-control:focus-within { border-color: #82704e; }
+.explore-sort-control .sort-label { position: static; padding-right: 7px; border-right: 1px solid #353b34; color: var(--amber); font-size: 9px; font-weight: 700; letter-spacing: .8px; }
+.explore-sort-control select { max-width: none; padding: 8px 18px 8px 3px; background: #20241f; color: var(--paper); font-size: 10.5px; }
+.explore-sort-control .sort-chevron { right: 10px; color: var(--amber-light); }
 .add-whisky-button, .photo-pick-button, .photo-change-button { min-height: 36px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 12px; border: 1px solid #5a513e; background: transparent; color: var(--amber-light); font-size: 10px; cursor: pointer; }
 .add-whisky-button span { font-size: 16px; line-height: 1; }
 .explore-filters { margin-bottom: 4px; }

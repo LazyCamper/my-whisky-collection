@@ -798,9 +798,22 @@ function defaultSummaryForWhisky(whisky) {
   return `${whisky.distillery || "증류소"}에서 선보이는 개성 있는 ${whisky.type || "위스키"}`;
 }
 
+function parseAveragePriceValue(averagePrice = "", fallbackValue = 0) {
+  if (Number(fallbackValue) > 0) return Number(fallbackValue);
+  const matches = String(averagePrice).match(/\d[\d,]*/g);
+  if (!matches || !matches.length) return 0;
+  const nums = matches
+    .map((token) => Number(token.replace(/,/g, "")))
+    .filter((num) => Number.isFinite(num) && num > 0);
+  if (!nums.length) return 0;
+  if (nums.length === 1) return nums[0];
+  return Math.round((nums[0] + nums[1]) / 2);
+}
+
 seedWhiskies.forEach((whisky) => {
   whisky.summary = whisky.summary || summariesById[whisky.id] || defaultSummaryForWhisky(whisky);
   whisky.officialRating = whisky.officialRating || officialRatingsById[whisky.id] || 86;
+  whisky.priceValue = parseAveragePriceValue(whisky.averagePrice, whisky.priceValue);
 });
 
 const storyCategories = [
@@ -1082,6 +1095,7 @@ function loadWhiskies() {
           nameEn: (saved?.nameEn && saved.nameEn !== seed.name) ? saved.nameEn : seed.nameEn,
           summary: seed.summary,
           officialRating: seed.officialRating || officialRatingsById[seed.id] || 86,
+          priceValue: parseAveragePriceValue(seed.averagePrice, seed.priceValue),
           ...(preserveUploadedPhoto ? {
             imageUrl: saved.imageUrl,
             fallbackImageUrl: "",
@@ -1106,6 +1120,7 @@ function loadWhiskies() {
             nameEn: whisky.nameEn || whisky.name || "",
             summary: whisky.summary || defaultSummaryForWhisky(whisky),
             officialRating: whisky.officialRating || 86,
+            priceValue: parseAveragePriceValue(whisky.averagePrice, whisky.priceValue),
           };
         });
       return [...savedSeeds, ...customWhiskies];
@@ -1292,10 +1307,38 @@ function renderCollection() {
 
 function renderExplore() {
   const query = document.getElementById("searchInput").value;
+  const sortBy = document.getElementById("exploreSortSelect")?.value || "default";
   const result = whiskies.filter((whisky) => {
     const matchesType = selectedExploreType === "전체" || whisky.type === selectedExploreType;
     return matchesType && matchesWhiskyQuery(whisky, query);
   });
+  if (sortBy === "price-asc") {
+    result.sort((a, b) => {
+      const priceA = parseAveragePriceValue(a.averagePrice, a.priceValue);
+      const priceB = parseAveragePriceValue(b.averagePrice, b.priceValue);
+      if (!priceA && !priceB) return a.name.localeCompare(b.name, "ko");
+      if (!priceA) return 1;
+      if (!priceB) return -1;
+      return priceA - priceB || Number(b.officialRating || 0) - Number(a.officialRating || 0);
+    });
+  } else if (sortBy === "price-desc") {
+    result.sort((a, b) => {
+      const priceA = parseAveragePriceValue(a.averagePrice, a.priceValue);
+      const priceB = parseAveragePriceValue(b.averagePrice, b.priceValue);
+      if (!priceA && !priceB) return a.name.localeCompare(b.name, "ko");
+      if (!priceA) return 1;
+      if (!priceB) return -1;
+      return priceB - priceA || Number(b.officialRating || 0) - Number(a.officialRating || 0);
+    });
+  } else if (sortBy === "official-desc") {
+    result.sort((a, b) => Number(b.officialRating || 0) - Number(a.officialRating || 0) || a.name.localeCompare(b.name, "ko"));
+  } else if (sortBy === "official-asc") {
+    result.sort((a, b) => Number(a.officialRating || 0) - Number(b.officialRating || 0) || a.name.localeCompare(b.name, "ko"));
+  } else if (sortBy === "name-asc") {
+    result.sort((a, b) => a.name.localeCompare(b.name, "ko") || (a.nameEn || "").localeCompare(b.nameEn || "", "en"));
+  } else if (sortBy === "name-desc") {
+    result.sort((a, b) => b.name.localeCompare(a.name, "ko") || (b.nameEn || "").localeCompare(a.nameEn || "", "en"));
+  }
   document.getElementById("resultCount").textContent = result.length;
   document.getElementById("exploreGrid").innerHTML = result.map((whisky) => cardMarkup(whisky, true)).join("");
   document.getElementById("exploreEmpty").classList.toggle("hidden", result.length > 0);
@@ -1696,7 +1739,7 @@ function saveNewWhisky(event) {
     abv: Number(formData.get("abv")),
     region,
     averagePrice: formData.get("averagePrice").trim() || "가격 정보 없음",
-    priceValue: 0,
+    priceValue: parseAveragePriceValue(formData.get("averagePrice").trim(), 0),
     officialRating: 86,
     tone: "tone-clear",
     imageUrl: newWhiskyPhoto,
@@ -2227,6 +2270,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.getElementById("searchInput").addEventListener("input", renderExplore);
+document.getElementById("exploreSortSelect")?.addEventListener("change", renderExplore);
 document.getElementById("sortSelect").addEventListener("change", renderCollection);
 document.getElementById("closeDetail").addEventListener("click", closeDetail);
 document.getElementById("detailContent").addEventListener("click", (event) => {
