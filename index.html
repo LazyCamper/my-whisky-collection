@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=explore-sort" />
+    <link rel="stylesheet" href="styles.css?v=empty-plus-btn" />
   </head>
   <body>
     <div class="app-shell">
@@ -77,7 +77,7 @@
           <div class="filter-row" id="filterRow" aria-label="종류별 필터"></div>
           <div class="whisky-grid" id="collectionGrid"></div>
           <div class="empty-state hidden" id="collectionEmpty">
-            <span class="empty-icon" aria-hidden="true">＋</span>
+            <button type="button" class="empty-icon empty-icon-button" data-go="explore" aria-label="위스키 둘러보기 및 추가">＋</button>
             <h3>아직 비어 있는 선반</h3>
             <p>마음에 드는 위스키를 찾아<br />나만의 컬렉션을 시작해 보세요.</p>
             <button class="primary-button" data-go="explore">위스키 둘러보기 <span aria-hidden="true">↗</span></button>
@@ -170,6 +170,6 @@
       </section>
     </div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="app.js?v=explore-sort"></script>
+    <script src="app.js?v=empty-plus-btn"></script>
   </body>
 </html>

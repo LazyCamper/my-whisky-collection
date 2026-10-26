@@ -125,7 +125,9 @@ h1, h2, h3, p { margin-top: 0; }
 .card-price span { margin-right: 4px; color: #7c8279; font-size: 8px; }
 .empty-state { padding: 56px 15px 25px; color: var(--muted); text-align: center; }
 .empty-state.hidden { display: none; }
-.empty-icon { width: 45px; height: 45px; display: grid; place-items: center; margin: 0 auto 18px; border: 1px solid #55503f; border-radius: 50%; color: var(--amber); font-size: 22px; }
+.empty-icon { width: 45px; height: 45px; display: grid; place-items: center; margin: 0 auto 18px; padding: 0; border: 1px solid #55503f; border-radius: 50%; background: transparent; color: var(--amber); font-size: 22px; }
+.empty-icon-button { cursor: pointer; transition: border-color .18s, background .18s, color .18s, transform .18s; }
+.empty-icon-button:hover, .empty-icon-button:focus-visible { border-color: var(--amber); background: rgba(217,163,74,.14); color: var(--amber-light); transform: scale(1.06); outline: 0; }
 .empty-state h3 { margin: 0 0 8px; color: var(--paper); font: 19px var(--serif); }
 .empty-state p { margin: 0; font-size: 11px; line-height: 1.8; }
 .primary-button { min-height: 42px; margin-top: 21px; padding: 0 17px; border: 1px solid var(--amber); background: var(--amber); color: #201d16; font-size: 11px; font-weight: 700; cursor: pointer; }
@@ -205,7 +207,8 @@ h1, h2, h3, p { margin-top: 0; }
 .new-whisky-heading p:last-child { margin: 6px 0 0; color: var(--muted); font-size: 11px; }
 .new-whisky-form { padding-top: 17px; }
 .new-photo-row { display: flex; align-items: center; gap: 13px; margin-bottom: 18px; }
-.new-photo-preview { width: 68px; height: 68px; flex: 0 0 68px; display: grid; place-items: center; overflow: hidden; border: 1px solid #484437; background: linear-gradient(145deg, #30332a, #252722); color: var(--amber); font-size: 23px; }
+.new-photo-preview { width: 68px; height: 68px; flex: 0 0 68px; display: grid; place-items: center; overflow: hidden; border: 1px solid #484437; background: linear-gradient(145deg, #30332a, #252722); color: var(--amber); font-size: 23px; cursor: pointer; transition: border-color .18s; }
+.new-photo-preview:hover { border-color: var(--amber); }
 .new-photo-preview img { width: 100%; height: 100%; object-fit: cover; }
 .new-photo-row strong { font: 13px var(--serif); }
 .new-photo-row p { margin: 4px 0 8px; color: var(--muted); font-size: 9px; }

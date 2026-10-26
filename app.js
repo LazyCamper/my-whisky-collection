@@ -1483,7 +1483,7 @@ function renderNewWhiskyForm() {
   document.getElementById("detailContent").innerHTML = `
     <div class="new-whisky-heading"><p class="eyebrow">YOUR OWN BOTTLE</p><h2 id="detailName">위스키 직접 추가</h2><p>나만의 위스키 정보를 입력해 보세요.</p></div>
     <form id="newWhiskyForm" class="new-whisky-form">
-      <div class="new-photo-row"><div class="new-photo-preview" id="newPhotoPreview"><span aria-hidden="true">＋</span></div><div><strong>위스키 사진</strong><p>선택 사항 · 사진은 이 기기에 저장됩니다.</p><label class="photo-pick-button" for="newWhiskyPhotoInput">사진 선택<input id="newWhiskyPhotoInput" type="file" accept="image/*" /></label></div></div>
+      <div class="new-photo-row"><label class="new-photo-preview" id="newPhotoPreview" for="newWhiskyPhotoInput" aria-label="위스키 사진 선택"><span aria-hidden="true">＋</span></label><div><strong>위스키 사진</strong><p>선택 사항 · 사진은 이 기기에 저장됩니다.</p><label class="photo-pick-button" for="newWhiskyPhotoInput">사진 선택<input id="newWhiskyPhotoInput" type="file" accept="image/*" /></label></div></div>
       <section class="internet-lookup" aria-label="인터넷 위스키 정보 검색">
         <label for="onlineWhiskyQuery">인터넷에서 위스키 찾기</label>
         <div class="lookup-input-row"><input id="onlineWhiskyQuery" type="search" autocomplete="off" placeholder="예: Ardbeg Uigeadail" /><button class="lookup-button" id="lookupWhiskyButton" type="button">검색</button></div>
