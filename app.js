@@ -1187,6 +1187,17 @@ function bottleArt(whisky, extraClass = "", allowPhotoChange = false) {
   return `<div class="bottle-art ${whisky.tone || ""} ${extraClass}">${photo}${credit}${changeButton}<div class="bottle-shape"><span class="bottle-label">${escapeHtml(label)}</span></div></div>`;
 }
 
+function buildTastingTagPills(whisky) {
+  const raw = `${whisky.notes?.aroma || ""} · ${whisky.notes?.taste || ""}`;
+  const tags = raw
+    .split("·")
+    .map((part) => part.trim())
+    .filter((part) => part && part !== "기록 없음" && part.length <= 10)
+    .slice(0, 3);
+  if (!tags.length) return "";
+  return `<div class="card-tasting-tags">${tags.map((tag, idx) => `<span class="tasting-tag ${idx === 2 ? "botanical" : ""}">#${escapeHtml(tag.replace(/\s+/g, ""))}</span>`).join("")}</div>`;
+}
+
 function cardMarkup(whisky, isExplore = false) {
   const rating = Number(whisky.userReview?.rating || 0);
   const official = Number(whisky.officialRating || 86);
@@ -1199,12 +1210,14 @@ function cardMarkup(whisky, isExplore = false) {
     : (shelfStatus ? `<button type="button" class="card-status-badge ${shelfStatus}" data-shelf-id="${escapeHtml(whisky.id)}" data-shelf-target="${shelfStatus === "owned" ? "wishlist" : "owned"}" title="클릭하여 ${shelfStatus === "owned" ? "관심 위스키" : "평가한 위스키"}로 변경">${shelfStatus === "wishlist" ? "♥ 관심" : "★ 평가"}</button>` : "");
   return `<article class="whisky-card" data-open="${escapeHtml(whisky.id)}" tabindex="0" aria-label="${escapeHtml(whisky.name)} ${escapeHtml(whisky.nameEn || "")} 상세 정보">
     <div class="card-visual">${bottleArt(whisky)}
+      <span class="card-score-badge" title="글로벌 전문가·커뮤니티 종합 평점 (100점 만점)">${official}</span>
       ${visualActions}
     </div>
     <div class="card-info"><p class="card-distillery">${escapeHtml(whisky.distillery)} <span>· ${escapeHtml(whisky.type)}</span></p>
       <h3 class="card-name">${escapeHtml(whisky.name)}</h3>
       <p class="card-name-en">${escapeHtml(whisky.nameEn || "")}</p>
       ${whisky.summary ? `<p class="card-summary">${escapeHtml(whisky.summary)}</p>` : ""}
+      ${buildTastingTagPills(whisky)}
       <div class="card-meta"><span>${whisky.abv}% · <strong class="official-score" title="글로벌 전문가·커뮤니티 종합 평점 (100점 만점)">공식 ${official}점</strong></span><span class="card-rating">${rating ? `★ ${rating.toFixed(1)}` : "☆ 평가 전"}</span></div>
       ${isExplore ? `<div class="card-price"><span>참고가</span>${escapeHtml(whisky.averagePrice)}</div>` : ""}
     </div>
@@ -2179,6 +2192,7 @@ document.addEventListener("click", (event) => {
   if (tabButton) { setTab(tabButton.dataset.tab); return; }
   const goButton = event.target.closest("[data-go]");
   if (goButton) { setTab(goButton.dataset.go); return; }
+  if (event.target.closest("[data-toggle-theme]")) { toggleTheme(); return; }
   if (event.target.closest("[data-open-sync]")) { renderSyncModal(); return; }
   if (event.target.closest("#shareSyncLinkButton")) { shareSyncLink(); return; }
   if (event.target.closest("#copySyncCodeButton")) { copySyncCode(); return; }
@@ -2346,5 +2360,38 @@ document.getElementById("detailContent").addEventListener("change", async (event
   }
 });
 
+const themeStorageKey = "stillnote-theme-v1";
+
+function applyTheme(theme = "nordic", notify = false) {
+  const resolved = theme === "speakeasy" ? "speakeasy" : "nordic";
+  document.documentElement.setAttribute("data-theme", resolved);
+  const meta = document.getElementById("themeColorMeta");
+  if (meta) meta.setAttribute("content", resolved === "speakeasy" ? "#0a0b0e" : "#f4f6f4");
+  const icon = document.getElementById("themeToggleIcon");
+  const label = document.getElementById("themeToggleLabel");
+  if (icon) icon.textContent = resolved === "speakeasy" ? "🌿" : "🌙";
+  if (label) label.textContent = resolved === "speakeasy" ? "노르딕 라이트" : "다크 스피크이지";
+  try {
+    localStorage.setItem(themeStorageKey, resolved);
+  } catch {}
+  if (notify) {
+    showToast(resolved === "speakeasy" ? "모던 스피크이지 다크 스타일로 변경했어요." : "노르딕 테이스팅 랩(기본) 스타일로 변경했어요.");
+  }
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute("data-theme") || "nordic";
+  applyTheme(current === "speakeasy" ? "nordic" : "speakeasy", true);
+}
+
+function initTheme() {
+  let savedTheme = "nordic";
+  try {
+    savedTheme = localStorage.getItem(themeStorageKey) || "nordic";
+  } catch {}
+  applyTheme(savedTheme, false);
+}
+
+initTheme();
 render();
 checkUrlSyncOnLoad();
