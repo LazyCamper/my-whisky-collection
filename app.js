@@ -2076,7 +2076,7 @@ async function shareSyncLink() {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "내 위스키 리스트 보관함 동기화",
+          title: "내 위스키 컬렉션 보관함 동기화",
           text: `내 위스키 보관함(${savedCount}병) 동기화 링크입니다.`,
           url,
         });
