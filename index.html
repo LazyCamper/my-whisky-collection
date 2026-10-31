@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=explore-heading-inline" />
+    <link rel="stylesheet" href="styles.css?v=explore-hero-banner" />
   </head>
   <body>
     <div class="app-shell">
@@ -88,12 +88,22 @@
             <h1 id="exploreTitle">위스키를 발견하다<span class="heading-period">.</span></h1>
             <p class="page-subtitle">다음 한 잔의 주인공을 찾아보세요.</p>
           </div>
-          <label class="search-box" for="searchInput">
-            <span class="search-icon" aria-hidden="true"></span>
-            <input id="searchInput" type="search" placeholder="한글·영문 이름이나 증류소로 검색" autocomplete="off" />
-            <kbd>⌘ K</kbd>
-          </label>
-          <div class="explore-meta"><span id="resultCount">114</span> bottles to discover <span class="meta-rule"></span><span>CURATED SELECTION</span></div>
+
+          <section class="explore-feature" aria-label="위스키 아카이브 검색">
+            <div class="feature-copy explore-feature-copy">
+              <span class="feature-kicker">CURATED SELECTION</span>
+              <p><strong id="resultCount">114</strong>종의 위스키 아카이브<br />취향에 맞는 한 잔을 찾아보세요</p>
+              <label class="search-box hero-search-box" for="searchInput">
+                <span class="search-icon" aria-hidden="true"></span>
+                <input id="searchInput" type="search" placeholder="한글·영문 이름이나 증류소로 검색" autocomplete="off" />
+                <kbd>⌘ K</kbd>
+              </label>
+            </div>
+            <div class="feature-photo" aria-hidden="true">
+              <img src="assets/banners/explore-hero.jpg" alt="" loading="lazy" />
+            </div>
+          </section>
+
           <div class="explore-actions">
             <label class="sort-control explore-sort-control" for="exploreSortSelect">
               <span class="sort-label">정렬</span>
