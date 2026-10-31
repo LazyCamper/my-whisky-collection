@@ -10,14 +10,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=nordic-default-dual-theme" />
+    <link rel="stylesheet" href="styles.css?v=hero-photo-brand-update" />
   </head>
   <body>
     <div class="app-shell">
       <header class="topbar">
-        <a class="wordmark" href="#" aria-label="내 위스키 리스트 홈">
-          <span class="brand-mark" aria-hidden="true">W</span>
-          <span>still<span class="wordmark-light">note</span></span>
+        <a class="wordmark" href="#" aria-label="My Whisky Collection 홈">
+          <span class="brand-mark" aria-hidden="true">M</span>
+          <span class="wordmark-text">y Whisky <span class="wordmark-light">Collection</span></span>
         </a>
         <div class="topbar-actions">
           <button class="theme-toggle-button" id="themeToggleButton" type="button" data-toggle-theme aria-label="디자인 테마 변경">
@@ -27,9 +27,6 @@
           <button class="sync-top-button" id="syncOpenButton" type="button" data-open-sync aria-label="보관함 백업 및 기기 이동">
             <span aria-hidden="true">⇄</span>
             <span>기기 이동 · 백업</span>
-          </button>
-          <button class="icon-button profile-button" id="profileButton" type="button" data-open-sync aria-label="내 컬렉션 백업 및 요약">
-            <span>J</span>
           </button>
         </div>
       </header>
@@ -56,13 +53,9 @@
                 <button class="text-link" type="button" data-open-sync>다른 기기와 동기화 <span aria-hidden="true">⇄</span></button>
               </div>
             </div>
-            <div class="feature-stilllife" aria-hidden="true">
-              <div class="still-bottle bottle-one"><i></i></div>
-              <div class="still-bottle bottle-two"><i></i></div>
-              <div class="still-glass"></div>
-              <div class="still-glow"></div>
+            <div class="feature-photo" aria-hidden="true">
+              <img src="assets/banners/collection-hero.jpg" alt="" loading="eager" />
             </div>
-            <span class="feature-index">01 / 04</span>
           </section>
 
           <div class="section-heading collection-section-heading">
@@ -139,10 +132,8 @@
               <p>알고 마시면 더 풍부해지는<br /><strong>위스키의 세계</strong></p>
               <span class="story-feature-sub">종류 · 보관법 · 음용법 · 위스키 상식</span>
             </div>
-            <div class="feature-stilllife" aria-hidden="true">
-              <div class="still-bottle bottle-one"><i></i></div>
-              <div class="still-glass"></div>
-              <div class="still-glow"></div>
+            <div class="feature-photo" aria-hidden="true">
+              <img src="assets/banners/story-hero.jpg" alt="" loading="lazy" />
             </div>
           </section>
 
@@ -175,6 +166,6 @@
       </section>
     </div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="app.js?v=nordic-default-dual-theme"></script>
+    <script src="app.js?v=hero-photo-brand-update"></script>
   </body>
 </html>
